@@ -1,0 +1,14 @@
+# 비밀 정보 (API 키, OAuth 토큰)
+.env
+*.env
+client_secret*.json
+token*.json
+
+# 대용량 산출물 (영상, 음성, 렌더링 중간 파일)
+episodes/*/assets/audio/
+episodes/*/output/*.mp4
+media/
+__pycache__/
+
+# DB 백업
+data/backup/
