@@ -77,5 +77,5 @@ data/choigo.db             # 영상 DB (기술지원팀 관리, scripts/db.py)
 scripts/                   # 자동화 스크립트 (setup.sh, make_episode.sh 등)
 ```
 
-- 영상 한 편 만들기: `scripts/make_episode.sh episodes/<폴더>` (환경 설치는 `scripts/setup.sh`)
+- 영상 한 편 만들기: `scripts/make_episode.sh episodes/<폴더>` (환경 설치는 `scripts/setup.sh`, 나레이션은 CLOVA Voice, 실사 소재는 박물관 공개자료와 AI 재현 영상)
 - 영상, 음성, 렌더링 결과(mp4, wav)는 git에 올리지 않는다. 언제든 다시 만들 수 있다.

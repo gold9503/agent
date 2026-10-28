@@ -38,7 +38,10 @@ DB를 쓰기 전에 `data/backup/`에 날짜별 백업이 자동으로 생긴다
 
 - **환경 구성:** `scripts/setup.sh`로 ffmpeg, LaTeX, 한글 폰트, Manim, TTS·음성 인식 모델을 `/opt/choigo-venv`, `/opt/choigo-models`에 설치한다. 설치 방법이 바뀌면 이 스크립트를 고쳐 재현할 수 있게 한다.
 - **오류 해결:** 제작팀, 유통팀 스크립트의 오류를 재현해 원인을 찾고 고친다.
-- **API 연동:** YouTube Data API 등 외부 서비스 연동을 설정한다.
+- **API 연동:** 외부 서비스 연동을 설정한다.
+  - CLOVA Voice: 환경 변수 `NCP_CLOVA_CLIENT_ID`, `NCP_CLOVA_CLIENT_SECRET` (선택: `CHOIGO_CLOVA_SPEAKER`)
+  - 네트워크 허용 도메인: `naveropenapi.apigw.ntruss.com`(CLOVA), `commons.wikimedia.org`, `upload.wikimedia.org`(커먼즈), `collectionapi.metmuseum.org`, `images.metmuseum.org`(메트 박물관)
+  - YouTube Data API(업로드)는 유통팀 요청 시 설정한다
   - API 키와 OAuth 토큰은 환경 변수나 비밀 저장소에만 둔다. **절대 저장소에 커밋하지 않는다.** (`.gitignore` 관리)
 - **저장 공간 관리:** 대용량 중간 파일(장면별 렌더링 결과 등)은 최종 영상이 확정되면 정리한다. 최종 영상, 자막, 썸네일, `sources.json`은 보존한다.
 

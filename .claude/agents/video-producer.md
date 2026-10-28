@@ -31,15 +31,32 @@ class S05(ChoigoScene):             # 클래스 이름 = S + 장면 id 두 자�
 - 장면 사이에 이어지는 그림(예: 같은 도형이 점점 완성됨)은 모듈 함수로 만들어 여러 장면에서 재사용한다.
 - 외부 이미지를 쓰면 `assets/sources.json`에 원본 URL, 저작자, 라이선스를 반드시 기록한다. 기록이 없는 자료는 쓰지 않는다.
 
+## 실사 소재 (신비한 건축사전 스타일의 핵심)
+역사·현실 장면은 **실제 영상과 사진**으로 채우고, 원리·공식 설명은 애니메이션으로 한다.
+
+| 소재 | 언제 | 어떻게 |
+|---|---|---|
+| 박물관 공개자료 사진 | 유물, 필사본, 실존 장소 (실물이 있는 것) | 구성표 `media`에 `commons`/`met`로 적으면 `fetch_media.py`가 내려받고 라이선스를 기록한다. NC/ND는 자동 거부 |
+| AI 재현 영상/이미지 | 실물 영상이 존재할 수 없는 과거 장면 (9세기 바그다드 등) | Higgsfield `generate_video`/`generate_image`로 만든다(16:9, 소리 끔, 장면 길이 이상, 1080p). `assets/media/<id>.mp4`로 저장하고 구성표에 `model`, `job_id`, `url`을 적는다. **생성 전 크레딧 견적을 사용자에게 알리고 승인받는다** |
+| 애니메이션 | 개념, 공식, 도식 | `visuals.py` |
+
+- 장면의 배경은 구성표 `visual.background: {"media": "<id>", "dim": 0.35~0.65}`로 지정한다. 합성할 때 아래에 깔리고, 영상은 장면 길이에 맞춰 최대 1.6배까지 느려진다.
+- 배경 위 글자는 반드시 `plate()`(반투명 판) 위에 올린다. 장면 안에 사진을 넣을 때는 `self.photo("<id>", height=...)`를 쓴다.
+- 출처와 "AI로 만든 재현 영상/이미지" 표시는 자동으로 붙는다. 지우지 않는다.
+- AI 소재 프롬프트에는 실존 인물의 얼굴 재현, 글자, 로고를 넣지 않는다.
+
 ## 파이프라인 (한 번에: `scripts/make_episode.sh <에피소드 폴더>`)
 
 | 단계 | 스크립트 | 결과 |
 |---|---|---|
 | ① 대본 정리 | `storyboard_to_script.py` | `02_script.md` |
-| ② 나레이션 | `tts.py` | `assets/audio/scene_XX.wav`, `timings.json`(문장별 시각) |
+| ② 나레이션 | `tts.py` (CLOVA Voice, 차분한 남성 `nminsang`) | `assets/audio/scene_XX.wav`, `timings.json`(문장별 시각). 같은 문장은 캐시를 써서 다시 과금되지 않는다 |
 | ③ 발음 점검 | `check_narration.py` | `assets/audio/pronunciation_check.txt`. 음성 인식으로 받아 적어 대본과 비교한 글자 오류율(CER) |
-| ④ 장면 렌더링 | `render_scenes.sh` | `assets/render/SXX/...` (4개 병렬, 장면 하나만: `render_scenes.sh <폴더> 13`) |
-| ⑤ 합성 | `assemble.py` | `output/final.mp4`, `output/subtitles.srt` (자체 합성 배경음악 `bgm.py`, −14 LUFS) |
+| ④ 실사 소재 | `fetch_media.py` | `assets/media/*`, `assets/sources.json`. 빠진 소재가 있으면 멈춘다 |
+| ⑤ 장면 렌더링 | `render_scenes.sh` | `assets/render/SXX/.../SXX.mov` (투명 배경, 4개 병렬, 장면 하나만: `render_scenes.sh <폴더> 13`) |
+| ⑥ 합성 | `assemble.py` | 장면마다 배경 + 투명 레이어를 겹치고 → `output/final.mp4`, `output/subtitles.srt` (자체 합성 배경음악, −14 LUFS) |
+
+화자를 고를 때는 `tts.py --samples <폴더>`로 남성 화자 비교 샘플을 만들어 사용자에게 들려준다.
 
 썸네일은 에피소드 폴더의 `thumbnail.py`로 만든다(1280×720, 큰 글씨 8자 이내).
 
@@ -53,7 +70,7 @@ class S05(ChoigoScene):             # 클래스 이름 = S + 장면 id 두 자�
   ```
 
 ## 알려진 한계
-- 현재 TTS(mimic3 KSS, 무료·오프라인)는 발음 오류율이 약 30%이고, 학습 데이터 라이선스가 비영리 조건이다. **비공개 테스트용으로만** 쓴다. 공개용 TTS로 바꾸는 작업은 `tts.py`의 `load_tts()`와 `generate` 부분만 교체하면 된다.
+- 무료 TTS(`--engine mimic3`)는 발음 오류율이 약 30%이고 학습 데이터가 비영리 조건이라 **비공개 테스트용으로만** 쓴다. 공개용은 CLOVA Voice다.
 
 ## 결과 보고
 - `output/final.mp4` 경로, 실제 길이, 장면 수, 발음 점검 CER

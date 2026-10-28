@@ -3,6 +3,8 @@
 모든 에피소드의 visuals.py는 이 모듈의 ChoigoScene을 상속한다.
 - 장면 길이와 문장 타이밍은 assets/audio/timings.json에서 읽어 나레이션과 맞춘다.
 - 화면 아래쪽(y < -2.5)은 자막 자리이므로 비워둔다.
+- 장면은 투명 배경으로 렌더링된다. 배경(실사 영상/사진 또는 기본 배경색)은 assemble.py가 아래에 깐다.
+  장면 구성표에서 visual.background로 지정한 소재가 배경이 되고, 출처 표시(AI 재현 표시 포함)는 자동으로 붙는다.
 """
 import json
 import os
@@ -52,6 +54,13 @@ def chapter_card(number, title):
     return VGroup(grp, line)
 
 
+def plate(mob, opacity=0.55, buff=0.3):
+    """실사 배경 위에서 글자가 잘 보이도록 뒤에 반투명 판을 깐다."""
+    bg = RoundedRectangle(corner_radius=0.12, width=mob.width + 2 * buff, height=mob.height + 2 * buff,
+                          stroke_width=0, fill_color=BLACK, fill_opacity=opacity).move_to(mob)
+    return VGroup(bg, mob)
+
+
 class ChoigoScene(MovingCameraScene):
     """나레이션 타이밍에 맞춰 장면을 만드는 기본 클래스.
 
@@ -70,6 +79,12 @@ class ChoigoScene(MovingCameraScene):
         info = next(t for t in timings if t["id"] == self.SCENE_ID)
         self.scene_len = info["duration"]
         self.sents = info["sentences"]
+        self.ep = ep
+        sb = json.loads((ep / "03_storyboard.json").read_text(encoding="utf-8"))
+        self.storyboard_scene = next(s for s in sb["scenes"] if s["id"] == self.SCENE_ID)
+        src = ep / "assets/sources.json"
+        self.sources = {a["id"]: a for a in json.loads(src.read_text(encoding="utf-8"))["assets"]} \
+            if src.exists() else {}
 
     def until(self, t):
         if t - self.time > 1 / 30:
@@ -84,12 +99,49 @@ class ChoigoScene(MovingCameraScene):
             frame = self.camera.frame
             frame.add_updater(lambda m, dt: m.scale(1 - self.ZOOM_PER_SEC * dt))
             self.add(frame)
+        bg = self.storyboard_scene["visual"].get("background")
+        if bg:
+            self.background_label(bg["media"])
         self.build()
         self.until(self.scene_len)
         print(f"[choigo] S{self.SCENE_ID:02d} rendered {self.time:.2f}s / narration {self.scene_len:.2f}s")
 
     def build(self):
         raise NotImplementedError
+
+    # ── 실사 소재 ──────────────────────────────────────
+    def media_file(self, mid):
+        files = sorted((self.ep / "assets/media").glob(f"{mid}.*"))
+        if not files:
+            raise FileNotFoundError(f"소재 없음: assets/media/{mid}.* (fetch_media.py 확인)")
+        return files[0]
+
+    def media_label(self, mid):
+        info = self.sources.get(mid, {})
+        if info.get("ai"):
+            return "AI로 만든 재현 영상" if info.get("type") == "video" else "AI로 만든 재현 이미지"
+        return info.get("credit") or info.get("author") or ""
+
+    def background_label(self, mid):
+        """배경 소재의 출처(또는 AI 재현 표시)를 오른쪽 위에 작게 단다."""
+        text = self.media_label(mid)
+        if text:
+            lab = T(text[:40], size=18, color=INK).set_opacity(0.75).to_corner(UR, buff=0.3)
+            self.add(lab)
+
+    def photo(self, mid, height=None, full=False, label=True):
+        """사진(박물관 자료, AI 이미지)을 화면에 놓는다. full=True면 화면을 가득 채운다."""
+        img = ImageMobject(str(self.media_file(mid)))
+        if full:
+            img.scale(max(config.frame_width / img.width, config.frame_height / img.height))
+        elif height:
+            img.set_height(height)
+        grp = Group(img)
+        if label and self.media_label(mid):
+            cap = T(self.media_label(mid)[:40], size=18, color=INK).set_opacity(0.8)
+            cap.next_to(img, DOWN, buff=0.1, aligned_edge=RIGHT) if not full else cap.to_corner(UR, buff=0.3)
+            grp.add(cap)
+        return grp
 
     # ── 자주 쓰는 연출 ──────────────────────────────────
     def show_chapter(self, number, title, hold=1.2):

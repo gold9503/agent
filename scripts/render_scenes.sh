@@ -8,6 +8,7 @@ shift
 PY="${CHOIGO_PYTHON:-/opt/choigo-venv/bin/python}"
 JOBS="${CHOIGO_JOBS:-4}"
 export CHOIGO_EPISODE="$EP"
+export PYTHONPATH="$(cd "$(dirname "$0")" && pwd)${PYTHONPATH:+:$PYTHONPATH}"
 
 if [ "$#" -gt 0 ]; then
   SCENES=$(printf "S%02d\n" "$@")
@@ -17,5 +18,5 @@ fi
 
 mkdir -p "$EP/assets/render/logs"
 echo "$SCENES" | xargs -P "$JOBS" -I{} sh -c \
-  "'$PY' -m manim render -q h --fps 30 -r 1920,1080 --disable_caching --media_dir '$EP/assets/render/{}' \
+  "'$PY' -m manim render -t -q h --fps 30 -r 1920,1080 --disable_caching --media_dir '$EP/assets/render/{}' \
    '$EP/visuals.py' {} > '$EP/assets/render/logs/{}.log' 2>&1 && echo 'ok {}' || echo 'FAIL {}'"

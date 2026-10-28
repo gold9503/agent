@@ -4,222 +4,613 @@
   "subject": "수학",
   "level": "middle",
   "curriculum": "중학교 3학년 수학 · 이차방정식",
+  "media": {
+    "classroom_chalk": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 12,
+      "prompt": "Close-up of a dark green chalkboard in a quiet school classroom at dusk, a student's hand writing algebra with white chalk, chalk dust floating in a beam of window light, shallow depth of field, slow push-in, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "manuscript_pages": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "prompt": "Old parchment manuscript pages slowly turning by candlelight on a wooden desk, warm amber tones, macro close-up, slow camera drift, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "baghdad_aerial": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "prompt": "Aerial drone shot at golden hour over a reconstructed 9th-century circular walled city beside a wide river, mud-brick walls, domes and palm groves, smoke from hearths, slow forward flight, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "house_of_wisdom": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 12,
+      "prompt": "Interior of a grand medieval Islamic library with pointed arches and hanging oil lamps, scholars in robes seen from behind copying and translating manuscripts at low tables, dust in light rays, slow dolly forward, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "land_measure": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 10,
+      "prompt": "Medieval farmers measuring a rectangular field with knotted ropes and wooden stakes beside an irrigation canal under a hazy sun, wide shot, slow pan, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "palm_leaf": {
+      "source": "ai",
+      "kind": "image",
+      "prompt": "Close-up of an ancient Indian palm-leaf manuscript with handwritten script lines and a wooden cover on a cloth, soft side light, museum photography, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "quill_square": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 12,
+      "prompt": "Macro shot of a reed pen drawing a simple square diagram with brown ink on parchment by candlelight, ink lines spreading, slow motion, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "tigris_sunrise": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 10,
+      "prompt": "Slow sunrise over a calm wide river with silhouettes of palm trees and ancient domes on the horizon, mist on the water, peaceful, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "khwarizmi_ms": {
+      "source": "commons",
+      "ref": "File:Image-Al-Kitāb al-muḫtaṣar fī ḥisāb al-ğabr wa-l-muqābala.jpg",
+      "note": "알 콰리즈미 『대수학』 필사본 한 쪽 (보들리언 도서관 소장, 퍼블릭 도메인 예상 → fetch_media가 라이선스 확인)"
+    },
+    "clay_tablet": {
+      "source": "met",
+      "query": "cuneiform tablet mathematical",
+      "note": "메트로폴리탄 미술관 공개자료(CC0) 점토판 사진"
+    }
+  },
   "scenes": [
     {
-      "id": 1, "section": "오프닝 질문",
+      "id": 1,
+      "section": "오프닝 질문",
       "narration": [
-        {"say": "엑스는, 마이너스 비 플러스 마이너스 루트, 비 제곱 마이너스 사 에이 씨, 나누기 이 에이.", "sub": "x = (−b ± √(b²−4ac)) / 2a"},
-        {"say": "중학교 삼 학년이라면 누구나 한 번쯤, 주문처럼 외웠던 문장입니다.", "sub": "중학교 3학년이라면 누구나 한 번쯤, 주문처럼 외웠던 문장입니다."}
+        {
+          "say": "엑스는, 마이너스 비 플러스 마이너스 루트, 비 제곱 마이너스 사 에이 씨, 나누기 이 에이.",
+          "sub": "x = (−b ± √(b²−4ac)) / 2a"
+        },
+        {
+          "say": "중학교 삼 학년이라면 누구나 한 번쯤, 주문처럼 외웠던 문장입니다.",
+          "sub": "중학교 3학년이라면 누구나 한 번쯤, 주문처럼 외웠던 문장입니다."
+        }
       ],
-      "visual": {"type": "formula", "key": "opening_formula", "description": "근의 공식이 한 글자씩 써지고, 주문처럼 희미하게 반복된다", "motion": "build_up"},
+      "visual": {
+        "type": "formula",
+        "key": "opening_formula",
+        "description": "근의 공식이 한 글자씩 써지고, 주문처럼 희미하게 반복된다",
+        "motion": "build_up",
+        "background": {
+          "media": "classroom_chalk",
+          "dim": 0.55
+        }
+      },
       "on_screen_text": null
     },
     {
-      "id": 2, "section": "오프닝 질문",
+      "id": 2,
+      "section": "오프닝 질문",
       "narration": [
-        {"say": "그런데 이 공식, 처음부터 이렇게 생겼을까요?"},
-        {"say": "도대체 누가, 왜 만들었을까요?"}
+        {
+          "say": "그런데 이 공식, 처음부터 이렇게 생겼을까요?"
+        },
+        {
+          "say": "도대체 누가, 왜 만들었을까요?"
+        }
       ],
-      "visual": {"type": "title_card", "key": "opening_title", "description": "공식 위로 물음표, 이어서 영상 제목 카드", "motion": "slow_zoom_in"},
+      "visual": {
+        "type": "title_card",
+        "key": "opening_title",
+        "description": "공식 위로 물음표, 이어서 영상 제목 카드",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "manuscript_pages",
+          "dim": 0.5
+        }
+      },
       "on_screen_text": "근의 공식은 누가 만들었을까?"
     },
     {
-      "id": 3, "section": "시대 속으로",
+      "id": 3,
+      "section": "시대 속으로",
       "narration": [
-        {"say": "시간을 천이백 년 전으로 돌려보겠습니다.", "sub": "시간을 1200년 전으로 돌려보겠습니다."},
-        {"say": "장소는 바그다드입니다."}
+        {
+          "say": "시간을 천이백 년 전으로 돌려보겠습니다.",
+          "sub": "시간을 1200년 전으로 돌려보겠습니다."
+        },
+        {
+          "say": "장소는 바그다드입니다."
+        }
       ],
-      "visual": {"type": "title_card", "key": "chapter_history", "description": "구간 제목 '시대 속으로'와 연표가 820년으로 거슬러 간다", "motion": "pan_left"},
+      "visual": {
+        "type": "title_card",
+        "key": "chapter_history",
+        "description": "구간 제목 '시대 속으로'와 연표가 820년으로 거슬러 간다",
+        "motion": "pan_left",
+        "background": {
+          "media": "baghdad_aerial",
+          "dim": 0.35
+        }
+      },
       "on_screen_text": "서기 820년경 · 바그다드"
     },
     {
-      "id": 4, "section": "시대 속으로",
+      "id": 4,
+      "section": "시대 속으로",
       "narration": [
-        {"say": "당시 바그다드는 세계에서 가장 큰 도시 가운데 하나였습니다."},
-        {"say": "칼리프는 지혜의 집이라는 연구 기관을 세우고, 그리스와 인도의 책을 모아 아랍어로 옮기게 했습니다.", "sub": "칼리프는 '지혜의 집'이라는 연구 기관을 세우고, 그리스와 인도의 책을 모아 아랍어로 옮기게 했습니다."}
+        {
+          "say": "당시 바그다드는 세계에서 가장 큰 도시 가운데 하나였습니다."
+        },
+        {
+          "say": "칼리프는 지혜의 집이라는 연구 기관을 세우고, 그리스와 인도의 책을 모아 아랍어로 옮기게 했습니다.",
+          "sub": "칼리프는 '지혜의 집'이라는 연구 기관을 세우고, 그리스와 인도의 책을 모아 아랍어로 옮기게 했습니다."
+        }
       ],
-      "visual": {"type": "diagram", "key": "house_of_wisdom_map", "description": "추상화한 지도: 그리스와 인도에서 바그다드로 책(지식)이 모여드는 화살표", "motion": "build_up"},
+      "visual": {
+        "type": "diagram",
+        "key": "house_of_wisdom_map",
+        "description": "AI 재현 영상: 지혜의 집 내부에서 학자들이 필사본을 번역하는 모습 + '지혜의 집', '그리스어 · 산스크리트어 → 아랍어' 자막판",
+        "motion": "build_up",
+        "background": {
+          "media": "house_of_wisdom",
+          "dim": 0.4
+        }
+      },
       "on_screen_text": "지혜의 집"
     },
     {
-      "id": 5, "section": "시대 속으로",
+      "id": 5,
+      "section": "시대 속으로",
       "narration": [
-        {"say": "이곳에 알 콰리즈미라는 학자가 있었습니다."},
-        {"say": "그가 다룬 문제는 아주 현실적이었습니다."},
-        {"say": "유산을 어떻게 나눌지, 땅의 넓이를 어떻게 잴지 같은 문제들이었죠."}
+        {
+          "say": "이곳에 알 콰리즈미라는 학자가 있었습니다."
+        },
+        {
+          "say": "그가 다룬 문제는 아주 현실적이었습니다."
+        },
+        {
+          "say": "유산을 어떻게 나눌지, 땅의 넓이를 어떻게 잴지 같은 문제들이었죠."
+        }
       ],
-      "visual": {"type": "diagram", "key": "khwarizmi_problems", "description": "이름 카드 '알 콰리즈미 (780년경~850년경)'와 유산, 토지, 거래 아이콘 세 개", "motion": "build_up"},
+      "visual": {
+        "type": "diagram",
+        "key": "khwarizmi_problems",
+        "description": "이름 카드 '알 콰리즈미 (780년경~850년경)'와 유산, 토지, 거래 아이콘 세 개",
+        "motion": "build_up",
+        "background": {
+          "media": "khwarizmi_ms",
+          "dim": 0.55
+        }
+      },
       "on_screen_text": "알 콰리즈미"
     },
     {
-      "id": 6, "section": "시대 속으로",
+      "id": 6,
+      "section": "시대 속으로",
       "narration": [
-        {"say": "그런데 이런 문제를 식으로 세우면, 어떤 수를 제곱한 값이 자꾸 끼어들었습니다."},
-        {"say": "오늘날 우리가 이차방정식이라고 부르는 문제입니다."}
+        {
+          "say": "그런데 이런 문제를 식으로 세우면, 어떤 수를 제곱한 값이 자꾸 끼어들었습니다."
+        },
+        {
+          "say": "오늘날 우리가 이차방정식이라고 부르는 문제입니다."
+        }
       ],
-      "visual": {"type": "formula", "key": "square_sneaks_in", "description": "땅 넓이 문제 → 식으로 바뀌며 '제곱'이 강조된다", "motion": "build_up"},
+      "visual": {
+        "type": "formula",
+        "key": "square_sneaks_in",
+        "description": "땅 넓이 문제 → 식으로 바뀌며 '제곱'이 강조된다",
+        "motion": "build_up",
+        "background": {
+          "media": "land_measure",
+          "dim": 0.55
+        }
+      },
       "on_screen_text": "이차방정식"
     },
     {
-      "id": 7, "section": "시대 속으로",
+      "id": 7,
+      "section": "시대 속으로",
       "narration": [
-        {"say": "사실 이런 문제는 훨씬 오래전, 기원전 천팔백 년 무렵 바빌로니아의 점토판에도 나옵니다.", "sub": "사실 이런 문제는 훨씬 오래전, 기원전 1800년 무렵 바빌로니아의 점토판에도 나옵니다."},
-        {"say": "다만 그들이 남긴 것은, 이 문제는 이 순서로 계산하라는 풀이 순서였습니다.", "sub": "다만 그들이 남긴 것은, '이 문제는 이 순서로 계산하라'는 풀이 순서였습니다."},
-        {"say": "서기 육백이십팔 년에는 인도의 브라마굽타가, 이 풀이를 말로 된 규칙으로 정리했습니다.", "sub": "서기 628년에는 인도의 브라마굽타가, 이 풀이를 말로 된 규칙으로 정리했습니다."}
+        {
+          "say": "사실 이런 문제는 훨씬 오래전, 기원전 천팔백 년 무렵 바빌로니아의 점토판에도 나옵니다.",
+          "sub": "사실 이런 문제는 훨씬 오래전, 기원전 1800년 무렵 바빌로니아의 점토판에도 나옵니다."
+        },
+        {
+          "say": "다만 그들이 남긴 것은, 이 문제는 이 순서로 계산하라는 풀이 순서였습니다.",
+          "sub": "다만 그들이 남긴 것은, '이 문제는 이 순서로 계산하라'는 풀이 순서였습니다."
+        },
+        {
+          "say": "서기 육백이십팔 년에는 인도의 브라마굽타가, 이 풀이를 말로 된 규칙으로 정리했습니다.",
+          "sub": "서기 628년에는 인도의 브라마굽타가, 이 풀이를 말로 된 규칙으로 정리했습니다."
+        }
       ],
-      "visual": {"type": "diagram", "key": "timeline_before", "description": "연표: 기원전 1800년 점토판(양식화한 그림) → 628년 브라마굽타 → 820년 알 콰리즈미", "motion": "pan_left"},
+      "visual": {
+        "type": "diagram",
+        "key": "timeline_before",
+        "description": "연표: 기원전 1800년 바빌로니아 점토판(메트 박물관 실물 사진) → 628년 브라마굽타(야자잎 필사본 AI 이미지) → 820년 알 콰리즈미",
+        "motion": "pan_left",
+        "photos": [
+          "clay_tablet",
+          "palm_leaf"
+        ]
+      },
       "on_screen_text": null
     },
     {
-      "id": 8, "section": "시대 속으로",
+      "id": 8,
+      "section": "시대 속으로",
       "narration": [
-        {"say": "알 콰리즈미는 한 걸음 더 나아갔습니다."},
-        {"say": "문제 하나하나가 아니라, 왜 그렇게 풀리는지를 그림으로 보여주려 한 겁니다."}
+        {
+          "say": "알 콰리즈미는 한 걸음 더 나아갔습니다."
+        },
+        {
+          "say": "문제 하나하나가 아니라, 왜 그렇게 풀리는지를 그림으로 보여주려 한 겁니다."
+        }
       ],
-      "visual": {"type": "title_card", "key": "one_step_further", "description": "연표의 820년이 확대되며 '왜?'가 떠오른다", "motion": "slow_zoom_in"},
+      "visual": {
+        "type": "title_card",
+        "key": "one_step_further",
+        "description": "연표의 820년이 확대되며 '왜?'가 떠오른다",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "quill_square",
+          "dim": 0.45
+        }
+      },
       "on_screen_text": "왜 그렇게 풀릴까?"
     },
     {
-      "id": 9, "section": "개념의 탄생",
+      "id": 9,
+      "section": "개념의 탄생",
       "narration": [
-        {"say": "그의 책에 나오는 대표 문제는 이것입니다."},
-        {"say": "어떤 수의 제곱에, 그 수의 열 배를 더했더니 서른아홉이 되었다.", "sub": "어떤 수의 제곱에, 그 수의 10배를 더했더니 39가 되었다."},
-        {"say": "그 수는 무엇인가."}
+        {
+          "say": "그의 책에 나오는 대표 문제는 이것입니다."
+        },
+        {
+          "say": "어떤 수의 제곱에, 그 수의 열 배를 더했더니 서른아홉이 되었다.",
+          "sub": "어떤 수의 제곱에, 그 수의 10배를 더했더니 39가 되었다."
+        },
+        {
+          "say": "그 수는 무엇인가."
+        }
       ],
-      "visual": {"type": "formula", "key": "the_problem", "description": "구간 제목 '개념의 탄생', 문장으로 쓴 문제가 x² + 10x = 39로 바뀐다", "motion": "build_up"},
+      "visual": {
+        "type": "formula",
+        "key": "the_problem",
+        "description": "구간 제목 '개념의 탄생', 문장으로 쓴 문제가 x² + 10x = 39로 바뀐다",
+        "motion": "build_up",
+        "background": {
+          "media": "quill_square",
+          "dim": 0.6
+        }
+      },
       "on_screen_text": "x² + 10x = 39"
     },
     {
-      "id": 10, "section": "개념의 탄생",
+      "id": 10,
+      "section": "개념의 탄생",
       "narration": [
-        {"say": "그 시절에는 엑스 같은 기호가 없었습니다.", "sub": "그 시절에는 x 같은 기호가 없었습니다."},
-        {"say": "문제도 풀이도 전부 문장으로 썼죠."},
-        {"say": "그래서 그는 그림을 그렸습니다."},
-        {"say": "먼저 한 변이 엑스인 정사각형을 그립니다. 넓이는 엑스 제곱입니다.", "sub": "먼저 한 변이 x인 정사각형을 그립니다. 넓이는 x²입니다."}
+        {
+          "say": "그 시절에는 엑스 같은 기호가 없었습니다.",
+          "sub": "그 시절에는 x 같은 기호가 없었습니다."
+        },
+        {
+          "say": "문제도 풀이도 전부 문장으로 썼죠."
+        },
+        {
+          "say": "그래서 그는 그림을 그렸습니다."
+        },
+        {
+          "say": "먼저 한 변이 엑스인 정사각형을 그립니다. 넓이는 엑스 제곱입니다.",
+          "sub": "먼저 한 변이 x인 정사각형을 그립니다. 넓이는 x²입니다."
+        }
       ],
-      "visual": {"type": "animation", "key": "geo_square", "description": "한 변이 x인 정사각형이 그려지고 안에 x²", "motion": "build_up"},
+      "visual": {
+        "type": "animation",
+        "key": "geo_square",
+        "description": "한 변이 x인 정사각형이 그려지고 안에 x²",
+        "motion": "build_up"
+      },
       "on_screen_text": null
     },
     {
-      "id": 11, "section": "개념의 탄생",
+      "id": 11,
+      "section": "개념의 탄생",
       "narration": [
-        {"say": "열 엑스는 가로가 엑스, 세로가 십인 직사각형입니다.", "sub": "10x는 가로가 x, 세로가 10인 직사각형입니다."},
-        {"say": "이것을 똑같이 네 조각으로 잘라서, 정사각형의 네 변에 하나씩 붙입니다."},
-        {"say": "조각 하나의 폭은 이 점 오입니다.", "sub": "조각 하나의 폭은 2.5입니다."}
+        {
+          "say": "열 엑스는 가로가 엑스, 세로가 십인 직사각형입니다.",
+          "sub": "10x는 가로가 x, 세로가 10인 직사각형입니다."
+        },
+        {
+          "say": "이것을 똑같이 네 조각으로 잘라서, 정사각형의 네 변에 하나씩 붙입니다."
+        },
+        {
+          "say": "조각 하나의 폭은 이 점 오입니다.",
+          "sub": "조각 하나의 폭은 2.5입니다."
+        }
       ],
-      "visual": {"type": "animation", "key": "geo_rects", "description": "x×10 직사각형이 네 조각(x×2.5)으로 잘려 정사각형 네 변에 붙는다", "motion": "build_up"},
+      "visual": {
+        "type": "animation",
+        "key": "geo_rects",
+        "description": "x×10 직사각형이 네 조각(x×2.5)으로 잘려 정사각형 네 변에 붙는다",
+        "motion": "build_up"
+      },
       "on_screen_text": null
     },
     {
-      "id": 12, "section": "개념의 탄생",
+      "id": 12,
+      "section": "개념의 탄생",
       "narration": [
-        {"say": "그러면 십자 모양이 생기는데, 네 귀퉁이가 비어 있습니다."},
-        {"say": "한 변이 이 점 오인 작은 정사각형 네 개. 넓이를 모두 더하면 이십오입니다.", "sub": "한 변이 2.5인 작은 정사각형 네 개. 넓이를 모두 더하면 25입니다."}
+        {
+          "say": "그러면 십자 모양이 생기는데, 네 귀퉁이가 비어 있습니다."
+        },
+        {
+          "say": "한 변이 이 점 오인 작은 정사각형 네 개. 넓이를 모두 더하면 이십오입니다.",
+          "sub": "한 변이 2.5인 작은 정사각형 네 개. 넓이를 모두 더하면 25입니다."
+        }
       ],
-      "visual": {"type": "animation", "key": "geo_corners", "description": "빈 귀퉁이 네 개가 깜빡이며 채워진다: 4 × 2.5² = 25", "motion": "build_up"},
+      "visual": {
+        "type": "animation",
+        "key": "geo_corners",
+        "description": "빈 귀퉁이 네 개가 깜빡이며 채워진다: 4 × 2.5² = 25",
+        "motion": "build_up"
+      },
       "on_screen_text": "4 × 2.5² = 25"
     },
     {
-      "id": 13, "section": "개념의 탄생",
+      "id": 13,
+      "section": "개념의 탄생",
       "narration": [
-        {"say": "귀퉁이를 채우면 커다란 정사각형이 완성됩니다."},
-        {"say": "넓이는 원래의 서른아홉에, 이십오를 더한 육십사.", "sub": "넓이는 원래의 39에, 25를 더한 64."},
-        {"say": "넓이가 육십사인 정사각형의 한 변은 팔입니다.", "sub": "넓이가 64인 정사각형의 한 변은 8입니다."},
-        {"say": "그 한 변은 엑스에 이 점 오를 양쪽으로 더한 길이니까, 엑스는 팔 빼기 오, 삼입니다.", "sub": "그 한 변은 x에 2.5를 양쪽으로 더한 길이니까, x = 8 − 5 = 3입니다."}
+        {
+          "say": "귀퉁이를 채우면 커다란 정사각형이 완성됩니다."
+        },
+        {
+          "say": "넓이는 원래의 서른아홉에, 이십오를 더한 육십사.",
+          "sub": "넓이는 원래의 39에, 25를 더한 64."
+        },
+        {
+          "say": "넓이가 육십사인 정사각형의 한 변은 팔입니다.",
+          "sub": "넓이가 64인 정사각형의 한 변은 8입니다."
+        },
+        {
+          "say": "그 한 변은 엑스에 이 점 오를 양쪽으로 더한 길이니까, 엑스는 팔 빼기 오, 삼입니다.",
+          "sub": "그 한 변은 x에 2.5를 양쪽으로 더한 길이니까, x = 8 − 5 = 3입니다."
+        }
       ],
-      "visual": {"type": "animation", "key": "geo_complete", "description": "완성된 큰 정사각형, 넓이 39+25=64, 한 변 8 = 2.5 + x + 2.5 → x = 3", "motion": "build_up"},
+      "visual": {
+        "type": "animation",
+        "key": "geo_complete",
+        "description": "완성된 큰 정사각형, 넓이 39+25=64, 한 변 8 = 2.5 + x + 2.5 → x = 3",
+        "motion": "build_up"
+      },
       "on_screen_text": "x = 3"
     },
     {
-      "id": 14, "section": "개념의 탄생",
+      "id": 14,
+      "section": "개념의 탄생",
       "narration": [
-        {"say": "모자란 귀퉁이를 채워서, 완전한 정사각형을 만든다."},
-        {"say": "이것이 바로 우리가 배우는 완전제곱식의 정체입니다.", "sub": "이것이 바로 우리가 배우는 '완전제곱식'의 정체입니다."},
-        {"say": "그리고 근의 공식은, 이 과정을 모든 이차방정식에 한꺼번에 적용해서 얻은 결과입니다."}
+        {
+          "say": "모자란 귀퉁이를 채워서, 완전한 정사각형을 만든다."
+        },
+        {
+          "say": "이것이 바로 우리가 배우는 완전제곱식의 정체입니다.",
+          "sub": "이것이 바로 우리가 배우는 '완전제곱식'의 정체입니다."
+        },
+        {
+          "say": "그리고 근의 공식은, 이 과정을 모든 이차방정식에 한꺼번에 적용해서 얻은 결과입니다."
+        }
       ],
-      "visual": {"type": "formula", "key": "completing_is_formula", "description": "정사각형 그림 옆에 '완전제곱식' 글자, 화살표로 근의 공식과 연결", "motion": "build_up"},
+      "visual": {
+        "type": "formula",
+        "key": "completing_is_formula",
+        "description": "정사각형 그림 옆에 '완전제곱식' 글자, 화살표로 근의 공식과 연결",
+        "motion": "build_up"
+      },
       "on_screen_text": "완전제곱식 → 근의 공식"
     },
     {
-      "id": 15, "section": "진짜 쉬운 설명",
+      "id": 15,
+      "section": "진짜 쉬운 설명",
       "narration": [
-        {"say": "정리하면 이렇습니다."},
-        {"say": "이차방정식이 까다로운 건, 엑스 제곱과 엑스가 뒤섞여 있기 때문입니다.", "sub": "이차방정식이 까다로운 건, x²과 x가 뒤섞여 있기 때문입니다."},
-        {"say": "정사각형을 완성하면 둘이, 엑스 더하기 오의 제곱이라는 한 덩어리로 합쳐집니다.", "sub": "정사각형을 완성하면 둘이, (x + 5)²이라는 한 덩어리로 합쳐집니다."},
-        {"say": "덩어리가 하나가 되면, 제곱근만 구하면 끝입니다."}
+        {
+          "say": "정리하면 이렇습니다."
+        },
+        {
+          "say": "이차방정식이 까다로운 건, 엑스 제곱과 엑스가 뒤섞여 있기 때문입니다.",
+          "sub": "이차방정식이 까다로운 건, x²과 x가 뒤섞여 있기 때문입니다."
+        },
+        {
+          "say": "정사각형을 완성하면 둘이, 엑스 더하기 오의 제곱이라는 한 덩어리로 합쳐집니다.",
+          "sub": "정사각형을 완성하면 둘이, (x + 5)²이라는 한 덩어리로 합쳐집니다."
+        },
+        {
+          "say": "덩어리가 하나가 되면, 제곱근만 구하면 끝입니다."
+        }
       ],
-      "visual": {"type": "formula", "key": "easy_merge", "description": "구간 제목 '진짜 쉬운 설명', x² + 10x + 25 가 (x+5)² 로 합쳐지는 수식 변형", "motion": "build_up"},
+      "visual": {
+        "type": "formula",
+        "key": "easy_merge",
+        "description": "구간 제목 '진짜 쉬운 설명', x² + 10x + 25 가 (x+5)² 로 합쳐지는 수식 변형",
+        "motion": "build_up"
+      },
       "on_screen_text": "(x + 5)² = 64"
     },
     {
-      "id": 16, "section": "진짜 쉬운 설명",
+      "id": 16,
+      "section": "진짜 쉬운 설명",
       "narration": [
-        {"say": "여기서 흔한 오해 하나."},
-        {"say": "근의 공식은 인수분해가 안 될 때만 쓰는 특별한 공식이라는 생각이죠."},
-        {"say": "사실은 반대입니다. 근의 공식은 모든 이차방정식을 여는 만능 열쇠이고, 인수분해는 운이 좋을 때 쓰는 지름길입니다."}
+        {
+          "say": "여기서 흔한 오해 하나."
+        },
+        {
+          "say": "근의 공식은 인수분해가 안 될 때만 쓰는 특별한 공식이라는 생각이죠."
+        },
+        {
+          "say": "사실은 반대입니다. 근의 공식은 모든 이차방정식을 여는 만능 열쇠이고, 인수분해는 운이 좋을 때 쓰는 지름길입니다."
+        }
       ],
-      "visual": {"type": "diagram", "key": "misconception_key", "description": "'오해' 카드에 X 표시 → 열쇠(근의 공식)와 지름길(인수분해) 비교", "motion": "build_up"},
+      "visual": {
+        "type": "diagram",
+        "key": "misconception_key",
+        "description": "'오해' 카드에 X 표시 → 열쇠(근의 공식)와 지름길(인수분해) 비교",
+        "motion": "build_up"
+      },
       "on_screen_text": "근의 공식 = 만능 열쇠"
     },
     {
-      "id": 17, "section": "공식 풀어보기",
+      "id": 17,
+      "section": "공식 풀어보기",
       "narration": [
-        {"say": "이제 공식을 다시 보겠습니다."},
-        {"say": "앞부분의 비 나누기 이 에이는, 아까 정사각형 한 변에 양쪽으로 덧붙인 길이, 이 점 오 더하기 이 점 오, 즉 오에 해당합니다.", "sub": "앞부분의 b/2a는, 아까 정사각형 한 변에 양쪽으로 덧붙인 길이, 2.5 + 2.5 = 5에 해당합니다."},
-        {"say": "알 콰리즈미가 열의 절반이라고 부른 바로 그 수죠. 마이너스가 붙은 건, 큰 변에서 이만큼을 빼야 엑스가 남기 때문입니다.", "sub": "알 콰리즈미가 '10의 절반'이라고 부른 바로 그 수죠. 마이너스가 붙은 건, 큰 변에서 이만큼을 빼야 x가 남기 때문입니다."}
+        {
+          "say": "이제 공식을 다시 보겠습니다."
+        },
+        {
+          "say": "앞부분의 비 나누기 이 에이는, 아까 정사각형 한 변에 양쪽으로 덧붙인 길이, 이 점 오 더하기 이 점 오, 즉 오에 해당합니다.",
+          "sub": "앞부분의 b/2a는, 아까 정사각형 한 변에 양쪽으로 덧붙인 길이, 2.5 + 2.5 = 5에 해당합니다."
+        },
+        {
+          "say": "알 콰리즈미가 열의 절반이라고 부른 바로 그 수죠. 마이너스가 붙은 건, 큰 변에서 이만큼을 빼야 엑스가 남기 때문입니다.",
+          "sub": "알 콰리즈미가 '10의 절반'이라고 부른 바로 그 수죠. 마이너스가 붙은 건, 큰 변에서 이만큼을 빼야 x가 남기 때문입니다."
+        }
       ],
-      "visual": {"type": "formula", "key": "formula_part_shift", "description": "구간 제목 '공식 풀어보기', 공식에서 −b/2a 부분 강조 + 2.5 + 2.5 = 10 ÷ 2 = 5 연결", "motion": "build_up"},
+      "visual": {
+        "type": "formula",
+        "key": "formula_part_shift",
+        "description": "구간 제목 '공식 풀어보기', 공식에서 −b/2a 부분 강조 + 2.5 + 2.5 = 10 ÷ 2 = 5 연결",
+        "motion": "build_up"
+      },
       "on_screen_text": null
     },
     {
-      "id": 18, "section": "공식 풀어보기",
+      "id": 18,
+      "section": "공식 풀어보기",
       "narration": [
-        {"say": "루트 안의 비 제곱 마이너스 사 에이 씨는, 완성한 정사각형의 넓이를 결정합니다.", "sub": "루트 안의 b² − 4ac는, 완성한 정사각형의 넓이를 결정합니다."},
-        {"say": "그래서 이 값이 음수면, 중학교 범위에서는 해가 없습니다."},
-        {"say": "넓이가 음수인 정사각형은 그릴 수 없으니까요."}
+        {
+          "say": "루트 안의 비 제곱 마이너스 사 에이 씨는, 완성한 정사각형의 넓이를 결정합니다.",
+          "sub": "루트 안의 b² − 4ac는, 완성한 정사각형의 넓이를 결정합니다."
+        },
+        {
+          "say": "그래서 이 값이 음수면, 중학교 범위에서는 해가 없습니다."
+        },
+        {
+          "say": "넓이가 음수인 정사각형은 그릴 수 없으니까요."
+        }
       ],
-      "visual": {"type": "formula", "key": "formula_part_disc", "description": "b² − 4ac 강조, 양수/0/음수일 때 정사각형이 생기거나 사라지는 그림", "motion": "build_up"},
+      "visual": {
+        "type": "formula",
+        "key": "formula_part_disc",
+        "description": "b² − 4ac 강조, 양수/0/음수일 때 정사각형이 생기거나 사라지는 그림",
+        "motion": "build_up"
+      },
       "on_screen_text": "b² − 4ac < 0 → 실수인 해가 없다"
     },
     {
-      "id": 19, "section": "공식 풀어보기",
+      "id": 19,
+      "section": "공식 풀어보기",
       "narration": [
-        {"say": "알 콰리즈미의 문제로 확인해 볼까요."},
-        {"say": "엑스 제곱 더하기 십 엑스 빼기 서른아홉은 영. 에이는 일, 비는 십, 씨는 마이너스 서른아홉입니다.", "sub": "x² + 10x − 39 = 0. a = 1, b = 10, c = −39입니다."},
-        {"say": "비 제곱 마이너스 사 에이 씨는, 백 더하기 백오십육, 이백오십육.", "sub": "b² − 4ac = 100 + 156 = 256"},
-        {"say": "루트 이백오십육은 십육입니다.", "sub": "√256 = 16"}
+        {
+          "say": "알 콰리즈미의 문제로 확인해 볼까요."
+        },
+        {
+          "say": "엑스 제곱 더하기 십 엑스 빼기 서른아홉은 영. 에이는 일, 비는 십, 씨는 마이너스 서른아홉입니다.",
+          "sub": "x² + 10x − 39 = 0. a = 1, b = 10, c = −39입니다."
+        },
+        {
+          "say": "비 제곱 마이너스 사 에이 씨는, 백 더하기 백오십육, 이백오십육.",
+          "sub": "b² − 4ac = 100 + 156 = 256"
+        },
+        {
+          "say": "루트 이백오십육은 십육입니다.",
+          "sub": "√256 = 16"
+        }
       ],
-      "visual": {"type": "formula", "key": "example_calc1", "description": "a, b, c 대입과 판별식 계산이 한 줄씩 써진다", "motion": "build_up"},
+      "visual": {
+        "type": "formula",
+        "key": "example_calc1",
+        "description": "a, b, c 대입과 판별식 계산이 한 줄씩 써진다",
+        "motion": "build_up"
+      },
       "on_screen_text": null
     },
     {
-      "id": 20, "section": "공식 풀어보기",
+      "id": 20,
+      "section": "공식 풀어보기",
       "narration": [
-        {"say": "그러면 엑스는, 마이너스 십 더하기 십육을 이로 나눈 삼.", "sub": "x = (−10 + 16) ÷ 2 = 3"},
-        {"say": "또는 마이너스 십 빼기 십육을 이로 나눈 마이너스 십삼입니다.", "sub": "또는 x = (−10 − 16) ÷ 2 = −13"},
-        {"say": "그림으로 찾은 삼이 그대로 나왔습니다.", "sub": "그림으로 찾은 3이 그대로 나왔습니다."},
-        {"say": "마이너스 십삼은 알 콰리즈미가 버린 답입니다. 그에게 길이는 음수일 수 없었으니까요.", "sub": "−13은 알 콰리즈미가 버린 답입니다. 그에게 길이는 음수일 수 없었으니까요."}
+        {
+          "say": "그러면 엑스는, 마이너스 십 더하기 십육을 이로 나눈 삼.",
+          "sub": "x = (−10 + 16) ÷ 2 = 3"
+        },
+        {
+          "say": "또는 마이너스 십 빼기 십육을 이로 나눈 마이너스 십삼입니다.",
+          "sub": "또는 x = (−10 − 16) ÷ 2 = −13"
+        },
+        {
+          "say": "그림으로 찾은 삼이 그대로 나왔습니다.",
+          "sub": "그림으로 찾은 3이 그대로 나왔습니다."
+        },
+        {
+          "say": "마이너스 십삼은 알 콰리즈미가 버린 답입니다. 그에게 길이는 음수일 수 없었으니까요.",
+          "sub": "−13은 알 콰리즈미가 버린 답입니다. 그에게 길이는 음수일 수 없었으니까요."
+        }
       ],
-      "visual": {"type": "formula", "key": "example_calc2", "description": "두 근 계산, 3은 정사각형 그림과 연결되어 빛나고 −13은 흐려진다", "motion": "build_up"},
+      "visual": {
+        "type": "formula",
+        "key": "example_calc2",
+        "description": "두 근 계산, 3은 정사각형 그림과 연결되어 빛나고 −13은 흐려진다",
+        "motion": "build_up"
+      },
       "on_screen_text": "x = 3, x = −13"
     },
     {
-      "id": 21, "section": "오늘의 한 줄",
+      "id": 21,
+      "section": "오늘의 한 줄",
       "narration": [
-        {"say": "오늘의 한 줄."},
-        {"say": "근의 공식은 외우는 주문이 아니라, 모자란 귀퉁이를 채워 정사각형을 완성하는 이야기입니다."}
+        {
+          "say": "오늘의 한 줄."
+        },
+        {
+          "say": "근의 공식은 외우는 주문이 아니라, 모자란 귀퉁이를 채워 정사각형을 완성하는 이야기입니다."
+        }
       ],
-      "visual": {"type": "title_card", "key": "one_line", "description": "완성된 정사각형 그림 위에 오늘의 한 줄", "motion": "slow_zoom_in"},
+      "visual": {
+        "type": "title_card",
+        "key": "one_line",
+        "description": "완성된 정사각형 그림 위에 오늘의 한 줄",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "tigris_sunrise",
+          "dim": 0.45
+        }
+      },
       "on_screen_text": "근의 공식 = 정사각형을 완성하는 이야기"
     },
     {
-      "id": 22, "section": "오늘의 한 줄",
+      "id": 22,
+      "section": "오늘의 한 줄",
       "narration": [
-        {"say": "덧붙이면, 알 콰리즈미의 책 제목에 있던 알 자브르에서 대수학을 뜻하는 알지브라가, 그의 이름에서 알고리즘이라는 말이 나왔습니다.", "sub": "덧붙이면, 책 제목의 '알 자브르'에서 대수학(algebra)이, 그의 이름에서 '알고리즘(algorithm)'이 나왔습니다."},
-        {"say": "다음 시간에는 이 정사각형이 그래프 위에서 어떻게 보이는지, 이차함수 이야기를 해보겠습니다."},
-        {"say": "최고의 공부였습니다."}
+        {
+          "say": "덧붙이면, 알 콰리즈미의 책 제목에 있던 알 자브르에서 대수학을 뜻하는 알지브라가, 그의 이름에서 알고리즘이라는 말이 나왔습니다.",
+          "sub": "덧붙이면, 책 제목의 '알 자브르'에서 대수학(algebra)이, 그의 이름에서 '알고리즘(algorithm)'이 나왔습니다."
+        },
+        {
+          "say": "다음 시간에는 이 정사각형이 그래프 위에서 어떻게 보이는지, 이차함수 이야기를 해보겠습니다."
+        },
+        {
+          "say": "최고의 공부였습니다."
+        }
       ],
-      "visual": {"type": "title_card", "key": "ending", "description": "al-jabr → algebra, Algoritmi → algorithm, 다음 편 예고와 채널 로고", "motion": "static"},
+      "visual": {
+        "type": "title_card",
+        "key": "ending",
+        "description": "al-jabr → algebra, Algoritmi → algorithm, 다음 편 예고와 채널 로고",
+        "motion": "static",
+        "background": {
+          "media": "khwarizmi_ms",
+          "dim": 0.65
+        }
+      },
       "on_screen_text": "다음 편: 이차함수"
     }
   ]

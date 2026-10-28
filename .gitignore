@@ -5,9 +5,12 @@ client_secret*.json
 token*.json
 
 # 대용량 산출물 (다시 만들 수 있음: scripts/make_episode.sh)
+#  - 실사 소재는 assets/sources.json의 원본 URL(AI 소재는 생성 기록)로 다시 받을 수 있다
 episodes/*/assets/render/
 episodes/*/assets/build/
+episodes/*/assets/media/
 episodes/*/assets/audio/*.wav
+episodes/*/assets/audio/cache/
 episodes/*/output/*.mp4
 media/
 __pycache__/

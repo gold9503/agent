@@ -54,13 +54,7 @@ class S01(ChoigoScene):
         f = M(r"x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}", size=96, color=GOLD)
         self.play(Write(f), run_time=3.2)
         self.at(1)
-        echoes = VGroup(*[
-            M(r"x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}", size=s, color=MUTED).set_opacity(o).move_to(p)
-            for s, o, p in [(40, .25, [-4.6, 2.6, 0]), (34, .2, [4.4, 2.3, 0]), (44, .18, [-4.2, -1.9, 0]),
-                            (30, .22, [4.8, -1.6, 0]), (28, .15, [0.2, 3.1, 0])]
-        ])
-        self.play(LaggedStart(*[FadeIn(e, scale=1.2) for e in echoes], lag_ratio=0.3), run_time=2.5)
-        tag = T("외우는 주문?", size=40, color=INK).next_to(f, DOWN, buff=0.6)
+        tag = plate(T("외우는 주문?", size=44, color=INK)).next_to(f, DOWN, buff=0.6)
         self.play(FadeIn(tag, shift=UP * 0.2))
 
 
@@ -106,39 +100,20 @@ class S04(ChoigoScene):
     SCENE_ID = 4
 
     def build(self):
-        pts = {"그리스": np.array([-5.0, 1.6, 0]), "바그다드": np.array([0.2, 0.3, 0]), "인도": np.array([4.9, -1.2, 0])}
-        dots, labels = VGroup(), VGroup()
-        for name, p in pts.items():
-            big = name == "바그다드"
-            d = Dot(p, radius=0.16 if big else 0.11, color=GOLD if big else TEAL)
-            halo = Circle(radius=0.38, color=GOLD, stroke_width=2).move_to(p) if big else VMobject()
-            dots.add(VGroup(halo, d))
-            labels.add(T(name, size=40 if big else 34, color=INK if big else MUTED).next_to(d, DOWN, buff=0.25))
-        self.play(LaggedStart(*[FadeIn(d, scale=0.5) for d in dots], lag_ratio=0.2),
-                  LaggedStart(*[FadeIn(l) for l in labels], lag_ratio=0.2), run_time=1.6)
-        big = T("세계에서 가장 큰 도시 가운데 하나", size=30, color=MUTED).next_to(dots[1], UP, buff=0.6)
-        self.play(FadeIn(big, shift=UP * 0.2))
+        big = plate(T("세계에서 가장 큰 도시 가운데 하나", size=40)).move_to(UP * 2.4)
+        self.play(FadeIn(big, shift=UP * 0.2), run_time=0.8)
         self.at(1)
-        # 지혜의 집 (돔 지붕)
-        base = Rectangle(width=1.4, height=0.7, color=GOLD, stroke_width=3).next_to(dots[1], UP, buff=0.55)
-        dome = Arc(radius=0.7, start_angle=0, angle=PI, color=GOLD, stroke_width=3).next_to(base, UP, buff=0)
-        house = VGroup(base, dome)
-        name = T("지혜의 집", size=36, color=GOLD, weight=BOLD).next_to(house, UP, buff=0.2)
-        self.play(FadeOut(big), Create(house), FadeIn(name), run_time=1.2)
-        self.at(1, 2.2)
-        arrows, books = VGroup(), VGroup()
-        for src in ("그리스", "인도"):
-            a = CurvedArrow(pts[src] + (RIGHT if src == "그리스" else LEFT) * 0.3,
-                            pts["바그다드"] + (LEFT if src == "그리스" else RIGHT) * 0.4,
-                            angle=-PI / 5 if src == "그리스" else -PI / 5, color=TEAL, stroke_width=3)
-            arrows.add(a)
-            for k in range(3):
-                b = Rectangle(width=0.26, height=0.34, color=INK, fill_color=INK, fill_opacity=0.8, stroke_width=1)
-                books.add(b.move_to(a.point_from_proportion(0.25 + 0.25 * k)))
-        self.play(Create(arrows), run_time=1.2)
-        self.play(LaggedStart(*[FadeIn(b, scale=0.3) for b in books], lag_ratio=0.15), run_time=1.5)
-        tr = T("그리스어 · 산스크리트어 → 아랍어", size=30, color=MUTED).move_to(DOWN * 2.2)
-        self.play(FadeIn(tr))
+        name = T("지혜의 집", size=88, color=GOLD, font=SERIF, weight=BOLD)
+        sub = T("Bayt al-Hikma · 번역과 연구의 중심", size=30, color=INK)
+        card = plate(VGroup(name, sub).arrange(DOWN, buff=0.25), buff=0.4)
+        self.play(FadeOut(big), FadeIn(card, scale=0.95), run_time=1.0)
+        self.at(1, 2.6)
+        langs = VGroup(T("그리스어", size=36, color=TEAL), T("산스크리트어", size=36, color=TEAL)).arrange(DOWN, buff=0.2)
+        arrow = Arrow(LEFT, RIGHT, color=GOLD, stroke_width=6)
+        ar = T("아랍어", size=44, color=GOLD, weight=BOLD)
+        row = plate(VGroup(langs, arrow, ar).arrange(RIGHT, buff=0.5)).move_to(DOWN * 1.5)
+        self.play(card.animate.shift(UP * 1.3), FadeIn(row[0]), FadeIn(langs), run_time=0.8)
+        self.play(GrowArrow(arrow), FadeIn(ar, shift=LEFT * 0.2), run_time=0.9)
 
 
 class S05(ChoigoScene):
@@ -146,36 +121,36 @@ class S05(ChoigoScene):
 
     def build(self):
         name = T("알 콰리즈미", size=80, font=SERIF, weight=BOLD)
-        life = T("780년경 ~ 850년경 · 바그다드", size=32, color=MUTED)
-        card = VGroup(name, life).arrange(DOWN, buff=0.35)
-        self.play(Write(name), run_time=1.4)
+        life = T("780년경 ~ 850년경 · 바그다드", size=32, color=INK)
+        card = plate(VGroup(name, life).arrange(DOWN, buff=0.35), buff=0.4)
+        self.play(FadeIn(card[0]), Write(name), run_time=1.4)
         self.play(FadeIn(life, shift=UP * 0.2))
+        note = T("※ 뒤 배경: 그의 책 『알 자브르와 알 무카발라』 필사본", size=22, color=INK).set_opacity(0.85)
+        note.next_to(card, DOWN, buff=0.3)
+        self.play(FadeIn(note))
         self.at(1)
-        self.play(card.animate.scale(0.7).to_edge(UP, buff=0.6))
+        self.play(card.animate.scale(0.7).to_edge(UP, buff=0.6), FadeOut(note))
         self.at(2)
-        # 유산 나누기: 셋으로 나뉜 원
         pie = VGroup(*[AnnularSector(inner_radius=0, outer_radius=0.85, angle=TAU / 3, start_angle=k * TAU / 3,
-                                     color=c, fill_opacity=0.55, stroke_width=2, stroke_color=BG)
+                                     color=c, fill_opacity=0.7, stroke_width=2, stroke_color=BG)
                        for k, c in enumerate([GOLD, TEAL, CLAY])])
-        # 땅 넓이: 격자 사각형
         land = VGroup(Rectangle(width=1.9, height=1.4, color=TEAL, stroke_width=3),
                       *[Line([-0.95 + 0.475 * i, -0.7, 0], [-0.95 + 0.475 * i, 0.7, 0], color=TEAL,
-                             stroke_width=1, stroke_opacity=0.5) for i in range(1, 4)],
+                             stroke_width=1, stroke_opacity=0.6) for i in range(1, 4)],
                       *[Line([-0.95, -0.7 + 0.467 * j, 0], [0.95, -0.7 + 0.467 * j, 0], color=TEAL,
-                             stroke_width=1, stroke_opacity=0.5) for j in range(1, 3)])
-        # 거래: 저울
+                             stroke_width=1, stroke_opacity=0.6) for j in range(1, 3)])
         beam = Line(LEFT, RIGHT, color=GOLD, stroke_width=4)
         post = Line(DOWN * 0.9, ORIGIN, color=GOLD, stroke_width=4)
         pans = VGroup(*[Arc(radius=0.32, start_angle=PI, angle=PI, color=GOLD, stroke_width=3)
                         .move_to(beam.get_end() * s + DOWN * 0.45) for s in (1, -1)])
         strings = VGroup(*[Line(beam.get_end() * s, beam.get_end() * s + DOWN * 0.3, color=GOLD, stroke_width=2)
                            for s in (1, -1)])
-        scale_icon = VGroup(beam, post, pans, strings)
-        icons = VGroup(pie, land, scale_icon).arrange(RIGHT, buff=1.9).shift(DOWN * 0.6)
+        icons = VGroup(pie, land, VGroup(beam, post, pans, strings)).arrange(RIGHT, buff=1.9).shift(DOWN * 0.4)
         caps = VGroup(*[T(s, size=34).next_to(i, DOWN, buff=0.35)
                         for s, i in zip(["유산 나누기", "땅 넓이 재기", "거래 계산"], icons)])
-        self.play(LaggedStart(*[AnimationGroup(FadeIn(i, scale=0.6), FadeIn(c)) for i, c in zip(icons, caps)],
-                              lag_ratio=0.45), run_time=2.6)
+        panel = plate(VGroup(icons, caps), opacity=0.6, buff=0.45)
+        self.play(FadeIn(panel[0]), LaggedStart(*[AnimationGroup(FadeIn(i, scale=0.6), FadeIn(c))
+                                                  for i, c in zip(icons, caps)], lag_ratio=0.45), run_time=2.6)
 
 
 class S06(ChoigoScene):
@@ -183,21 +158,24 @@ class S06(ChoigoScene):
 
     def build(self):
         land = Rectangle(width=3 * U * 1.1, height=13 * U * 0.42, color=TEAL, fill_color=TEAL,
-                         fill_opacity=0.15, stroke_width=3).move_to(LEFT * 3.6 + UP * 0.4)
+                         fill_opacity=0.25, stroke_width=4).move_to(LEFT * 3.6 + UP * 0.4)
         w = M("x", size=44, color=TEAL).next_to(land, DOWN, buff=0.15)
         h = M("x + 10", size=44, color=TEAL).next_to(land, LEFT, buff=0.15)
         area = T("넓이 39", size=36).move_to(land)
-        self.play(Create(land), FadeIn(w), FadeIn(h), run_time=1.2)
+        left_bg = plate(VGroup(land, w, h), opacity=0.5)[0]
+        self.play(FadeIn(left_bg), Create(land), FadeIn(w), FadeIn(h), run_time=1.2)
         self.play(FadeIn(area))
         e1 = M("x", "(", "x + 10", ")", "=", "39", size=72).move_to(RIGHT * 2.6 + UP * 1.0)
-        self.play(Write(e1), run_time=1.4)
         e2 = M("x^2", "+", "10x", "=", "39", size=80).move_to(RIGHT * 2.6 + DOWN * 0.3)
         e2[0].set_color(CORAL)
+        right_bg = RoundedRectangle(corner_radius=0.12, width=6.0, height=5.0, stroke_width=0, fill_color=BLACK,
+                                    fill_opacity=0.55).move_to(RIGHT * 2.6 + DOWN * 0.15)
+        self.play(FadeIn(right_bg), Write(e1), run_time=1.4)
         self.play(TransformFromCopy(e1, e2), run_time=1.4)
         self.play(Indicate(e2[0], color=CORAL, scale_factor=1.4), run_time=1.2)
         self.at(1)
-        lab = T("이차방정식", size=56, color=GOLD, font=SERIF, weight=BOLD).next_to(e2, DOWN, buff=0.7)
-        sub = T("가장 높은 차수가 2인 방정식", size=28, color=MUTED).next_to(lab, DOWN, buff=0.2)
+        lab = T("이차방정식", size=56, color=GOLD, font=SERIF, weight=BOLD).next_to(e2, DOWN, buff=0.6)
+        sub = T("가장 높은 차수가 2인 방정식", size=28, color=INK).next_to(lab, DOWN, buff=0.2)
         self.play(FadeIn(lab, shift=UP * 0.2), FadeIn(sub))
 
 
@@ -209,20 +187,6 @@ def timeline():
     return line, xs, ticks
 
 
-def clay_tablet():
-    tab = RoundedRectangle(corner_radius=0.18, width=1.5, height=1.9, color=CLAY,
-                           fill_color=CLAY, fill_opacity=0.55, stroke_width=3)
-    wedges = VGroup()
-    rng = np.random.default_rng(7)
-    for r in range(5):
-        for c in range(4):
-            if rng.random() < 0.8:
-                t = Triangle(color="#5B3A22", fill_color="#5B3A22", fill_opacity=1, stroke_width=0).scale(0.07)
-                t.rotate(PI / 2 * rng.integers(0, 4))
-                wedges.add(t.move_to(tab.get_corner(UL) + np.array([0.3 + 0.3 * c, -0.32 - 0.31 * r, 0])))
-    return VGroup(tab, wedges)
-
-
 class S07(ChoigoScene):
     SCENE_ID = 7
 
@@ -231,23 +195,23 @@ class S07(ChoigoScene):
         self.play(Create(line), FadeIn(ticks), run_time=1.0)
         y0 = T("기원전 1800년경", size=30, color=GOLD).next_to(ticks[0], DOWN, buff=0.3)
         n0 = T("바빌로니아 점토판", size=30).next_to(y0, DOWN, buff=0.15)
-        tab = clay_tablet().next_to(ticks[0], UP, buff=0.4)
+        tab = self.photo("clay_tablet", height=2.6).next_to(ticks[0], UP, buff=0.35)
         self.play(FadeIn(tab, shift=DOWN * 0.3), FadeIn(y0), FadeIn(n0), run_time=1.2)
         self.at(1)
         steps = VGroup(*[T(s, size=24, color=INK) for s in ["① 반으로 나눈다", "② 제곱한다", "③ 더한다", "④ 제곱근을 구한다"]])
-        steps.arrange(DOWN, aligned_edge=LEFT, buff=0.12).next_to(tab, RIGHT, buff=0.35)
-        tag = T("문제별 '계산 순서'", size=26, color=MUTED).next_to(steps, UP, buff=0.2, aligned_edge=LEFT)
-        self.play(FadeIn(tag), LaggedStart(*[FadeIn(s, shift=RIGHT * 0.2) for s in steps], lag_ratio=0.3), run_time=2.0)
+        steps.arrange(DOWN, aligned_edge=LEFT, buff=0.12)
+        tag = T("문제별 '계산 순서'", size=26, color=MUTED)
+        box = plate(VGroup(tag, steps).arrange(DOWN, aligned_edge=LEFT, buff=0.2), opacity=0.5)
+        box.next_to(tab, RIGHT, buff=0.35).align_to(tab, UP)
+        self.play(FadeIn(box[0]), FadeIn(tag), LaggedStart(*[FadeIn(s, shift=RIGHT * 0.2) for s in steps],
+                                                          lag_ratio=0.3), run_time=2.0)
         self.at(2)
-        self.play(FadeOut(steps), FadeOut(tag), run_time=0.5)
+        self.play(FadeOut(box), run_time=0.5)
         y1 = T("628년", size=30, color=GOLD).next_to(ticks[1], DOWN, buff=0.3)
         n1 = T("인도 · 브라마굽타", size=30).next_to(y1, DOWN, buff=0.15)
-        verse = VGroup(*[Line(LEFT * 0.7, RIGHT * (0.7 - 0.25 * (k % 2)), color=INK, stroke_width=3)
-                         for k in range(4)]).arrange(DOWN, buff=0.18, aligned_edge=LEFT)
-        frame = SurroundingRectangle(verse, color=TEAL, buff=0.25, corner_radius=0.1)
-        rule = VGroup(frame, verse).next_to(ticks[1], UP, buff=0.4)
-        cap = T("말로 쓴 규칙", size=26, color=TEAL).next_to(rule, UP, buff=0.15)
-        self.play(FadeIn(rule, shift=DOWN * 0.3), FadeIn(cap), FadeIn(y1), FadeIn(n1), run_time=1.2)
+        leaf = self.photo("palm_leaf", height=2.2).next_to(ticks[1], UP, buff=0.35)
+        cap = T("말로 쓴 규칙", size=26, color=TEAL).next_to(leaf, UP, buff=0.12)
+        self.play(FadeIn(leaf, shift=DOWN * 0.3), FadeIn(cap), FadeIn(y1), FadeIn(n1), run_time=1.2)
         self.wait(1.5)
         y2 = T("820년경", size=30, color=GOLD).next_to(ticks[2], DOWN, buff=0.3)
         n2 = T("바그다드 · 알 콰리즈미", size=30).next_to(y2, DOWN, buff=0.15)
@@ -258,18 +222,16 @@ class S08(ChoigoScene):
     SCENE_ID = 8
 
     def build(self):
-        line, xs, ticks = timeline()
-        y2 = T("820년경", size=30, color=GOLD).next_to(ticks[2], DOWN, buff=0.3)
-        n2 = T("바그다드 · 알 콰리즈미", size=30).next_to(y2, DOWN, buff=0.15)
-        self.add(line, ticks, y2, n2)
-        self.play(VGroup(line, ticks).animate.set_opacity(0.3), run_time=0.8)
+        self.wait(0.8)
         self.at(1)
-        a = T("이 문제는 이렇게 푼다", size=40, color=MUTED).move_to(UP * 2.2 + LEFT * 2.6)
-        arrow = Arrow(LEFT, RIGHT, color=GOLD).next_to(a, RIGHT, buff=0.3)
-        b = T("왜?", size=110, color=GOLD, font=SERIF, weight=BOLD).next_to(arrow, RIGHT, buff=0.4)
-        self.play(FadeIn(a), run_time=0.6)
+        a = T("이 문제는 이렇게 푼다", size=40, color=INK)
+        arrow = Arrow(LEFT, RIGHT, color=GOLD)
+        b = T("왜?", size=110, color=GOLD, font=SERIF, weight=BOLD)
+        row = VGroup(a, arrow, b).arrange(RIGHT, buff=0.4).shift(UP * 1.2)
+        pic = T("→ 그림으로 보여주기", size=40).next_to(row, DOWN, buff=0.6)
+        bg = plate(VGroup(row, pic), opacity=0.5, buff=0.45)[0]
+        self.play(FadeIn(bg), FadeIn(a), run_time=0.6)
         self.play(GrowArrow(arrow), FadeIn(b, scale=1.5), run_time=1.0)
-        pic = T("→ 그림으로 보여주기", size=36).next_to(VGroup(a, b), DOWN, buff=0.5)
         self.play(FadeIn(pic, shift=UP * 0.2))
 
 
@@ -281,13 +243,14 @@ class S09(ChoigoScene):
         self.show_chapter("③", "개념의 탄생", hold=1.0)
         self.at(1)
         words = T("어떤 수의 제곱에, 그 수의 10배를 더했더니 39가 되었다.", size=40, font=SERIF).shift(UP * 1.0)
-        self.play(AddTextLetterByLetter(words), run_time=2.6)
-        self.at(2)
         q = T("그 수는 무엇인가?", size=44, font=SERIF, color=GOLD).next_to(words, DOWN, buff=0.4)
-        self.play(FadeIn(q, shift=UP * 0.2))
         eq = M("x^2", "+", "10x", "=", "39", size=96).shift(DOWN * 1.3)
+        note = T("오늘날의 기호로 쓰면", size=26, color=INK).next_to(eq, DOWN, buff=0.3)
+        bg = plate(VGroup(words, q, eq, note), opacity=0.45, buff=0.4)[0]
+        self.play(FadeIn(bg), AddTextLetterByLetter(words), run_time=2.6)
+        self.at(2)
+        self.play(FadeIn(q, shift=UP * 0.2))
         self.play(Write(eq), run_time=1.5)
-        note = T("오늘날의 기호로 쓰면", size=26, color=MUTED).next_to(eq, DOWN, buff=0.3)
         self.play(FadeIn(note))
 
 
@@ -624,7 +587,8 @@ class S21(ChoigoScene):
         l1 = T("근의 공식은 외우는 주문이 아니라", size=38, font=SERIF)
         l2 = T("정사각형을 완성하는 이야기", size=50, font=SERIF, weight=BOLD, color=GOLD)
         g = VGroup(l1, l2).arrange(DOWN, buff=0.3).next_to(fig, DOWN, buff=0.45)
-        self.play(FadeIn(l1, shift=UP * 0.2), run_time=0.8)
+        bg = plate(g, opacity=0.5)[0]
+        self.play(FadeIn(bg), FadeIn(l1, shift=UP * 0.2), run_time=0.8)
         self.wait(1.8)
         self.play(Write(l2), run_time=1.6)
 
@@ -642,14 +606,15 @@ class S22(ChoigoScene):
             c = T(f"({ko})", size=34)
             rows.add(VGroup(a, arr, b, c).arrange(RIGHT, buff=0.3))
         rows.arrange(DOWN, buff=0.5, aligned_edge=LEFT).shift(UP * 0.5)
-        self.play(FadeIn(rows[0][0]), run_time=0.5)
+        rows_bg = plate(rows, opacity=0.6, buff=0.45)[0]
+        self.play(FadeIn(rows_bg), FadeIn(rows[0][0]), run_time=0.5)
         self.play(GrowArrow(rows[0][1]), FadeIn(rows[0][2:]), run_time=1.0)
         self.wait(2.0)
         self.play(FadeIn(rows[1][0]), run_time=0.5)
         self.play(GrowArrow(rows[1][1]), FadeIn(rows[1][2:]), run_time=1.0)
         self.at(1)
-        self.play(FadeOut(rows), run_time=0.6)
-        nxt = T("다음 편", size=34, color=MUTED, font=SERIF).shift(UP * 2.4)
+        self.play(FadeOut(rows), FadeOut(rows_bg), run_time=0.6)
+        nxt = T("다음 편", size=34, color=INK, font=SERIF).shift(UP * 2.4)
         title = T("이차함수", size=72, font=SERIF, weight=BOLD).next_to(nxt, DOWN, buff=0.25)
         ax = Axes(x_range=[-3, 3], y_range=[-1, 5], x_length=4.2, y_length=2.6,
                   axis_config={"color": MUTED, "stroke_width": 2, "include_ticks": False}).shift(DOWN * 1.0)

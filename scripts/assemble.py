@@ -1,6 +1,7 @@
-"""렌더링된 장면, 나레이션, 배경음악, 자막을 합쳐 최종 영상을 만든다.
+"""렌더링된 장면, 배경 소재, 나레이션, 배경음악, 자막을 합쳐 최종 영상을 만든다.
 
-입력:  assets/render/videos/visuals/1080p30/SXX.mp4, assets/audio/scene_XX.wav, assets/audio/timings.json
+장면마다: 배경(실사 영상 / 사진 / 기본 배경색) 위에 Manim 투명 레이어(SXX.mov)를 겹친다.
+입력:  assets/render/SXX/.../SXX.mov, assets/media/*, assets/audio/scene_XX.wav, assets/audio/timings.json
 출력:  output/final.mp4, output/subtitles.srt
 """
 import argparse
@@ -17,6 +18,9 @@ HERE = Path(__file__).resolve().parent
 SUB_MAX_LINE = 24          # 자막 한 줄 최대 글자 수
 SUB_MAX_LINES = 2
 BGM_GAIN_DB = -24          # 나레이션 대비 배경음악 크기
+BG_COLOR = "0x15171C"      # choigo_style.BG
+MAX_SLOWDOWN = 1.6         # 배경 영상이 장면보다 짧으면 이 배율까지 느리게 늘린다 (그래도 짧으면 반복)
+VIDEO_EXT = {".mp4", ".mov", ".webm", ".mkv"}
 SUB_STYLE = ("FontName=Noto Sans CJK KR,FontSize=17,Bold=1,PrimaryColour=&H00F0F0F0,"
              "OutlineColour=&H00000000,BackColour=&H90000000,BorderStyle=4,Outline=1,Shadow=0,"
              "MarginV=12,Alignment=2")
@@ -64,6 +68,36 @@ def cues_for(sentence, offset):
     return cues
 
 
+def composite_scene(ep, scene, overlay, dest):
+    """배경 위에 투명 장면 레이어를 겹쳐 장면 영상 하나를 만든다."""
+    dur = probe_duration(overlay)
+    bg = scene["visual"].get("background")
+    if bg:
+        files = sorted((ep / "assets/media").glob(f"{bg['media']}.*"))
+        if not files:
+            sys.exit(f"S{scene['id']:02d}: 배경 소재 assets/media/{bg['media']}.* 가 없습니다 (fetch_media.py).")
+        src = files[0]
+        dim = bg.get("dim", 0.35)
+        fit = "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30"
+        look = f"eq=saturation=0.9,drawbox=x=0:y=0:w=iw:h=ih:color=black@{dim}:t=fill"
+        if src.suffix.lower() in VIDEO_EXT:
+            k = min(max(dur / probe_duration(src), 1.0), MAX_SLOWDOWN)
+            base_in = ["-stream_loop", "-1", "-i", str(src)]
+            base = f"[0:v]setpts={k:.3f}*PTS,{fit},{look}[base]"
+        else:   # 사진: 느린 줌(Ken Burns)
+            frames = int(dur * 30) + 1
+            base_in = ["-loop", "1", "-i", str(src)]
+            base = (f"[0:v]scale=2400:-2,zoompan=z='min(zoom+0.0005,1.12)':d={frames}:s=1920x1080:fps=30,"
+                    f"{look}[base]")
+    else:
+        base_in = ["-f", "lavfi", "-i", f"color=c={BG_COLOR}:s=1920x1080:r=30"]
+        base = "[0:v]null[base]"
+    run(["ffmpeg", "-y", "-v", "error", *base_in, "-i", str(overlay), "-filter_complex",
+         f"{base};[base][1:v]overlay=0:0:format=auto,format=yuv420p[v]", "-map", "[v]", "-t", f"{dur:.3f}",
+         "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-r", "30", str(dest)])
+    return dur
+
+
 def srt_time(t):
     ms = int(round(t * 1000))
     h, ms = divmod(ms, 3_600_000)
@@ -83,17 +117,20 @@ def main():
     work.mkdir(parents=True, exist_ok=True)
 
     timings = json.loads((ep / "assets/audio/timings.json").read_text(encoding="utf-8"))
+    scenes = {s["id"]: s for s in json.loads((ep / "03_storyboard.json").read_text(encoding="utf-8"))["scenes"]}
+    (work / "scenes").mkdir(exist_ok=True)
 
     # 1) 장면 영상 길이에 맞춰 나레이션을 이어 붙이고 자막 시각을 계산
     narration, cues, offset, sr = [], [], 0.0, None
     concat_list = []
     for sc in timings:
         name = f"S{sc['id']:02d}"
-        vid = ep / f"assets/render/{name}/videos/visuals/1080p30/{name}.mp4"
+        layer = ep / f"assets/render/{name}/videos/visuals/1080p30/{name}.mov"
         wav = ep / f"assets/audio/scene_{sc['id']:02d}.wav"
-        if not vid.exists() or vid.stat().st_mtime < wav.stat().st_mtime:
+        if not layer.exists() or layer.stat().st_mtime < wav.stat().st_mtime:
             sys.exit(f"{name}: 장면 영상이 없거나 나레이션보다 오래되었습니다. render_scenes.sh를 다시 실행하세요.")
-        vdur = probe_duration(vid)
+        vid = work / "scenes" / f"{name}.mp4"
+        vdur = composite_scene(ep, scenes[sc["id"]], layer, vid)
         audio, sr = sf.read(wav, dtype="float32")
         n = int(round(vdur * sr))
         audio = np.pad(audio, (0, max(0, n - len(audio))))[:n]
