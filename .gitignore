@@ -4,8 +4,10 @@
 client_secret*.json
 token*.json
 
-# 대용량 산출물 (영상, 음성, 렌더링 중간 파일)
-episodes/*/assets/audio/
+# 대용량 산출물 (다시 만들 수 있음: scripts/make_episode.sh)
+episodes/*/assets/render/
+episodes/*/assets/build/
+episodes/*/assets/audio/*.wav
 episodes/*/output/*.mp4
 media/
 __pycache__/

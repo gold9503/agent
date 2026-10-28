@@ -1,0 +1,45 @@
+{
+  "episode": "2026-10-28_quadratic-formula",
+  "assets": [
+    {
+      "type": "animation",
+      "files": "assets/render/S01~S22 (Manim 렌더링)",
+      "source": "자체 제작 (episodes/2026-10-28_quadratic-formula/visuals.py)",
+      "author": "최고의 공부",
+      "license": "자체 저작물",
+      "retrieved": "2026-10-28"
+    },
+    {
+      "type": "music",
+      "files": "assets/build/bgm.wav",
+      "source": "자체 합성 (scripts/bgm.py, 외부 음원 없음)",
+      "author": "최고의 공부",
+      "license": "자체 저작물",
+      "retrieved": "2026-10-28"
+    },
+    {
+      "type": "tts_voice",
+      "files": "assets/audio/scene_XX.wav",
+      "source": "mimic3 ko_KO kss_low (sherpa-onnx 변환본) https://github.com/MycroftAI/mimic3-voices/tree/master/voices/ko_KO/kss_low",
+      "author": "MycroftAI (학습 데이터: KSS, Kyubyong Park)",
+      "license": "모델 파일 CC0-1.0 / 학습 데이터 KSS는 CC BY-NC-SA 4.0으로 알려짐 → 상업 이용 불확실",
+      "retrieved": "2026-10-28"
+    },
+    {
+      "type": "font",
+      "files": "Noto Sans CJK KR, Noto Serif CJK KR",
+      "source": "Ubuntu fonts-noto-cjk 패키지",
+      "author": "Google, Adobe",
+      "license": "SIL Open Font License 1.1",
+      "retrieved": "2026-10-28"
+    },
+    {
+      "type": "font",
+      "files": "Computer Modern (수식)",
+      "source": "TeX Live",
+      "author": "Donald Knuth 외",
+      "license": "Knuth License (자유 이용)",
+      "retrieved": "2026-10-28"
+    }
+  ]
+}

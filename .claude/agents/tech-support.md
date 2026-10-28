@@ -18,6 +18,15 @@ SQLite 파일 `data/choigo.db`를 관리한다. 스키마는 `scripts/db/schema.
 | `assets` | episode_id, 파일명, 원본 URL, 저작자, 라이선스, 유형 |
 | `distributions` | episode_id, 플랫폼, URL, 업로드 일시, 공개 상태 |
 
+### 명령
+```bash
+python3 scripts/db.py add <에피소드 폴더> --status 보류     # 에피소드, 개념, 자료 출처 기록 (다시 실행하면 갱신)
+python3 scripts/db.py review <에피소드 폴더> 2 "조건부 통과" "메모"
+python3 scripts/db.py list                                   # 진행 현황
+python3 scripts/db.py has 근의 공식                           # 중복 확인
+```
+DB를 쓰기 전에 `data/backup/`에 날짜별 백업이 자동으로 생긴다.
+
 ### 제공 기능
 - **중복 확인:** 기획팀이 후보 개념을 주면 이미 다뤘는지, 비슷한 편이 있는지 알려준다.
 - **다음 주제 추천 데이터:** 과목별 진행 현황, 선수 개념은 다뤘지만 아직 다루지 않은 개념 목록
@@ -27,7 +36,7 @@ SQLite 파일 `data/choigo.db`를 관리한다. 스키마는 `scripts/db/schema.
 
 ## 2. 기술 지원
 
-- **환경 구성:** ffmpeg, Python 패키지(Manim, MoviePy 등), 한글 폰트, TTS 엔진 설치. 설치 방법은 `scripts/setup.sh`에 남겨 재현할 수 있게 한다.
+- **환경 구성:** `scripts/setup.sh`로 ffmpeg, LaTeX, 한글 폰트, Manim, TTS·음성 인식 모델을 `/opt/choigo-venv`, `/opt/choigo-models`에 설치한다. 설치 방법이 바뀌면 이 스크립트를 고쳐 재현할 수 있게 한다.
 - **오류 해결:** 제작팀, 유통팀 스크립트의 오류를 재현해 원인을 찾고 고친다.
 - **API 연동:** YouTube Data API 등 외부 서비스 연동을 설정한다.
   - API 키와 OAuth 토큰은 환경 변수나 비밀 저장소에만 둔다. **절대 저장소에 커밋하지 않는다.** (`.gitignore` 관리)

@@ -14,7 +14,7 @@ tools: Read, Write, Edit, Glob, Grep, WebSearch, WebFetch
 
 ### 1. 주제 선정
 - 사용자가 개념을 지정하면 그 개념을 쓴다.
-- 지정하지 않으면 `data/`의 영상 DB(기술지원팀 관리)를 확인해 아직 다루지 않은 개념을 고른다. 선정 기준은 다음과 같다.
+- 지정하지 않으면 영상 DB(기술지원팀 관리, `python3 scripts/db.py list`, `python3 scripts/db.py has <개념>`)를 확인해 아직 다루지 않은 개념을 고른다. 선정 기준은 다음과 같다.
   - 역사적 이야기가 풍부한가 (인물, 사건, 논쟁)
   - 학생들이 "외우기만 하고 이해는 못 하는" 개념인가
   - 앞뒤 편과 이어지는가 (예: 속력 → 가속도 → 뉴턴 제2법칙)
@@ -30,31 +30,35 @@ tools: Read, Write, Edit, Glob, Grep, WebSearch, WebFetch
 - **모든 사실에 출처를 단다**(URL 또는 서지). 출처끼리 다르면 함께 적고 신뢰도를 판단한다.
 - 사실 여부가 불확실한 일화(예: 뉴턴의 사과)는 "전해지는 이야기"로 표시한다.
 
-### 3. 대본 → `02_script.md`
+### 3. 대본 (장면 구성표의 `narration`)
 - `docs/style-guide.md`의 **6구간 구성**과 **메르 스타일 문체**를 따른다.
-- 나레이션은 1,400~1,700자로 쓴다. 구간마다 예상 시간을 표시한다.
 - 나레이션은 소리로 읽힌다는 점을 기억한다.
   - 수식은 읽는 말로 쓴다: `F = ma` → "힘은 질량 곱하기 가속도"
   - 숫자는 TTS가 오독하지 않게 쓴다: "1,600년대" → "천육백 년대"
   - 괄호, 기호, 영문 약어는 나레이션에서 피한다
-- 화면에 띄울 수식과 핵심어는 대본 옆에 `[화면: ...]`으로 표시한다.
+- 화면에 띄울 수식과 핵심어는 `on_screen_text`와 `visual.description`에 쓴다.
 
-### 4. 장면 구성표 → `03_storyboard.json`
+### 4. 장면 구성표 → `03_storyboard.json` (대본과 제작 컨셉을 한 파일에)
 제작팀이 그대로 자동화에 넣을 수 있는 형식으로 쓴다.
 
 ```json
 {
   "title": "가속도: 갈릴레이가 공을 굴린 이유",
+  "concept": "가속도",
+  "subject": "물리",
   "level": "high",
+  "curriculum": "고등학교 통합과학 · 힘과 운동",
   "scenes": [
     {
       "id": 1,
       "section": "오프닝 질문",
-      "narration": "나레이션 문장들...",
+      "narration": [
+        {"say": "일 초에 이 미터씩 빨라진다는 건 무슨 뜻일까요?", "sub": "1초에 2m씩 빨라진다는 건 무슨 뜻일까요?"}
+      ],
       "visual": {
         "type": "image | animation | diagram | formula | title_card",
+        "key": "visuals.py에서 이 장면을 그릴 때 쓸 짧은 이름",
         "description": "무엇을 보여줄지 구체적으로",
-        "source_hint": "퍼블릭 도메인 초상화 / Manim 애니메이션 / AI 생성 등",
         "motion": "slow_zoom_in | pan_left | static | build_up"
       },
       "on_screen_text": "화면 중앙에 강조할 핵심어나 수식 (없으면 null)"
@@ -63,7 +67,12 @@ tools: Read, Write, Edit, Glob, Grep, WebSearch, WebFetch
 }
 ```
 
+- `narration`은 문장 단위 목록이다. 문장 하나가 자막 하나의 시간 단위가 된다.
+  - `say`: TTS가 읽을 문장. 숫자, 기호, 영문은 모두 한글로 풀어 쓴다.
+  - `sub`: 화면 자막. `say`와 다를 때만 쓴다(숫자, 수식 표기).
 - 장면 하나는 5~20초 길이로 한다. 5분 기준 장면 15~30개.
+- `02_script.md`는 직접 쓰지 않는다. 구성표를 완성한 뒤 `python3 scripts/storyboard_to_script.py <에피소드 폴더>`로 만든다.
+- 분량 기준: `say` 전체(공백 포함, 숫자를 한글로 푼 상태)가 약 **2,000~2,200자**이면 5분 안팎이 된다. 실제 길이는 제작팀 TTS 결과로 확정한다.
 - 원리 설명과 공식 풀이 장면은 `animation`이나 `formula`로 정하고 단계별로 그려지게(`build_up`) 지시한다.
 
 ## 하지 말 것

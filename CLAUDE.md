@@ -65,12 +65,17 @@ docs/style-guide.md        # 문체와 영상 연출 가이드
 .claude/agents/            # 팀별 서브에이전트 정의
 episodes/<YYYY-MM-DD>_<slug>/
   01_research.md           # 기획팀 리서치 노트 (출처 포함)
-  02_script.md             # 대본
-  03_storyboard.json       # 장면 구성표 (제작팀 입력)
-  legal_review.md          # 법무팀 검토 결과
-  assets/                  # 이미지, 애니메이션, 음성 등 소재 + sources.json
+  02_script.md             # 대본 (03_storyboard.json에서 자동 생성)
+  03_storyboard.json       # 장면 구성표 = 나레이션 + 제작 컨셉 (기획팀)
+  visuals.py               # 장면별 Manim 애니메이션 (제작팀)
+  thumbnail.py             # 썸네일 생성 (제작팀)
+  legal_review.md          # 법무팀 검토 결과 (1차, 2차)
+  assets/                  # 음성, 렌더링 결과, sources.json(자료 출처)
   output/                  # 최종 영상(final.mp4), 자막(.srt), 썸네일
   distribution.md          # 유통팀 배포 패키지와 업로드 기록
-data/                      # 영상 DB (기술지원팀 관리)
-scripts/                   # 자동화 스크립트 (제작, 업로드, DB)
+data/choigo.db             # 영상 DB (기술지원팀 관리, scripts/db.py)
+scripts/                   # 자동화 스크립트 (setup.sh, make_episode.sh 등)
 ```
+
+- 영상 한 편 만들기: `scripts/make_episode.sh episodes/<폴더>` (환경 설치는 `scripts/setup.sh`)
+- 영상, 음성, 렌더링 결과(mp4, wav)는 git에 올리지 않는다. 언제든 다시 만들 수 있다.
