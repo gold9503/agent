@@ -1,0 +1,126 @@
+{
+ "flow_id": "RhF7fgPchxP860mq6B9p",
+ "voice_id": "J3IV02ZzZmojOIQbmpu0",
+ "voice": "Gun Woong - Deep & Trustworthy",
+ "model": "eleven_v4",
+ "plan": "paid",
+ "scenes": {
+  "scene_01": {
+   "generation_id": "fphqjl3SRqyzntvjo90Q",
+   "duration": 10.4,
+   "price": {
+    "credits": 81.9918,
+    "price_cents": 1.49076,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_02": {
+   "generation_id": "pXlSgG8dTR1kxL1hMgiT",
+   "duration": 8.72,
+   "price": {
+    "credits": 70.99289999999999,
+    "price_cents": 1.2907799999999998,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_03": {
+   "generation_id": "efSMl1pBSSygsjAUU4rK",
+   "duration": 10.32,
+   "price": {
+    "credits": 83.9916,
+    "price_cents": 1.52712,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_04": {
+   "generation_id": "YlMiC6C6QxFDXV6Yddsk",
+   "duration": 9.12,
+   "price": {
+    "credits": 69.99300000000001,
+    "price_cents": 1.2726000000000002,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_05": {
+   "generation_id": "gfTXs7Zcpw3zlflUSIk5",
+   "duration": 14.24,
+   "price": {
+    "credits": 113.98859999999999,
+    "price_cents": 2.07252,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_06": {
+   "generation_id": "Q6O44kUGnql8q1Nfr3oU",
+   "duration": 13.44,
+   "price": {
+    "credits": 108.9891,
+    "price_cents": 1.98162,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_07": {
+   "generation_id": "6L6epl2ZiPhuWJw6F0z8",
+   "duration": 7.68,
+   "price": {
+    "credits": 59.994,
+    "price_cents": 1.0908,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_08": {
+   "generation_id": "wzxkuuRAXSrWFvzJVT6C",
+   "duration": 9.12,
+   "price": {
+    "credits": 75.9924,
+    "price_cents": 1.38168,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_09": {
+   "generation_id": "8EBomOFCZwMDTq8MkYZy",
+   "duration": 11.28,
+   "price": {
+    "credits": 86.9913,
+    "price_cents": 1.5816599999999998,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_10": {
+   "generation_id": "3Q6DDpy5cxeIpR3Nx7wH",
+   "duration": 14.56,
+   "price": {
+    "credits": 115.9884,
+    "price_cents": 2.10888,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_11": {
+   "generation_id": "unjlyttwlajHvqrESIIr",
+   "duration": 11.2,
+   "price": {
+    "credits": 88.99109999999999,
+    "price_cents": 1.6180199999999998,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_12": {
+   "generation_id": "XR5G2kp6IJRwlCSinrRd",
+   "duration": 18.72,
+   "price": {
+    "credits": 149.98499999999999,
+    "price_cents": 2.727,
+    "cost_fiat_currency": "usd"
+   }
+  },
+  "scene_13": {
+   "generation_id": "NVjbwdVdLTv1eVlLXJtp",
+   "duration": 15.04,
+   "price": {
+    "credits": 110.9889,
+    "price_cents": 2.01798,
+    "cost_fiat_currency": "usd"
+   }
+  }
+ }
+}
