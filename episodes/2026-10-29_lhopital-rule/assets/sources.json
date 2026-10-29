@@ -1,0 +1,37 @@
+{
+  "episode": "2026-10-29_lhopital-rule",
+  "assets": [
+    {
+      "id": "animation",
+      "type": "animation",
+      "source": "자체 제작 (visuals.py, Manim)",
+      "author": "최고의 공부",
+      "license": "자체 저작물",
+      "ai": false
+    },
+    {
+      "id": "bgm",
+      "type": "music",
+      "source": "자체 합성 (scripts/bgm.py)",
+      "author": "최고의 공부",
+      "license": "자체 저작물",
+      "ai": false
+    },
+    {
+      "id": "fonts",
+      "type": "font",
+      "source": "Noto Sans/Serif CJK KR, Computer Modern",
+      "author": "Google, Adobe / D. Knuth",
+      "license": "SIL OFL 1.1 / Knuth License",
+      "ai": false
+    },
+    {
+      "id": "narration",
+      "type": "tts_voice",
+      "ai": true,
+      "source": "ElevenLabs (eleven_v4)",
+      "author": "Jae - Calm Narrator (eleven_v4, 유료 플랜)",
+      "license": "ElevenLabs 이용약관: 유료 플랜은 상업적 이용 가능 (법무팀 확인)"
+    }
+  ]
+}

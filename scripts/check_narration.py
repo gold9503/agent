@@ -29,6 +29,26 @@ def strip_punct(s):
     return "".join(c for c in s if c.isalnum() or c.isspace())
 
 
+DIGITS = "영일이삼사오육칠팔구"
+
+
+def read_number(n):
+    """정수를 한자어 수사로 읽는다 (1694 → 천육백구십사). 인식기가 숫자로 받아 적은 것을 대본 표기와 맞추기 위함."""
+    if n == 0:
+        return "영"
+    out = ""
+    for unit, name in ((10000, "만"), (1000, "천"), (100, "백"), (10, "십"), (1, "")):
+        d, n = divmod(n, unit)
+        if d:
+            out += ("" if d == 1 and name else DIGITS[d]) + name
+    return out
+
+
+def normalize_numbers(s):
+    import re
+    return re.sub(r"\d+", lambda m: read_number(int(m.group())), s)
+
+
 def main():
     ep = Path(sys.argv[1])
     sb = json.loads((ep / "03_storyboard.json").read_text(encoding="utf-8"))
@@ -47,7 +67,7 @@ def main():
             st.accept_waveform(sr, seg)
             rec.decode_stream(st)
             hyp = st.result.text
-            e = cer(strip_punct(n["say"]), strip_punct(hyp))
+            e = cer(strip_punct(n["say"]), strip_punct(normalize_numbers(hyp)))
             rows.append(e)
             if e >= CER_WARN:
                 worst.append((sc["id"], e, n["say"], hyp))

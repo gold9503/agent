@@ -73,7 +73,7 @@ class S02(ChoigoScene):
         year.move_to(UP * 2.6)
         self.play(FadeIn(year, shift=DOWN * 0.2), run_time=0.6)
         self.at(1)
-        book = self.photo_or("analyse_title", title_page(), height=4.2).move_to(LEFT * 3.2 + DOWN * 0.3)
+        book = self.photo_or("analyse_title", title_page(), height=4.0).move_to(LEFT * 3.2 + UP * 0.1)
         cap = T("1715년 판 속표지" if self.sources.get("analyse_title") else "1696년 초판 속표지 문구 재현",
                 size=20, color=INK).next_to(book, DOWN, buff=0.12)
         info = VGroup(T("『무한소 해석』", size=48, font=SERIF, weight=BOLD, color=GOLD),
@@ -160,7 +160,7 @@ class S05(ChoigoScene):
         pa = ax.c2p(A, 0)
         dot = Dot(pa, color=GOLD, radius=0.09)
         la = M("a", size=40, color=GOLD).next_to(dot, DOWN + LEFT, buff=0.1)
-        both = M("f(a) = 0,", r"\ g(a) = 0", size=40).move_to(RIGHT * 4.0 + UP * 2.2)
+        both = M("f(a) = 0,", r"\ g(a) = 0", size=40).move_to(RIGHT * 3.4 + UP * 2.4)
         both[0].set_color(BLUE)
         both[1].set_color(ORANGE)
         self.play(FadeIn(dot, scale=2), FadeIn(la), Write(both), run_time=1.0)
@@ -272,7 +272,7 @@ class S08(ChoigoScene):
         cross = Cross(wrong, stroke_color=CORAL, stroke_width=7)
         self.play(Write(wrong), run_time=1.0)
         self.play(Create(cross), run_time=0.5)
-        rule = plate(T("먼저 대입해 보기: 0/0 또는 ∞/∞ 인가?", size=30, color=GOLD)).move_to(DOWN * 2.15)
+        rule = plate(T("먼저 대입해 보기: 0/0 또는 ∞/∞ 인가?", size=30, color=GOLD)).move_to(DOWN * 1.9)
         self.play(FadeIn(rule, shift=UP * 0.2))
 
 
@@ -336,21 +336,20 @@ class S11(ChoigoScene):
     SCENE_ID = 11
 
     def build(self):
-        ex = M(r"\lim_{x \to 1}", r"\frac{x^3 - 1}{x - 1}", size=72).move_to(UP * 2.0 + LEFT * 2.0)
+        ex = M(r"\lim_{x \to 1}", r"\frac{x^3 - 1}{x - 1}", size=60).move_to(UP * 2.1 + LEFT * 2.0)
         self.add(ex)
-        d = M(r"= \lim_{x \to 1} \frac{3x^2}{1}", size=72).next_to(ex, RIGHT, buff=0.3)
-        num = Arrow(ex[1].get_top() + UP * 0.05, d.get_top() + UP * 0.05 + LEFT * 0.4, color=BLUE, path_arc=-1.2)
-        self.play(Create(num), Write(d), run_time=1.4)
-        res = M(r"= \frac{3 \cdot 1^2}{1} = 3", size=72, color=GOLD).move_to(UP * 0.5)
+        d = M(r"= \lim_{x \to 1} \frac{3x^2}{1}", size=60).next_to(ex, RIGHT, buff=0.3)
+        self.play(Write(d), run_time=1.4)
+        res = M(r"= \frac{3 \cdot 1^2}{1} = 3", size=60, color=GOLD).move_to(UP * 0.45)
         self.play(Write(res), run_time=1.2)
         check = plate(VGroup(T("검산", size=24, color=MUTED),
                              M(r"\frac{(x-1)(x^2+x+1)}{x-1} \to 1+1+1 = 3", size=36)).arrange(RIGHT, buff=0.3))
-        check.move_to(DOWN * 1.2)
+        check.move_to(DOWN * 0.9)
         self.play(FadeIn(check))
         self.at(1)
-        conds = plate(T("② g′(x) = 1 ≠ 0  ✓   ③ 극한 3 존재  ✓", size=26, color=GOLD)).to_corner(UL, buff=0.4)
+        conds = plate(T("② g′(x) = 1 ≠ 0  ✓   ③ 극한 3 존재  ✓", size=26, color=GOLD)).to_corner(UL, buff=0.35)
         self.play(FadeIn(conds, shift=DOWN * 0.2))
-        mini = plate(T("분자가 분모보다 3배 빠르게 0으로", size=34, color=GOLD)).move_to(DOWN * 2.15)
+        mini = plate(T("분자가 분모보다 3배 빠르게 0으로", size=34, color=GOLD)).move_to(DOWN * 2.05)
         self.play(FadeIn(mini, shift=UP * 0.2))
 
 

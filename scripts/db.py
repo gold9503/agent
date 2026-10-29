@@ -60,7 +60,8 @@ def cmd_add(con, a):
         con.execute("DELETE FROM assets WHERE episode_id = ?", (eid,))
         for s in json.loads(src.read_text(encoding="utf-8"))["assets"]:
             con.execute("INSERT INTO assets (episode_id, type, files, source, author, license) VALUES (?,?,?,?,?,?)",
-                        (eid, s["type"], s["files"], s["source"], s["author"], s["license"]))
+                        (eid, s["type"], s.get("file") or s.get("files"), s.get("source"), s.get("author"),
+                         s.get("license")))
     print(f"기록: {ep.name} ({a.status})")
 
 

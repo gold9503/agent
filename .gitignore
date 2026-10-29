@@ -17,3 +17,4 @@ __pycache__/
 
 # DB 백업
 data/backup/
+episodes/*/assets/audio/elevenlabs_free/
