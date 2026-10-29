@@ -9,46 +9,54 @@
       "source": "ai",
       "kind": "video",
       "duration": 10,
-      "prompt": "Over-the-shoulder shot of a high school student's desk at night, a desk lamp lighting an open math notebook filled with blurred unreadable scribbles, a pencil tapping hesitantly, face never visible, shallow depth of field, slow push-in, cinematic, warm lamp light, 16:9, no text, no readable writing, no logos, no recognizable real person"
+      "prompt": "Over-the-shoulder shot of a high school student's desk at night, a desk lamp lighting an open math notebook filled with blurred unreadable scribbles, a pencil tapping hesitantly, face never visible, shallow depth of field, slow push-in, cinematic, warm lamp light, 16:9, no text, no readable writing, no logos, no recognizable real person",
+      "status": "unused (2026-10-29 판: 소재 미확보 → 기본 배경/직접 조판 그림으로 대체. 넣어서 다시 합성하면 법무 재검토 필요)"
     },
     "paris_1690s": {
       "source": "ai",
       "kind": "video",
       "duration": 10,
-      "prompt": "Early morning over a reconstructed late 17th-century Paris riverside, stone bridges over the Seine, slate roofs and church towers in soft mist, horse carriages in the distance, slow aerial drift, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person, no Eiffel Tower, no 19th-century Haussmann buildings, no street lamps, no cars, no modern bridges"
+      "prompt": "Early morning over a reconstructed late 17th-century Paris riverside, stone bridges over the Seine, slate roofs and church towers in soft mist, horse carriages in the distance, slow aerial drift, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person, no Eiffel Tower, no 19th-century Haussmann buildings, no street lamps, no cars, no modern bridges",
+      "status": "unused (2026-10-29 판: 소재 미확보 → 기본 배경/직접 조판 그림으로 대체. 넣어서 다시 합성하면 법무 재검토 필요)"
     },
     "noble_study": {
       "source": "ai",
       "kind": "video",
       "duration": 12,
-      "prompt": "Interior of a 17th-century French aristocrat's study, carved wooden desk, leather-bound books, brass compass and geometric drawing instruments, candlelight and window light, empty room, slow dolly forward, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person, no electric lights, no modern objects"
+      "prompt": "Interior of a 17th-century French aristocrat's study, carved wooden desk, leather-bound books, brass compass and geometric drawing instruments, candlelight and window light, empty room, slow dolly forward, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person, no electric lights, no modern objects",
+      "status": "unused (2026-10-29 판: 소재 미확보 → 기본 배경/직접 조판 그림으로 대체. 넣어서 다시 합성하면 법무 재검토 필요)"
     },
     "quill_letter": {
       "source": "ai",
       "kind": "video",
       "duration": 12,
-      "prompt": "Macro close-up of a hand in a lace cuff writing with a feather quill on aged paper by candlelight, illegible flowing strokes only, a wax seal and sealing stick beside the paper, slow motion, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no readable writing, no logos, no recognizable real person, no face, folded letter sheet, no envelope, no modern pen"
+      "prompt": "Macro close-up of a hand in a lace cuff writing with a feather quill on aged paper by candlelight, illegible flowing strokes only, a wax seal and sealing stick beside the paper, slow motion, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no readable writing, no logos, no recognizable real person, no face, folded letter sheet, no envelope, no modern pen",
+      "status": "unused (2026-10-29 판: 소재 미확보 → 기본 배경/직접 조판 그림으로 대체. 넣어서 다시 합성하면 법무 재검토 필요)"
     },
     "library_dawn": {
       "source": "ai",
       "kind": "video",
       "duration": 12,
-      "prompt": "Dawn light streaming through tall windows into an old European library with wooden shelves of antique books, dust floating in light beams, a closed old book on a reading table, slow push-in, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person, no electric lights, no modern objects"
+      "prompt": "Dawn light streaming through tall windows into an old European library with wooden shelves of antique books, dust floating in light beams, a closed old book on a reading table, slow push-in, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person, no electric lights, no modern objects",
+      "status": "unused (2026-10-29 판: 소재 미확보 → 기본 배경/직접 조판 그림으로 대체. 넣어서 다시 합성하면 법무 재검토 필요)"
     },
     "lhopital_portrait": {
       "source": "commons",
       "ref": "File:Guillaume de l'Hôpital.jpg",
-      "note": "로피탈 후작 초상 판화. 커먼즈 미러에서 파일명·퍼블릭 도메인 확인, 원본 페이지 미확인 → fetch_media가 라이선스 재확인"
+      "note": "로피탈 후작 초상 판화. 커먼즈 미러에서 파일명·퍼블릭 도메인 확인, 원본 페이지 미확인 → fetch_media가 라이선스 재확인",
+      "status": "unused (2026-10-29 판: 소재 미확보 → 기본 배경/직접 조판 그림으로 대체. 넣어서 다시 합성하면 법무 재검토 필요)"
     },
     "bernoulli_portrait": {
       "source": "commons",
       "ref": "File:Portret van Johann Bernoulli (I), RP-P-1908-3095.jpg",
-      "note": "요한 베르누이 초상 판화(레이크스 미술관, CC0). 커먼즈 미러에서 확인, 원본 페이지 미확인"
+      "note": "요한 베르누이 초상 판화(레이크스 미술관, CC0). 커먼즈 미러에서 확인, 원본 페이지 미확인",
+      "status": "unused (2026-10-29 판: 소재 미확보 → 기본 배경/직접 조판 그림으로 대체. 넣어서 다시 합성하면 법무 재검토 필요)"
     },
     "analyse_title": {
       "source": "commons",
       "ref": "File:L'Hospital - Analyse des infiniment petits pour l'intelligence des lignes courbes, 1715 - 1425244.jpg",
-      "note": "파일명 확인 필요(위키백과 미러 썸네일 주소에서 추정). 1715년 판 속표지이므로 화면에 '1715년 판'으로 표기한다. 1696년 초판 속표지는 커먼즈에서 찾지 못함"
+      "note": "파일명 확인 필요(위키백과 미러 썸네일 주소에서 추정). 1715년 판 속표지이므로 화면에 '1715년 판'으로 표기한다. 1696년 초판 속표지는 커먼즈에서 찾지 못함",
+      "status": "unused (2026-10-29 판: 소재 미확보 → 기본 배경/직접 조판 그림으로 대체. 넣어서 다시 합성하면 법무 재검토 필요)"
     }
   },
   "scenes": [

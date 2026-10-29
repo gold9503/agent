@@ -31,7 +31,17 @@
       "ai": true,
       "source": "ElevenLabs (eleven_v4)",
       "author": "Jae - Calm Narrator (eleven_v4, 유료 플랜)",
-      "license": "ElevenLabs 이용약관: 유료 플랜은 상업적 이용 가능 (법무팀 확인)"
+      "license": "ElevenLabs 이용약관: 유료 플랜은 상업적 이용 가능 (법무팀 확인)",
+      "plan": "유료 플랜 (플랜 이름 사용자 확인 대기)",
+      "manifest": "assets/audio/elevenlabs/manifest.json"
+    },
+    {
+      "id": "analyse_title_typeset",
+      "type": "image",
+      "source": "자체 조판 (visuals.py title_page): 『무한소 해석』 1696년 초판 속표지 문구 일부를 직접 조판",
+      "author": "최고의 공부",
+      "license": "자체 저작물 (원문 문구는 퍼블릭 도메인)",
+      "ai": false
     }
   ]
 }

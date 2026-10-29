@@ -74,7 +74,7 @@ class S02(ChoigoScene):
         self.play(FadeIn(year, shift=DOWN * 0.2), run_time=0.6)
         self.at(1)
         book = self.photo_or("analyse_title", title_page(), height=4.0).move_to(LEFT * 3.2 + UP * 0.1)
-        cap = T("1715년 판 속표지" if self.sources.get("analyse_title") else "1696년 초판 속표지 문구 재현",
+        cap = T("1715년 판 속표지" if self.sources.get("analyse_title") else "1696년 초판 속표지 문구 일부 재현",
                 size=20, color=INK).next_to(book, DOWN, buff=0.12)
         info = VGroup(T("『무한소 해석』", size=48, font=SERIF, weight=BOLD, color=GOLD),
                       T("미분을 다룬 최초의 교과서", size=32),
@@ -130,7 +130,7 @@ class S04(ChoigoScene):
         self.play(FadeIn(ticks[2]), FadeIn(cards[2], shift=UP * 0.2), run_time=0.8)
         arrow = CurvedArrow(ticks[1].get_center() + UP * 0.2, ticks[2].get_center() + UP * 0.2,
                             angle=-PI / 3, color=GOLD)
-        name = plate(T("‘로피탈의 정리’로 불리게 됨", size=30, color=GOLD)).next_to(arrow, UP, buff=0.15)
+        name = plate(T("책에 실림 → 지금은 ‘로피탈의 정리’", size=30, color=GOLD)).next_to(arrow, UP, buff=0.15)
         self.play(Create(arrow), FadeIn(name), run_time=1.0)
         self.at(2)
         note = plate(T("머리말: 베르누이의 도움을 밝힘", size=28)).move_to(UP * 2.9 + LEFT * 3.2)
