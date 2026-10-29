@@ -7,6 +7,7 @@
 import argparse
 import json
 import math
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -74,8 +75,12 @@ def composite_scene(ep, scene, overlay, dest):
     bg = scene["visual"].get("background")
     if bg:
         files = sorted((ep / "assets/media").glob(f"{bg['media']}.*"))
-        if not files:
+        if not files and os.environ.get("CHOIGO_ALLOW_MISSING_MEDIA") == "1":
+            print(f"경고: S{scene['id']:02d} 배경 소재 {bg['media']} 없음 → 기본 배경색으로 대체")
+            bg = None
+        elif not files:
             sys.exit(f"S{scene['id']:02d}: 배경 소재 assets/media/{bg['media']}.* 가 없습니다 (fetch_media.py).")
+    if bg:
         src = files[0]
         dim = bg.get("dim", 0.35)
         fit = "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30"

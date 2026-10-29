@@ -39,7 +39,8 @@ DB를 쓰기 전에 `data/backup/`에 날짜별 백업이 자동으로 생긴다
 - **환경 구성:** `scripts/setup.sh`로 ffmpeg, LaTeX, 한글 폰트, Manim, TTS·음성 인식 모델을 `/opt/choigo-venv`, `/opt/choigo-models`에 설치한다. 설치 방법이 바뀌면 이 스크립트를 고쳐 재현할 수 있게 한다.
 - **오류 해결:** 제작팀, 유통팀 스크립트의 오류를 재현해 원인을 찾고 고친다.
 - **API 연동:** 외부 서비스 연동을 설정한다.
-  - CLOVA Voice: 환경 변수 `NCP_CLOVA_CLIENT_ID`, `NCP_CLOVA_CLIENT_SECRET` (선택: `CHOIGO_CLOVA_SPEAKER`)
+  - ElevenLabs(기본 나레이션): claude.ai의 ElevenLabs 커넥터로 생성한다. 생성 결과 파일은 `storage.googleapis.com`에서 내려받는다
+  - CLOVA Voice(예비): 환경 변수 `NCP_CLOVA_CLIENT_ID`, `NCP_CLOVA_CLIENT_SECRET` (선택: `CHOIGO_CLOVA_SPEAKER`)
   - 네트워크 허용 도메인: `naveropenapi.apigw.ntruss.com`(CLOVA), `commons.wikimedia.org`, `upload.wikimedia.org`(커먼즈), `collectionapi.metmuseum.org`, `images.metmuseum.org`(메트 박물관)
   - YouTube Data API(업로드)는 유통팀 요청 시 설정한다
   - API 키와 OAuth 토큰은 환경 변수나 비밀 저장소에만 둔다. **절대 저장소에 커밋하지 않는다.** (`.gitignore` 관리)

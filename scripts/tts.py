@@ -1,7 +1,10 @@
 """장면 구성표의 나레이션을 문장 단위로 음성 합성하고, 장면별 음성 파일과 자막 타이밍을 만든다.
 
 엔진:
-  clova   네이버 클라우드 CLOVA Voice Premium (기본, 공개용)
+  elevenlabs  ElevenLabs (기본, 공개용). 음성 생성은 ElevenLabs 커넥터로 제작팀이 장면마다 한 번씩 하고,
+          assets/audio/elevenlabs/scene_XX.mp3 로 저장해 둔다 (장면별 원고: --prompts 로 출력).
+          이 스크립트는 그 파일을 읽어 문장 사이의 쉼을 찾아 자막 타이밍을 만든다.
+  clova   네이버 클라우드 CLOVA Voice Premium (예비)
           환경 변수 NCP_CLOVA_CLIENT_ID, NCP_CLOVA_CLIENT_SECRET 필요
           화자는 CHOIGO_CLOVA_SPEAKER (기본 nminsang, 차분한 남성)
   mimic3  무료 오프라인 음성 (비공개 테스트용, 발음 오류율 약 30%)
@@ -85,6 +88,56 @@ class Mimic3TTS:
         return resample(x, a.sample_rate)
 
 
+class ElevenLabsFiles:
+    """커넥터로 미리 만든 장면별 mp3를 읽는다. 문장 경계는 쉼(무음) 구간으로 찾는다."""
+
+    def __init__(self, ep):
+        self.dir = ep / "assets/audio/elevenlabs"
+
+    def scene(self, sc):
+        path = self.dir / f"scene_{sc['id']:02d}.mp3"
+        if not path.exists():
+            raise SystemExit(f"{path} 가 없습니다. ElevenLabs로 장면 {sc['id']} 나레이션을 먼저 생성하세요 (tts.py --prompts).")
+        x = trim_silence(decode(path))
+        return x, split_sentences(x, sc["narration"])
+
+
+def split_sentences(x, narration, min_gap=0.18):
+    """무음 구간 중 가장 긴 것들을 문장 경계로 쓴다. 부족하면 글자 수 비율로 나눈다."""
+    n = len(narration)
+    win = int(0.02 * SR)
+    env = np.sqrt(np.convolve(x ** 2, np.ones(win) / win, mode="same"))
+    quiet = env < max(0.01, 0.06 * np.percentile(env, 95))
+    gaps, i = [], 0
+    while i < len(quiet):
+        if quiet[i]:
+            j = i
+            while j < len(quiet) and quiet[j]:
+                j += 1
+            if (j - i) / SR >= min_gap and i > 0 and j < len(quiet):
+                gaps.append((j - i, i, j))
+            i = j
+        else:
+            i += 1
+    # 글자 수 비율로 예상한 경계에 가장 가까운 긴 쉼을 고른다
+    lens = np.array([len(m["say"]) for m in narration], dtype=float)
+    expected = np.cumsum(lens)[:-1] / lens.sum() * len(x)
+    bounds, used = [], set()
+    for e in expected:
+        cands = [g for g in gaps if g[1] not in used]
+        if cands:
+            g = min(cands, key=lambda g: abs((g[1] + g[2]) / 2 - e) - 0.5 * g[0])
+            if abs((g[1] + g[2]) / 2 - e) < 0.25 * len(x):
+                used.add(g[1])
+                bounds.append((g[1], g[2]))
+                continue
+        bounds.append((int(e), int(e)))
+    bounds.sort()
+    starts = [0] + [b[1] for b in bounds]
+    ends = [b[0] for b in bounds] + [len(x)]
+    return [(a / SR, b / SR) for a, b in zip(starts, ends)]
+
+
 def decode(path):
     """mp3 → 48kHz 모노 float32."""
     raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(path), "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"],
@@ -130,7 +183,9 @@ def samples(args):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("episode", nargs="?")
-    ap.add_argument("--engine", choices=["clova", "mimic3"], default=os.environ.get("CHOIGO_TTS_ENGINE", "clova"))
+    ap.add_argument("--engine", choices=["elevenlabs", "clova", "mimic3"],
+                    default=os.environ.get("CHOIGO_TTS_ENGINE", "elevenlabs"))
+    ap.add_argument("--prompts", action="store_true", help="ElevenLabs에 넣을 장면별 원고를 출력하고 끝낸다")
     ap.add_argument("--speaker", default=os.environ.get("CHOIGO_CLOVA_SPEAKER", "nminsang"))
     ap.add_argument("--clova-speed", type=int, default=0)
     ap.add_argument("--clova-pitch", type=int, default=0)
@@ -144,6 +199,28 @@ def main():
     out = ep / "assets" / "audio"
     cache = out / "cache"
     cache.mkdir(parents=True, exist_ok=True)
+
+    if args.prompts:
+        prompts = {f"scene_{sc['id']:02d}": " ".join(n["say"] for n in sc["narration"]) for sc in sb["scenes"]}
+        print(json.dumps(prompts, ensure_ascii=False, indent=1))
+        return
+
+    if args.engine == "elevenlabs":
+        eleven = ElevenLabsFiles(ep)
+        timings = []
+        for sc in sb["scenes"]:
+            x, spans = eleven.scene(sc)
+            audio = np.concatenate([np.zeros(int(SCENE_LEAD * SR), dtype=np.float32), x,
+                                    np.zeros(int(SCENE_TAIL * SR), dtype=np.float32)])
+            sents = [{"start": round(SCENE_LEAD + a, 3), "end": round(SCENE_LEAD + b, 3), "text": n.get("sub", n["say"])}
+                     for (a, b), n in zip(spans, sc["narration"])]
+            sf.write(out / f"scene_{sc['id']:02d}.wav", audio, SR)
+            timings.append({"id": sc["id"], "duration": round(len(audio) / SR, 3), "sentences": sents})
+            print(f"scene {sc['id']:02d}: {len(audio) / SR:5.1f}s")
+        (out / "timings.json").write_text(json.dumps(timings, ensure_ascii=False, indent=1), encoding="utf-8")
+        (out / "engine.txt").write_text(f"elevenlabs {os.environ.get('CHOIGO_ELEVEN_VOICE', '')}\n")
+        print(f"total: {sum(s['duration'] for s in timings):.1f}s (elevenlabs)")
+        return
 
     tts = make_engine(args)
     timings = []

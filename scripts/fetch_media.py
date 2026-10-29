@@ -10,7 +10,7 @@
 
 비상업(NC)·변경금지(ND) 라이선스는 자동으로 거부한다.
 출력: assets/media/<id>.*, assets/sources.json
-사용법: python fetch_media.py <에피소드 폴더>
+사용법: python fetch_media.py <에피소드 폴더> [--allow-missing]
 """
 import json
 import sys
@@ -80,7 +80,7 @@ def from_met(mid, m, out):
 
 
 def main():
-    ep = Path(sys.argv[1])
+    ep = Path([a for a in sys.argv[1:] if not a.startswith("--")][0])
     sb = json.loads((ep / "03_storyboard.json").read_text(encoding="utf-8"))
     out = ep / "assets/media"
     out.mkdir(parents=True, exist_ok=True)
@@ -92,10 +92,13 @@ def main():
     entries = list(STATIC_SOURCES)
     if tts.exists():
         engine = tts.read_text().split()
-        entries.append({"id": "narration", "type": "tts_voice", "ai": True,
-                        "source": "NAVER Cloud CLOVA Voice Premium" if engine[0] == "clova" else "mimic3 ko_KO kss_low",
-                        "author": engine[1] if len(engine) > 1 else "", "license":
-                        "NAVER Cloud 이용약관 (법무팀 확인)" if engine[0] == "clova" else "모델 CC0 / 학습 데이터 비영리 → 테스트 전용"})
+        tts_info = {
+            "elevenlabs": ("ElevenLabs (eleven_v4)", "ElevenLabs 이용약관: 유료 플랜은 상업적 이용 가능 (법무팀 확인)"),
+            "clova": ("NAVER Cloud CLOVA Voice Premium", "NAVER Cloud 이용약관 (법무팀 확인)"),
+            "mimic3": ("mimic3 ko_KO kss_low", "모델 CC0 / 학습 데이터 비영리 → 테스트 전용"),
+        }[engine[0]]
+        entries.append({"id": "narration", "type": "tts_voice", "ai": True, "source": tts_info[0],
+                        "author": " ".join(engine[1:]), "license": tts_info[1]})
 
     problems = []
     for mid, m in sb.get("media", {}).items():
@@ -122,6 +125,9 @@ def main():
                         encoding="utf-8")
     for p in problems:
         print("MISSING", p)
+    if problems and "--allow-missing" in sys.argv:
+        print("※ --allow-missing: 빠진 소재 없이 진행합니다 (해당 장면은 기본 배경). 공개용으로 쓰지 말 것.")
+        sys.exit(0)
     sys.exit(1 if problems else 0)
 
 
