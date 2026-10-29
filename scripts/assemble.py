@@ -86,9 +86,20 @@ def composite_scene(ep, scene, overlay, dest):
         fit = "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30"
         look = f"eq=saturation=0.9,drawbox=x=0:y=0:w=iw:h=ih:color=black@{dim}:t=fill"
         if src.suffix.lower() in VIDEO_EXT:
-            k = min(max(dur / probe_duration(src), 1.0), MAX_SLOWDOWN)
-            base_in = ["-stream_loop", "-1", "-i", str(src)]
-            base = f"[0:v]setpts={k:.3f}*PTS,{fit},{look}[base]"
+            # start/end: 쓸 구간만 잘라 쓴다. max_slow: 장면별 최대 감속 배율.
+            # hold: 모자라면 반복 대신 마지막 프레임을 붙잡는다 (되감기처럼 보이면 안 되는 영상용).
+            start = float(bg.get("start", 0))
+            end = float(bg.get("end", probe_duration(src)))
+            k = min(max(dur / (end - start), 1.0), float(bg.get("max_slow", MAX_SLOWDOWN)))
+            trim = f"trim={start:.3f}:{end:.3f},setpts=PTS-STARTPTS,"
+            if bg.get("hold"):
+                base_in = ["-i", str(src)]
+                tail = f",tpad=stop_mode=clone:stop_duration={dur:.3f}"
+            else:
+                base_in = ["-stream_loop", "-1", "-i", str(src)]
+                tail = ""
+                trim = trim if "start" in bg or "end" in bg else ""
+            base = f"[0:v]{trim}setpts={k:.3f}*PTS,{fit}{tail},{look}[base]"
         else:   # 사진: 느린 줌(Ken Burns)
             frames = int(dur * 30) + 1
             base_in = ["-loop", "1", "-i", str(src)]
