@@ -99,6 +99,12 @@ def main():
         }[engine[0]]
         entries.append({"id": "narration", "type": "tts_voice", "ai": True, "source": tts_info[0],
                         "author": " ".join(engine[1:]), "license": tts_info[1]})
+        # ElevenLabs: 생성 기록(플랜, 목소리, 생성일, 보이스 공지 기간 등)을 함께 남긴다 (법무 2차 지적 2-3)
+        manifest = ep / "assets/audio/elevenlabs/manifest.json"
+        if engine[0] == "elevenlabs" and manifest.exists():
+            m = json.loads(manifest.read_text(encoding="utf-8"))
+            entries[-1].update({k: m.get(k) for k in ("plan", "plan_since", "generated_at", "voice_id", "voice",
+                                                      "model", "flow_id", "notice_period", "beta")})
 
     problems = []
     for mid, m in sb.get("media", {}).items():

@@ -93,7 +93,7 @@ class S02(ChoigoScene):
         self.add(ai_badge(AI_HISTORY))
         self.show_chapter("②", "시대 속으로", hold=0.3)
         card = plate(VGroup(T("다니엘 베르누이", size=56, font=SERIF, weight=BOLD),
-                            T("1700~1782 · 스위스 바젤", size=28)).arrange(DOWN, buff=0.15), buff=0.4).move_to(UP * 1.4)
+                            T("1700~1782 · 바젤에서 활동", size=28)).arrange(DOWN, buff=0.15), buff=0.4).move_to(UP * 1.4)
         self.play(FadeIn(card, shift=UP * 0.2), run_time=0.8)
         self.at(1)
         dad = VGroup(T("요한 베르누이", size=34, weight=BOLD), T("아버지", size=24, color=MUTED)).arrange(DOWN, buff=0.08)
@@ -231,20 +231,53 @@ class S07(ChoigoScene):
     SCENE_ID = 7
 
     def build(self):
+        # 법무 2차 지적 2-1: 개울 배경 위라도 압력 이야기는 '닫힌 관' 도식 안에서만 한다
         self.add(ai_badge(AI_GENERAL))
-        wide = Wallet(values=(5, 1, 2), total=8, height=1.9, width=0.34, labels=False, title="넓은 곳").move_to(LEFT * 4.9 + DOWN * 0.3)
-        self.play(FadeIn(wide), run_time=0.6)
-        drop = Line(LEFT * 0.7, RIGHT * 0.7, color=WHITE, stroke_width=6).move_to(UP * 1.2)
-        self.play(Create(drop), run_time=0.4)
-        self.play(drop.animate.shift(DOWN * 1.3), run_time=1.2, rate_func=rate_functions.ease_in_cubic)
-        word = plate(T("쑥!", size=56, color=GOLD, weight=BOLD)).next_to(drop, RIGHT, buff=0.4)
-        self.play(FadeIn(word, scale=1.5), run_time=0.4)
+        lab = plate(T("닫힌 관(벤투리관) 그림", size=26, color=INK)).to_corner(UL, buff=0.4)
+        y0, wide, thin = -1.45, 0.55, 0.22          # 관 중심 높이, 넓은 곳·좁은 곳 반폭
+        xs = [-5.2, -1.6, -0.8, 0.8, 1.6, 5.2]
+        half = [wide, wide, thin, thin, wide, wide]
+        up_pts = [[x, y0 + h, 0] for x, h in zip(xs, half)]
+        dn_pts = [[x, y0 - h, 0] for x, h in zip(xs, half)]
+        top = VMobject(stroke_color=WHITE, stroke_width=4).set_points_as_corners(up_pts)
+        bot = VMobject(stroke_color=WHITE, stroke_width=4).set_points_as_corners(dn_pts)
+        water = Polygon(*up_pts, *dn_pts[::-1], stroke_width=0, fill_color=P_BLUE, fill_opacity=0.35)
+        tube_h = 2.7
+        t_wide = Rectangle(width=0.3, height=tube_h, stroke_color=INK, stroke_width=3)
+        t_wide.move_to([-3.4, y0 + wide + tube_h / 2, 0])
+        t_thin = Rectangle(width=0.3, height=tube_h, stroke_color=INK, stroke_width=3)
+        t_thin.move_to([0.0, y0 + thin + tube_h / 2, 0])
+        level = y0 + wide + tube_h * 0.8               # 흐르기 전 두 물기둥 높이
+        def column(tube, base_y):
+            c = Rectangle(width=0.26, height=level - base_y, stroke_width=0, fill_color=P_BLUE, fill_opacity=0.9)
+            return c.move_to([tube.get_center()[0], (level + base_y) / 2, 0])
+        c_wide, c_thin = column(t_wide, y0 + wide), column(t_thin, y0 + thin)
+        sch = VGroup(top, bot, water, t_wide, t_thin)
+        bg = plate(sch, opacity=0.5, buff=0.3)[0]
+        self.play(FadeIn(lab), FadeIn(bg), Create(top), Create(bot), FadeIn(water),
+                  Create(t_wide), Create(t_thin), FadeIn(c_wide), FadeIn(c_thin), run_time=0.9)
+        flow = flow_arrow([xs[0] + 0.3, y0, 0], [xs[5] - 0.3, y0, 0], width=6)
+        self.play(GrowArrow(flow), run_time=0.5)
+        fast = T("빨라짐", size=24, color=K_ORANGE, weight=BOLD).next_to([0, y0 - thin, 0], DOWN, buff=0.12)
+        self.play(FadeIn(fast), run_time=0.3)
+        drop_to = (level - (y0 + thin)) * 0.45
+        surf = Line(LEFT * 0.35, RIGHT * 0.35, color=WHITE, stroke_width=6).move_to([0, level, 0])
+        self.add(surf)
+        self.play(c_thin.animate.stretch_to_fit_height(drop_to, about_edge=DOWN),
+                  surf.animate.move_to([0, y0 + thin + drop_to, 0]),
+                  run_time=1.0, rate_func=rate_functions.ease_in_cubic)
+        word = plate(T("쑥!", size=48, color=GOLD, weight=BOLD)).next_to(surf, RIGHT, buff=0.35)
+        self.play(FadeIn(word, scale=1.5), run_time=0.3)
         self.at(1)
-        narrow = Wallet(values=(2, 4, 2), total=8, height=1.9, width=0.34, labels=False, title="좁은 곳").move_to(RIGHT * 4.9 + DOWN * 0.3)
-        self.play(FadeIn(narrow), FadeOut(word), run_time=0.6)
-        same = DashedLine(wide.total_line.get_right(), narrow.total_line.get_left(), color=GOLD, stroke_width=2)
-        lab = plate(T("총액은 같다", size=28, color=GOLD)).next_to(same, UP, buff=0.15)
-        self.play(Create(same), FadeIn(lab), run_time=0.8)
+        w_wide = Wallet(values=(5, 1, 2), total=8, height=1.5, width=0.28, labels=False, title="넓은 곳")
+        w_wide.next_to(t_wide, LEFT, buff=0.35).align_to(t_wide, UP)
+        w_thin = Wallet(values=(5, 1, 2), total=8, height=1.5, width=0.28, labels=False, title="좁은 곳")
+        w_thin.next_to(t_thin, RIGHT, buff=1.0).align_to(w_wide, UP)
+        self.play(FadeIn(w_wide), FadeIn(w_thin), FadeOut(word), run_time=0.5)
+        self.play(Transform(w_thin.bars, w_thin.bars_for((2, 4, 2))), run_time=0.8)
+        same = DashedLine(w_wide.total_line.get_right(), w_thin.total_line.get_left(), color=GOLD, stroke_width=2)
+        self.play(Create(same), FadeIn(plate(T("총액은 같다", size=24, color=GOLD)).next_to(w_thin, RIGHT, buff=0.2)),
+                  run_time=0.6)
 
 
 class S08(ChoigoScene):

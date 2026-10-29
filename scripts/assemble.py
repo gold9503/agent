@@ -99,7 +99,13 @@ def composite_scene(ep, scene, overlay, dest):
                 base_in = ["-stream_loop", "-1", "-i", str(src)]
                 tail = ""
                 trim = trim if "start" in bg or "end" in bg else ""
-            base = f"[0:v]{trim}setpts={k:.3f}*PTS,{fit}{tail},{look}[base]"
+            # blur: [[x, y, w, h], ...] 원본 좌표에서 흐리게 가릴 곳 (AI가 만든 뜻 없는 글자 등)
+            pre, src_lab = "", "[0:v]"
+            for i, (x, y, w, h) in enumerate(bg.get("blur", [])):
+                pre += (f"{src_lab}split[k{i}][c{i}];[c{i}]crop={w}:{h}:{x}:{y},boxblur=18:2[b{i}];"
+                        f"[k{i}][b{i}]overlay={x}:{y}[s{i}];")
+                src_lab = f"[s{i}]"
+            base = f"{pre}{src_lab}{trim}setpts={k:.3f}*PTS,{fit}{tail},{look}[base]"
         else:   # 사진: 느린 줌(Ken Burns)
             frames = int(dur * 30) + 1
             base_in = ["-loop", "1", "-i", str(src)]
