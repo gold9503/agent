@@ -109,7 +109,9 @@ def main():
                     raise RuntimeError(f"AI 소재가 아직 없습니다. 프롬프트: {m['prompt']}")
                 entries.append({"id": mid, "type": m.get("kind", "video"), "file": str(files[0].relative_to(ep)),
                                 "source": f"AI 생성 ({m.get('model', 'Higgsfield')})", "prompt": m["prompt"],
-                                "job_id": m.get("job_id"), "url": m.get("url"),
+                                "job_id": m.get("job_id"), "url": m.get("url"), "service": m.get("service"),
+                                "plan": m.get("plan"), "generated_at": m.get("generated_at"),
+                                "physics_check": m.get("physics_check"),
                                 "author": "최고의 공부 (AI 도구 사용)", "license": "생성 서비스 약관 (법무팀 확인)", "ai": True})
                 continue
             if mid in old and (ep / old[mid].get("file", "-")).exists():

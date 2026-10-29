@@ -231,9 +231,7 @@ class S07(ChoigoScene):
     SCENE_ID = 7
 
     def build(self):
-        self.add(ai_badge(AI_EXPERIMENT))
-        cap = T("오늘날의 실험 장치(AI 재현)", size=22, color=INK).set_opacity(0.85).to_corner(UL, buff=0.35)
-        self.add(cap)
+        self.add(ai_badge(AI_GENERAL))
         wide = Wallet(values=(5, 1, 2), total=8, height=1.9, width=0.34, labels=False, title="넓은 곳").move_to(LEFT * 4.9 + DOWN * 0.3)
         self.play(FadeIn(wide), run_time=0.6)
         drop = Line(LEFT * 0.7, RIGHT * 0.7, color=WHITE, stroke_width=6).move_to(UP * 1.2)
@@ -318,8 +316,8 @@ class S10(ChoigoScene):
     SCENE_ID = 10
 
     def build(self):
-        self.add(ai_badge(AI_EXPERIMENT))
-        cap = T("AI로 만든 재현 영상 · 실제 실험: H. 바빈스키(케임브리지대), 연기 펄스 실험", size=20, color=INK)
+        self.add(ai_badge(AI_GENERAL))
+        cap = T("흐름 그림: H. 바빈스키(케임브리지대) 연기 펄스 실험을 바탕으로 그린 애니메이션", size=20, color=INK)
         cap.set_opacity(0.85).next_to(ai_badge(), DOWN, buff=0.12).align_to(ai_badge(), RIGHT)
         self.add(cap)
         wing = airfoil(1.2).move_to(UP * 0.2)
@@ -353,7 +351,6 @@ class S11(ChoigoScene):
     SCENE_ID = 11
 
     def build(self):
-        self.add(ai_badge(AI_EXPERIMENT))
         self.show_chapter("⑤", "공식 풀어보기", hold=0.3)
         w = Wallet(values=(5, 1, 2), total=8, height=1.8, width=0.45, labels=False).move_to(LEFT * 5.2 + UP * 1.7)
         self.play(FadeIn(w, shift=RIGHT * 0.5), run_time=0.6)
@@ -383,7 +380,6 @@ class S12(ChoigoScene):
     SCENE_ID = 12
 
     def build(self):
-        self.add(ai_badge(AI_EXPERIMENT))
         s1 = plate(VGroup(T("넓은 곳", size=26), M(r"v = 1\,\mathrm{m/s}", size=44),
                           T("→  단면 넓이 ½ →", size=26, color=MUTED),
                           T("좁은 곳", size=26), M(r"v = 2\,\mathrm{m/s}", size=44, color=K_ORANGE))
