@@ -1,0 +1,461 @@
+{
+  "title": "베르누이의 원리: 빨라진 공기는 덜 민다",
+  "concept": "베르누이의 원리",
+  "subject": "유체역학",
+  "level": "univ",
+  "reading_level": "middle (사용자 지시: 대학 개념이지만 중학생이 한 번 듣고 이해하는 수준으로 쓴다)",
+  "curriculum": "대학 유체역학 · 베르누이 방정식 (한국 고교 교육과정 포함 여부는 미확인. 화면에 교육과정 단원 표기를 하지 않는다)",
+  "narrator": "신뢰감 있는 중후한 남성 다큐 목소리 (ElevenLabs)",
+  "core_metaphor": "흐르는 물 한 덩어리가 들고 다니는 '총액이 정해진 지갑'. 주머니 셋: 미는 주머니(압력, 파랑) / 달리는 주머니(움직임의 에너지, 주황) / 높이 주머니(높이의 에너지, 회색). 장면 6, 7, 8, 11, 12, 13에서 같은 색과 같은 지갑 그림을 반복해 쓴다.",
+  "media_policy": "AI 영상은 Higgsfield Kling 3.0 Turbo, 1080p, 클립당 8초(16크레딧), 총 11클립(176크레딧, 상한 12클립). 모든 장면에 실사 배경을 깐다(실사 배경 시간 100% 목표, 기준 70%). AI 영상이 나오는 동안 화면 구석에 'AI로 만든 영상' 표시를 붙인다. 역사 장면은 'AI로 만든 재현 영상'. 8초보다 긴 장면은 0.6~0.8배 슬로 재생, 또는 끝에서 정지 화면 + 느린 줌으로 늘린다(역재생 루프는 물리 현상이 거꾸로 보이므로 금지). [법무 1차 지적 6] 표시 문구: 역사 재현(장면 2·4·5) 'AI로 만든 재현 영상', 장면 3 'AI로 만든 재현 영상 · 전해지는 이야기', 실험처럼 보이는 영상(종이·벤투리관·풍동·장면 13 원형 창) 'AI로 만든 영상 · 실제 실험 촬영 아님', 풍경·일반(개울·창밖 날개·이륙) 'AI로 만든 영상'.",
+  "media": {
+    "paper_sheets_blow": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "Macro slow-motion shot of two thin white sheets of A4 paper hanging vertically and parallel, about 4 cm apart, their top edges pinched by two hands at the top of the frame (only fingers visible, no face). A steady stream of breath is blown downward from above into the narrow gap between the sheets. The lower halves of both sheets swing INWARD, TOWARD each other, until they nearly touch in the middle; the sheets do NOT spread apart. Soft window light from the side, plain warm grey background, shallow depth of field, 120fps slow motion look, locked-off camera, realistic paper texture, 16:9, no text, no writing on the paper, no logos, no recognizable real person",
+      "status": "planned"
+    },
+    "basel_rhine_1730s": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "Early morning aerial drift over a reconstructed early 18th-century Swiss town on the river Rhine, steep red-tiled roofs, half-timbered and plastered stone houses, a Gothic cathedral of red sandstone with two slender towers on a terrace above the river, small wooden boats on the water, soft mist and warm low sunlight, slow aerial drift, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no people close-up, no recognizable real person, no cars, no electric lights, no modern buildings, no modern bridges, no trams",
+      "status": "planned"
+    },
+    "door_closing_1730s": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "Interior of an 18th-century European townhouse entrance hall at dusk, candlelight and cold blue window light, a heavy dark oak door with an iron latch slowly swings shut; an elderly man's hand in a dark coat sleeve with a white linen cuff pushes it closed, only the hand and sleeve visible; on the other side of the closing gap the blurred silhouette of a man in his thirties in a tricorn hat and long coat seen from behind, walking away; slow push-in, shallow depth of field, historical documentary reconstruction, cinematic, 16:9, no text, no logos, no faces, no recognizable real person, no modern objects",
+      "status": "planned"
+    },
+    "quill_fluid_sketch": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "Macro close-up of a hand in an 18th-century linen cuff drawing with a feather quill and brown iron-gall ink on aged laid paper by candlelight: simple line sketches of a water tank, a horizontal pipe and thin vertical tubes standing on the pipe, flowing wavy lines for water; no letters, no numbers, no readable writing; a few bound old books and a brass instrument blurred in the background, slow motion, shallow depth of field, historical documentary reconstruction, cinematic, warm candlelight, 16:9, no text, no logos, no face, no recognizable real person, no modern pen",
+      "status": "planned"
+    },
+    "pipe_tubes_1730s": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "Reconstructed 18th-century experimental workbench in a stone room with window light: a tall wooden water tank on the left, filled high, feeds one long horizontal brass pipe of uniform width; water flows steadily through the pipe and pours out of its open right end into a wooden bucket; one thin vertical open glass tube stands on top of the pipe near its middle; the water column in that glass tube stands clearly LOWER than the water surface in the tank; slight ripples in the column, slow dolly along the pipe, shallow depth of field, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no scale markings, no logos, no people, no faces, no recognizable real person, no plastic, no modern fittings, no electric lights",
+      "status": "planned"
+    },
+    "stream_narrows": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "Low-angle slow-motion shot of a clear mountain stream flowing over smooth pebbles in morning sun; the channel narrows between two large mossy boulders and the water visibly SPEEDS UP through the narrow gap, with faster streaks and small standing ripples, then widens and slows again downstream; floating leaves accelerate through the gap; slow lateral camera drift, shallow depth of field, photorealistic nature documentary, 16:9, no text, no logos, no people",
+      "status": "planned"
+    },
+    "venturi_demo": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "Modern physics lab demonstration on a clean white bench: a horizontal transparent acrylic Venturi tube shaped wide, then narrow, then wide again, with blue-dyed water flowing steadily from left to right; three thin vertical transparent glass tubes rise from the top of the tube, one above the wide inlet, one above the narrow throat, one above the wide outlet; the blue water column above the NARROW throat is clearly the LOWEST, the column above the inlet is the HIGHEST, the outlet column is slightly lower than the inlet column; tiny bubbles in the water speed up through the narrow throat; locked-off camera, side view, soft studio light, shallow depth of field, photorealistic, 16:9, no text, no scale markings, no numbers, no logos, no people",
+      "status": "planned"
+    },
+    "venturi_throat_macro": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "Extreme macro slow-motion side view of the narrow throat of a transparent acrylic Venturi tube carrying blue-dyed water from left to right: tiny air bubbles and thin dye streaks move slowly in the wide part, ACCELERATE sharply as they enter the narrow throat, then slow down again as they exit into the wide part; the base of a thin vertical glass tube is visible on top of the throat; locked-off camera, soft studio backlight, shallow depth of field, photorealistic, 16:9, no text, no scale markings, no numbers, no logos, no people",
+      "status": "planned"
+    },
+    "wing_window_cruise": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "View through an airliner passenger window of a swept wing in cruise flight above a sunlit sea of white clouds, plain white wing with no markings, a winglet at the tip, subtle wing flex and light turbulence, golden late-afternoon sun, slow drift, photorealistic, shallow depth of field on the window frame, 16:9, no text, no airline logos, no livery, no registration numbers, no people",
+      "status": "planned"
+    },
+    "wing_smoke_tunnel": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "Wind tunnel flow visualization against a matte black background: a 2D aircraft wing cross-section (airfoil) seen from the side, mounted at a small positive angle of attack, air flowing from left to right; many thin parallel white smoke streamlines come from the left; streamlines above the wing squeeze closer together and curve smoothly over the top surface; streamlines below stay further apart; behind the trailing edge the whole flow is clearly deflected DOWNWARD; locked-off camera, laboratory lighting, photorealistic, 16:9, no text, no numbers, no logos, no people",
+      "status": "planned"
+    },
+    "airliner_takeoff": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 8,
+      "model": "kling3_0_turbo",
+      "resolution": "1080p",
+      "prompt": "A generic twin-engine passenger airliner with a plain white livery rotates and lifts off a runway at golden hour, nose rising, main wheels leaving the ground, heat shimmer behind the engines, long telephoto lens from the side, slow motion, photorealistic, cinematic, 16:9, no text, no airline logos, no livery, no registration numbers, no recognizable real person",
+      "status": "planned"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "section": "오프닝 질문",
+      "narration": [
+        {
+          "say": "종이 두 장을 나란히 들고, 그 사이로 숨을 세게 불어 보세요."
+        },
+        {
+          "say": "종이는 벌어지지 않습니다."
+        },
+        {
+          "say": "오히려 서로 달라붙죠."
+        },
+        {
+          "say": "바람이 밀었는데, 왜 다가올까요?"
+        }
+      ],
+      "visual": {
+        "type": "animation",
+        "key": "hook_paper_sheets",
+        "description": "첫 프레임부터 종이 두 장 실사 영상(인사, 제목 없음). 첫 문장: 종이 두 장이 나란히 걸려 있다. 두 번째 문장에서 바람이 들어가며 종이가 안쪽으로 휜다. 세 번째 문장 '달라붙죠'에 맞춰 종이가 거의 닿는 순간 0.3배 슬로 + 정지. 네 번째 문장에서 종이 사이로 흰 바람 화살표(아래 방향)가 반투명하게 겹쳐지고, 종이 바깥에 '?' 두 개가 떠오른다. 마지막 1초에 영상 제목 카드 '베르누이의 원리'가 짧게 스친다. 우측 상단 'AI로 만든 영상'",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "paper_sheets_blow",
+          "dim": 0.15
+        }
+      },
+      "on_screen_text": "바람이 밀었는데, 왜 다가올까?"
+    },
+    {
+      "id": 2,
+      "section": "시대 속으로",
+      "narration": [
+        {
+          "say": "이 수수께끼의 열쇠를 찾은 사람, 다니엘 베르누이입니다."
+        },
+        {
+          "say": "미분을 처음 책으로 낸 로피탈의 숨은 스승, 요한 베르누이의 아들이죠."
+        }
+      ],
+      "visual": {
+        "type": "image",
+        "key": "bernoulli_family",
+        "description": "구간 제목 '시대 속으로'. 18세기 라인강변 도시 재현 영상 위로 이름 카드 '다니엘 베르누이 (1700~1782)'. 두 번째 문장에서 카드 위에 작은 가계도가 그려진다: '요한 베르누이(아버지) → 다니엘(아들)', 요한 옆에 작은 태그 '지난 편: 로피탈의 숨은 스승'. 초상화는 쓰지 않는다(이번 편 커먼즈 소재 미사용). 'AI로 만든 재현 영상'",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "basel_rhine_1730s",
+          "dim": 0.4
+        }
+      },
+      "on_screen_text": "다니엘 베르누이 · 요한 베르누이의 아들"
+    },
+    {
+      "id": 3,
+      "section": "시대 속으로",
+      "narration": [
+        {
+          "say": "천칠백삼십사 년, 파리 아카데미가 상을 아버지와 아들에게 함께 줍니다.",
+          "sub": "1734년, 파리 아카데미가 상을 아버지와 아들에게 함께 줍니다."
+        },
+        {
+          "say": "아들과 같은 급이 된 게 분했던 아버지는, 아들을 집에서 내쫓았다고 전해집니다."
+        }
+      ],
+      "visual": {
+        "type": "image",
+        "key": "prize_and_door",
+        "description": "첫 문장: 연표 '1734 · 파리 왕립 과학 아카데미 대상' 카드, 그 아래 '요한 = 다니엘 (공동 수상)' 저울 아이콘이 수평으로 맞춰진다. 두 번째 문장: 무거운 나무 문이 닫히는 재현 영상이 밝아지고, 문이 닫히는 순간 저울 아이콘이 금이 가며 사라진다. 'AI로 만든 재현 영상'",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "door_closing_1730s",
+          "dim": 0.35
+        }
+      },
+      "on_screen_text": "1734 · 공동 수상"
+    },
+    {
+      "id": 4,
+      "section": "시대 속으로",
+      "narration": [
+        {
+          "say": "천칠백삼십팔 년, 다니엘은 유체역학이라는 책을 펴냅니다.",
+          "sub": "1738년, 다니엘은 『유체역학』이라는 책을 펴냅니다."
+        },
+        {
+          "say": "아버지는 나중에 낸 자기 책에 더 이른 연도를 적었다는 의심을 받죠."
+        }
+      ],
+      "visual": {
+        "type": "diagram",
+        "key": "book_timeline",
+        "description": "깃펜 스케치 재현 영상 위에 연표가 왼쪽에서 오른쪽으로 그려진다: '1738 다니엘 『유체역학』'. 두 번째 문장에서 연표 오른쪽(더 뒤)에 '아버지 『수력학』 실제 출간'이 놓이고, 그 책에서 화살표가 연표 왼쪽 '1732' 자리로 휘어 돌아가 꽂힌다(빨간 점선, 물음표). 실제 출간 연도 숫자는 적지 않는다(자료마다 1739/1743). 'AI로 만든 재현 영상'",
+        "motion": "pan_left",
+        "background": {
+          "media": "quill_fluid_sketch",
+          "dim": 0.45
+        }
+      },
+      "on_screen_text": "1738 『유체역학』 ← 책에 적힌 '1732'?"
+    },
+    {
+      "id": 5,
+      "section": "개념의 탄생",
+      "narration": [
+        {
+          "say": "다니엘은 흐르는 물의 압력을 재고 싶었습니다."
+        },
+        {
+          "say": "관 벽에 구멍을 뚫고, 가는 유리관을 세웠죠."
+        },
+        {
+          "say": "물이 세게 밀수록, 유리관 속 물기둥이 높아집니다."
+        },
+        {
+          "say": "그런데 물이 흐르기 시작하자, 물기둥이 오히려 낮아졌습니다."
+        }
+      ],
+      "visual": {
+        "type": "animation",
+        "key": "daniel_tubes",
+        "description": "구간 제목 '개념의 탄생'. 18세기 실험대 재현 영상. 첫 문장 '압력' 옆에 작은 라벨 '압력 = 물이 미는 힘'. 두 번째 문장에서 관 벽의 구멍과 세운 유리관을 흰 원으로 강조. 세 번째 문장에서 유리관 속 물기둥에 위로 향하는 파란 화살표와 눈금선이 겹쳐진다. 네 번째 문장에서 넓은 쪽(느림, 짧은 흐름 화살표)과 좁은 쪽(빠름, 긴 흐름 화살표)을 나란히 표시하고, 좁은 쪽 물기둥 높이에 빨간 '↓'와 '?' 표시. 'AI로 만든 재현 영상'",
+        "motion": "build_up",
+        "background": {
+          "media": "pipe_tubes_1730s",
+          "dim": 0.3
+        }
+      },
+      "on_screen_text": "흐르면 = 물기둥이 낮다?"
+    },
+    {
+      "id": 6,
+      "section": "개념의 탄생",
+      "narration": [
+        {
+          "say": "물 한 덩어리가 지갑을 들고 흐른다고 해 봅시다."
+        },
+        {
+          "say": "총액은 정해져 있습니다."
+        },
+        {
+          "say": "주머니는 셋. 미는 주머니, 달리는 주머니, 높이 주머니."
+        },
+        {
+          "say": "좁은 길에서 빨리 달리려면, 미는 주머니에서 꺼내 써야 하죠."
+        }
+      ],
+      "visual": {
+        "type": "animation",
+        "key": "wallet_metaphor",
+        "description": "핵심 비유 장면. 좁아지는 개울 실사 영상 위에 반투명 물방울 캐릭터(작은 물 덩어리, 얼굴 없이 단순한 방울 모양)가 지갑을 들고 떠내려간다. 둘째 문장: 지갑에 '총액 일정' 자물쇠 아이콘. 셋째 문장: 지갑이 펼쳐지며 주머니 셋이 차례로 생긴다 — 파랑 '미는(압력)', 주황 '달리는(움직임)', 회색 '높이'. 넷째 문장: 물방울이 바위 사이 좁은 틈으로 들어가 빨라지는 순간, 파란 주머니에서 동전이 주황 주머니로 옮겨 간다(파랑 줄고 주황 늘고, 합계 막대는 그대로). 이후 장면에서 같은 색과 같은 지갑 그림을 계속 쓴다. 'AI로 만든 영상'",
+        "motion": "build_up",
+        "background": {
+          "media": "stream_narrows",
+          "dim": 0.4
+        }
+      },
+      "on_screen_text": "압력 + 움직임 + 높이 = 총액 일정"
+    },
+    {
+      "id": 7,
+      "section": "개념의 탄생",
+      "narration": [
+        {
+          "say": "물이 좁은 곳에서 빨라지면, 그 위 물기둥은 쑥 낮아집니다."
+        },
+        {
+          "say": "빨라진 만큼, 미는 주머니에서 꺼내 쓴 겁니다."
+        }
+      ],
+      "visual": {
+        "type": "animation",
+        "key": "aha_venturi",
+        "description": "'아하' 장면 1 (이 편에서 가장 좋은 화면). 현대 벤투리관 실사 영상, 배경을 거의 어둡게 하지 않는다. 화면 아래 작은 캡션 '오늘날의 실험 장치'. 첫 문장: 좁은 목에서 빨라지는 기포를 따라 주황 흐름 화살표가 길어지고, 동시에 가운데 유리관 물기둥에 하얀 수평선이 내려가며 '쑥' 떨어지는 높이 차를 표시(넓은 쪽 기준선 대비). 두 번째 문장: 각 유리관 옆에 장면 6의 지갑이 작게 붙는다 — 넓은 곳 지갑(파랑 크고 주황 작음), 좁은 곳 지갑(파랑 작고 주황 큼), 두 지갑의 합계 막대 높이는 같다. 'AI로 만든 영상'",
+        "motion": "build_up",
+        "background": {
+          "media": "venturi_demo",
+          "dim": 0.1
+        }
+      },
+      "on_screen_text": "빨라진 만큼, 덜 민다"
+    },
+    {
+      "id": 8,
+      "section": "개념의 탄생",
+      "narration": [
+        {
+          "say": "종이 사이 공기도 같습니다."
+        },
+        {
+          "say": "좁은 틈을 빨리 지나느라 덜 밀고, 바깥 공기가 종이를 안으로 밀어붙인 거죠."
+        },
+        {
+          "say": "이것이 베르누이의 원리입니다."
+        }
+      ],
+      "visual": {
+        "type": "animation",
+        "key": "aha_paper_resolved",
+        "description": "'아하' 장면 2: 첫 장면의 종이 영상으로 돌아온다(같은 클립, 이번엔 정지 직전 구간을 0.5배 슬로). 종이 사이 좁은 틈에 주황 흐름 화살표(빠름, 길다)와 작은 파란 압력 화살표(약함), 종이 바깥에는 굵은 파란 압력 화살표가 양쪽에서 종이를 안쪽으로 민다. 틈 안쪽 라벨 '빠르다 → 덜 민다', 바깥 라벨 '느리다 → 그대로 민다'. 세 번째 문장에서 화면 중앙에 '베르누이의 원리' 타이틀이 크게 뜨고 그 아래 '흐름이 빨라지면 압력이 낮아진다'. 'AI로 만든 영상'",
+        "motion": "build_up",
+        "background": {
+          "media": "paper_sheets_blow",
+          "dim": 0.45
+        }
+      },
+      "on_screen_text": "베르누이의 원리: 빨라지면, 압력이 낮아진다"
+    },
+    {
+      "id": 9,
+      "section": "진짜 쉬운 설명",
+      "narration": [
+        {
+          "say": "이 원리는 비행기 설명에 꼭 나옵니다."
+        },
+        {
+          "say": "날개 위쪽 길이 더 기니, 위아래 공기가 끝에서 동시에 만나려면 위쪽이 빨라야 한다."
+        },
+        {
+          "say": "그럴듯하죠? 하지만 틀렸습니다."
+        }
+      ],
+      "visual": {
+        "type": "animation",
+        "key": "myth_equal_transit",
+        "description": "구간 제목 '진짜 쉬운 설명'. 여객기 창밖 날개 실사 영상. 두 번째 문장: 영상 위에 날개 단면 윤곽이 반투명하게 겹쳐지고, 앞끝에서 갈라진 점 두 개(위·아래)가 '동시에 만난다'는 점선 경로로 뒤끝에서 합쳐지는 애니메이션. 카드 제목 '흔한 설명: 같은 시간 도착설'. 세 번째 문장 '틀렸습니다'에서 카드 전체에 빨간 X 도장. 'AI로 만든 영상'",
+        "motion": "build_up",
+        "background": {
+          "media": "wing_window_cruise",
+          "dim": 0.4
+        }
+      },
+      "on_screen_text": "같은 시간 도착설 ✕"
+    },
+    {
+      "id": 10,
+      "section": "진짜 쉬운 설명",
+      "narration": [
+        {
+          "say": "연기로 흐름을 찍어 보면, 위쪽 공기가 훨씬 먼저 끝에 도착합니다."
+        },
+        {
+          "say": "날개는 공기를 아래로 꺾어 내리고, 그 반작용으로 위로 힘을 받습니다."
+        },
+        {
+          "say": "아래로 미는 힘과 날개 위의 낮은 압력, 같은 흐름의 두 얼굴입니다."
+        }
+      ],
+      "visual": {
+        "type": "animation",
+        "key": "wing_truth",
+        "description": "풍동 연기 실사(AI) 영상. 첫 문장: 정지 화면에서 연기 펄스를 점으로 강조 — 위쪽 점은 이미 뒤끝을 지났고 아래쪽 점은 아직 날개 밑에 있다(라벨 '위쪽이 먼저 도착'). 영상 자체가 펄스를 정확히 보여주지 못하면 애니메이션 점으로 덮어 표현한다. 화면 하단 작은 캡션 '케임브리지대 바빈스키 교수의 연기 실험 결과를 바탕으로 다시 그림'. 두 번째 문장: 날개 뒤로 흐름 전체를 아래로 꺾는 굵은 화살표(아래) + 날개에 위로 향하는 반작용 화살표(위, '뉴턴 제3법칙'). 세 번째 문장: 화면 왼쪽 라벨 '뉴턴: 공기를 아래로', 오른쪽 라벨 '베르누이: 날개 위 압력 ↓(파랑 압력 화살표 약함)', 가운데 둘을 잇는 '='가 아니라 '같은 흐름' 리본. 'AI로 만든 영상'",
+        "motion": "build_up",
+        "background": {
+          "media": "wing_smoke_tunnel",
+          "dim": 0.2
+        }
+      },
+      "on_screen_text": "뉴턴 + 베르누이 = 같은 흐름의 두 얼굴"
+    },
+    {
+      "id": 11,
+      "section": "공식 풀어보기",
+      "narration": [
+        {
+          "say": "이제 지갑을 식으로 써 봅시다."
+        },
+        {
+          "say": "압력 더하기 움직임의 에너지 더하기 높이의 에너지는, 늘 일정."
+        },
+        {
+          "say": "정확히는, 마찰 없이 한 줄기로 고르게 흐를 때의 이야기입니다."
+        }
+      ],
+      "visual": {
+        "type": "formula",
+        "key": "bernoulli_equation",
+        "description": "구간 제목 '공식 풀어보기'. 벤투리관 영상을 어둡게 깔고, 장면 6의 지갑 세 주머니가 왼쪽에서 들어와 한 줄로 선다. 두 번째 문장에 맞춰 각 주머니 아래에 기호가 한 칸씩 써진다: 파랑 'P (압력)' + 주황 '½ρv² (움직임의 에너지)' + 회색 'ρgh (높이의 에너지)' = '일정'. 기호 라벨을 작게: ρ = 밀도, v = 속력, h = 높이, g = 중력 가속도. 주황 칸 v² 위에 작은 메모 '속력 2배 → 4배'. 세 번째 문장: 아래쪽에 작은 조건 카드 '마찰 없음 · 같은 흐름선 · 흐름이 일정' (y > −2.5 위치, 자막과 겹치지 않게). 'AI로 만든 영상'",
+        "motion": "build_up",
+        "background": {
+          "media": "venturi_demo",
+          "dim": 0.75
+        }
+      },
+      "on_screen_text": "P + ½ρv² + ρgh = 일정"
+    },
+    {
+      "id": 12,
+      "section": "공식 풀어보기",
+      "narration": [
+        {
+          "say": "수평 관에서 초속 일 미터로 흐르던 물이, 단면 넓이가 절반인 곳에선 초속 이 미터가 됩니다.",
+          "sub": "수평 관에서 초속 1m로 흐르던 물이, 단면 넓이가 절반인 곳에선 초속 2m가 됩니다."
+        },
+        {
+          "say": "속력이 두 배니, 움직임의 에너지는 네 배. 오백에서 이천이 됩니다.",
+          "sub": "속력이 두 배니, 움직임의 에너지는 네 배. 500에서 2000이 됩니다."
+        },
+        {
+          "say": "총액은 그대로니까 압력은 천오백 파스칼 줄어들죠.",
+          "sub": "총액은 그대로니까 압력은 1500Pa 줄어들죠."
+        },
+        {
+          "say": "유리관 물기둥이 약 십오 센티미터 내려가는 만큼입니다.",
+          "sub": "유리관 물기둥이 약 15cm 내려가는 만큼입니다."
+        }
+      ],
+      "visual": {
+        "type": "formula",
+        "key": "example_venturi_numbers",
+        "description": "벤투리관 목 부분 매크로 영상 위에 단계별 계산. ① 넓은 곳 'v = 1 m/s', 좁은 곳(넓이 ½) 'v = 2 m/s'. ② 주황 주머니: ½ × 1000 × 1² = 500 → ½ × 1000 × 2² = 2000 (+1500), 옆에 '물의 밀도 ρ = 1000'. ③ 파랑 주머니에서 1500이 빠져나가는 동전 애니메이션, 'P 1500 Pa ↓', 'Pa(파스칼) = 압력의 단위'. 합계 막대는 그대로. ④ 오른쪽에 유리관 두 개 그림: 넓은 곳 물기둥 대비 좁은 곳 물기둥이 15cm 낮게 그려지고 'h = 1500 ÷ (1000 × 9.8) ≈ 0.15 m' 작은 검산. 'AI로 만든 영상'",
+        "motion": "build_up",
+        "background": {
+          "media": "venturi_throat_macro",
+          "dim": 0.6
+        }
+      },
+      "on_screen_text": "1 m/s → 2 m/s : 압력 1500 Pa ↓ (물기둥 약 15cm)"
+    },
+    {
+      "id": 13,
+      "section": "오늘의 한 줄",
+      "narration": [
+        {
+          "say": "오늘의 한 줄. 빨라진 공기는, 덜 밉니다."
+        },
+        {
+          "say": "여러분 입김이 종이를 붙인 그 원리가, 오늘도 하늘에서 여객기를 받칩니다."
+        },
+        {
+          "say": "다음 시간엔, 물이 왜 좁은 곳에서 빨라지는지 알아봅니다."
+        },
+        {
+          "say": "최고의 공부였습니다."
+        }
+      ],
+      "visual": {
+        "type": "title_card",
+        "key": "one_line_takeoff",
+        "description": "여객기 이륙 실사(AI) 영상. 첫 문장: 오늘의 한 줄 카드 '빨리 달리는 공기는, 덜 민다'. 두 번째 문장: 바퀴가 활주로를 떠나는 순간에 맞춰 화면 오른쪽 위에 장면 1의 종이 두 장이 작은 원형 창으로 겹쳐 보였다가 사라진다(같은 원리 연결). 세 번째 문장: 다음 편 예고 카드 '연속 방정식: 좁은 곳에서 물은 왜 빨라질까?'. 마지막에 채널 로고. 'AI로 만든 영상'",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "airliner_takeoff",
+          "dim": 0.35
+        }
+      },
+      "on_screen_text": "빨라진 공기는, 덜 민다"
+    }
+  ]
+}
