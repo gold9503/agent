@@ -67,7 +67,7 @@ class S05(ChoigoScene):             # 클래스 이름 = S + 장면 id 두 자�
 ## 품질 점검 (보고 전에 반드시)
 - 길이가 **3:00 이하**인가 (넘으면 기획팀에 대본 축소 요청)
 - 렌더링 로그 `[choigo] SXX rendered A / narration B`에서 A가 B보다 1초 이상 길면 애니메이션을 줄인다
-- 발음 점검 평균 CER: **10% 미만**이 공개 기준이다. 높은 문장은 `say` 표기를 바꿔 다시 합성한다
+- 발음 점검 평균 CER: **10% 미만**이 공개 기준이다. 공식 점검은 ElevenLabs `creative_transcribe_audio`(`eleven_scribe_v1`, 0크레딧)로 장면마다 받아 적어 대본과 비교하고 `assets/audio/pronunciation_check_scribe.json`에 남긴다(각 TTS 노드를 `connect_from`으로 넘긴다). 로컬 `check_narration.py`는 인물 이름(베르누이, 다니엘 등)을 잘 못 알아들어 CER이 부풀려지므로 참고용이다. Scribe에서도 틀린 문장은 `say` 표기를 바꿔 다시 합성한다
 - 장면마다 마지막 프레임을 뽑아 직접 보고 잘림, 겹침, 자막 가림이 없는지 확인한다
   ```bash
   ffmpeg -sseof -0.3 -i assets/render/S05/videos/visuals/1080p30/S05.mp4 -frames:v 1 s05.png
