@@ -55,6 +55,7 @@ class S05(ChoigoScene):             # 클래스 이름 = S + 장면 id 두 자�
 | ④ 실사 소재 | `fetch_media.py` | `assets/media/*`, `assets/sources.json`. 빠진 소재가 있으면 멈춘다 |
 | ⑤ 장면 렌더링 | `render_scenes.sh` | `assets/render/SXX/.../SXX.mov` (투명 배경, 4개 병렬, 장면 하나만: `render_scenes.sh <폴더> 13`) |
 | ⑥ 합성 | `assemble.py` | 장면마다 배경 + 투명 레이어를 겹치고 → `output/final.mp4`, `output/subtitles.srt` (자체 합성 배경음악, −14 LUFS) |
+| ⑦ 숏폼 | `make_shorts.py` | 구성표 `"shorts": {"scenes", "headline", "end"}`에 고른 장면으로 `output/shorts_vertical.mp4`(1080×1920), `output/shorts_square.mp4`(1080×1080). 60초 이하, 첫 장면은 훅, 끝은 개념 이름이 나오는 장면 |
 
 ### ElevenLabs 나레이션 만들기
 1. `tts.py <폴더> --prompts`로 장면별 원고를 뽑는다.

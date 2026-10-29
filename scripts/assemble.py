@@ -52,17 +52,17 @@ def split_balanced(words, parts):
     return [g for g in groups if g]
 
 
-def cues_for(sentence, offset):
+def cues_for(sentence, offset, max_line=SUB_MAX_LINE):
     """긴 문장은 여러 자막으로 고르게 나누고, 글자 수 비율로 시간을 나눈다."""
     words = sentence["text"].split()
     n_chars = len(sentence["text"])
-    n_cues = math.ceil(n_chars / (SUB_MAX_LINE * SUB_MAX_LINES))
+    n_cues = math.ceil(n_chars / (max_line * SUB_MAX_LINES))
     t = offset + sentence["start"]
     span = sentence["end"] - sentence["start"]
     cues = []
     for g in split_balanced(words, n_cues):
         text = " ".join(g)
-        lines = split_balanced(g, 2) if len(text) > SUB_MAX_LINE else [g]
+        lines = split_balanced(g, 2) if len(text) > max_line else [g]
         d = span * len(text) / n_chars
         cues.append((t, t + d, "\n".join(" ".join(l) for l in lines)))
         t += d
