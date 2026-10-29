@@ -207,6 +207,8 @@ class S06(ChoigoScene):
         box = SurroundingRectangle(final[1], color=GOLD, buff=0.15)
         d.next_to(box, RIGHT, buff=0.4)
         self.play(Create(box), FadeIn(d, shift=LEFT * 0.2))
+        fine = T("직관적 설명 · 엄밀한 증명은 코시의 평균값 정리", size=22, color=MUTED).to_corner(UL, buff=0.4)
+        self.play(FadeIn(fine))
 
 
 # ── ④ 진짜 쉬운 설명 ───────────────────────────────────────
@@ -261,9 +263,10 @@ class S08(ChoigoScene):
         self.at(2)
         lim = M(r"\lim_{x \to 0} \frac{x+1}{x+2}", size=64).move_to(LEFT * 3.4 + DOWN * 0.1)
         right = M(r"= \frac{1}{2}", size=64, color=TEAL).next_to(lim, RIGHT, buff=0.3)
-        ok = T("대입하면 끝 (0/0 아님)", size=26, color=TEAL).next_to(VGroup(lim, right), DOWN, buff=0.2)
+        ok = T("0/0 아님 → 로피탈 사용 불가", size=26, color=TEAL).next_to(VGroup(lim, right), DOWN, buff=0.2)
+        okmark = tick(Square(0.4).next_to(right, RIGHT, buff=0.2)).set_color(TEAL)
         self.play(Write(lim), run_time=1.0)
-        self.play(FadeIn(right), FadeIn(ok), run_time=0.8)
+        self.play(FadeIn(right), Create(okmark), FadeIn(ok), run_time=0.8)
         self.at(3)
         wrong = M(r"\frac{(x+1)'}{(x+2)'} = \frac{1}{1} = 1", size=56).move_to(RIGHT * 3.4 + DOWN * 0.1)
         cross = Cross(wrong, stroke_color=CORAL, stroke_width=7)
@@ -345,6 +348,8 @@ class S11(ChoigoScene):
         check.move_to(DOWN * 1.2)
         self.play(FadeIn(check))
         self.at(1)
+        conds = plate(T("② g′(x) = 1 ≠ 0  ✓   ③ 극한 3 존재  ✓", size=26, color=GOLD)).to_corner(UL, buff=0.4)
+        self.play(FadeIn(conds, shift=DOWN * 0.2))
         mini = plate(T("분자가 분모보다 3배 빠르게 0으로", size=34, color=GOLD)).move_to(DOWN * 2.15)
         self.play(FadeIn(mini, shift=UP * 0.2))
 

@@ -45,7 +45,7 @@ tools: Read, Write, Glob, Grep, WebSearch, WebFetch
 - 생성 서비스(Higgsfield) 약관상 상업적 이용이 가능한 플랜에서 만들었는가
 
 ### 나레이션 음성
-- CLOVA Voice는 NAVER Cloud 이용약관과 CLOVA Voice 이용 조건(상업적 이용, 출처 표기 의무 여부)을 확인하고 결과를 `legal_review.md`에 남긴다
+- 나레이션은 ElevenLabs(기본)다. 생성 시점의 사용자 플랜이 상업 라이선스를 포함하는지(무료 플랜은 상업 이용 불가·출처 표기 필요), 사용한 라이브러리 보이스의 공유 조건, 모델의 Beta 여부를 확인하고 `legal_review.md`에 남긴다. 예비 엔진 CLOVA Voice를 쓰면 NAVER Cloud 이용 조건을 같은 방식으로 확인한다
 
 ### 플랫폼 정책
 - 사실적인 AI 재현 장면이 들어가면 유튜브 업로드 시 "변경되거나 합성된 콘텐츠" 공개를 **켜도록** 유통팀에 전달한다(역사 재현 장면은 실제 사건처럼 보일 수 있으므로).

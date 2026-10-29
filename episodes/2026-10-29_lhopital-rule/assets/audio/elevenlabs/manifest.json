@@ -1,0 +1,22 @@
+{
+  "flow_id": "pRbKyA19iIlYdqOOxXEs",
+  "model": "eleven_v4",
+  "voice": {"id": "1wnzzdVjmRUxpiionYOT", "name": "Jae - Calm Narrator (라이브러리 보이스)"},
+  "account_plan": "무료(Free) — 상업 라이선스 없음. 2026-10-29 생성 도중 '비정상 활동 감지'로 무료 플랜 사용이 중지됨",
+  "generated_on": "2026-10-29",
+  "scenes": {
+    "01": {"generation_id": "lnIH3ENEHJhR71No7B00", "status": "completed", "credits": 117},
+    "02": {"generation_id": "SDzGxE7TSEHZECM788iN", "status": "completed", "credits": 74},
+    "03": {"generation_id": "GEhEtChQyNn5G7YKgZmj", "status": "completed", "credits": 91},
+    "04": {"generation_id": "ll1ySkjBwPTNvJLf9Yw3", "status": "failed", "error": "Free Tier disabled (unusual activity / proxy)"},
+    "05": {"generation_id": "OVWkkXagPtB0ADSb9N8r", "status": "failed", "error": "Free Tier disabled (unusual activity / proxy)"},
+    "06": {"generation_id": "gXkedGT0Kimo4Cs8pBDD", "status": "failed", "error": "Free Tier disabled (unusual activity / proxy)"},
+    "07": {"generation_id": "5IfbDws7Ab0hFDIIRkDi", "status": "completed", "credits": 99},
+    "08": {"generation_id": "lYI9hDW5wnQYfmVgLJA1", "status": "completed", "credits": 115},
+    "09": {"generation_id": "V5i9oh3WB6D1UixomkZA", "status": "completed", "credits": 126},
+    "10": {"generation_id": "FRb3B3ljSPyexJXc1gpy", "status": "failed", "error": "Free Tier disabled (unusual activity / proxy)"},
+    "11": {"generation_id": "Mbo24mfc4Sb5u9ACTiHw", "status": "failed", "error": "Free Tier disabled (unusual activity / proxy)"},
+    "12": {"generation_id": "KaIrSxYUAGygfUl7Psg7", "status": "completed", "credits": 115}
+  },
+  "note": "무료 플랜 생성분은 상업 이용 불가. 유료 플랜 전환 후 12개 장면 모두 다시 생성해야 공개 가능 (약 1,200크레딧)."
+}
