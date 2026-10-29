@@ -37,7 +37,7 @@ class S05(ChoigoScene):             # 클래스 이름 = S + 장면 id 두 자�
 | 소재 | 언제 | 어떻게 |
 |---|---|---|
 | 박물관 공개자료 사진 | 유물, 필사본, 실존 장소 (실물이 있는 것) | 구성표 `media`에 `commons`/`met`로 적으면 `fetch_media.py`가 내려받고 라이선스를 기록한다. NC/ND는 자동 거부 |
-| AI 재현 영상/이미지 | 실물 영상이 존재할 수 없는 과거 장면 (9세기 바그다드 등) | Higgsfield `generate_video`/`generate_image`로 만든다(16:9, 소리 끔, 장면 길이 이상, 1080p). `assets/media/<id>.mp4`로 저장하고 구성표에 `model`, `job_id`, `url`을 적는다. **생성 전 크레딧 견적을 사용자에게 알리고 승인받는다** |
+| AI 실사 영상/이미지 | 과거 장면, 실험 장면, 현상 클로즈업 등 화면의 70% 이상 | Higgsfield `generate_video`로 만든다. 기본 모델 **Kling 3.0 Turbo**(`kling3_0_turbo`, 1080p, 8초 = 16크레딧), 한 편 12클립 안팎. 실험 장면은 물리적으로 맞게 나왔는지 프레임을 뽑아 확인하고, 틀리면 쓰지 않는다. `assets/media/<id>.mp4`로 저장하고 구성표에 `model`, `job_id`, `url`을 적는다. **생성 전 크레딧 견적을 사용자에게 알리고 승인받는다** |
 | 애니메이션 | 개념, 공식, 도식 | `visuals.py` |
 
 - 장면의 배경은 구성표 `visual.background: {"media": "<id>", "dim": 0.35~0.65}`로 지정한다. 합성할 때 아래에 깔리고, 영상은 장면 길이에 맞춰 최대 1.6배까지 느려진다.
@@ -50,7 +50,7 @@ class S05(ChoigoScene):             # 클래스 이름 = S + 장면 id 두 자�
 | 단계 | 스크립트 | 결과 |
 |---|---|---|
 | ① 대본 정리 | `storyboard_to_script.py` | `02_script.md` |
-| ② 나레이션 | `tts.py` (ElevenLabs, 차분한 남성 나레이터 "Jae - Calm Korean Narrator") | `assets/audio/scene_XX.wav`, `timings.json`(문장별 시각). 같은 문장은 캐시를 써서 다시 과금되지 않는다 |
+| ② 나레이션 | `tts.py` (ElevenLabs `eleven_v4`, 신뢰감 있는 중저음 "Gun Woong - Deep & Trustworthy" `J3IV02ZzZmojOIQbmpu0`) | `assets/audio/scene_XX.wav`, `timings.json`(문장별 시각). 같은 문장은 캐시를 써서 다시 과금되지 않는다 |
 | ③ 발음 점검 | `check_narration.py` | `assets/audio/pronunciation_check.txt`. 음성 인식으로 받아 적어 대본과 비교한 글자 오류율(CER) |
 | ④ 실사 소재 | `fetch_media.py` | `assets/media/*`, `assets/sources.json`. 빠진 소재가 있으면 멈춘다 |
 | ⑤ 장면 렌더링 | `render_scenes.sh` | `assets/render/SXX/.../SXX.mov` (투명 배경, 4개 병렬, 장면 하나만: `render_scenes.sh <폴더> 13`) |
@@ -58,7 +58,7 @@ class S05(ChoigoScene):             # 클래스 이름 = S + 장면 id 두 자�
 
 ### ElevenLabs 나레이션 만들기
 1. `tts.py <폴더> --prompts`로 장면별 원고를 뽑는다.
-2. ElevenLabs 커넥터 `creative_generate_speech`로 장면마다 한 번씩 생성한다(model `eleven_v4`, 목소리 "Jae - Calm Korean Narrator" `1wnzzdVjmRUxpiionYOT`, `generations_count` 1, 한 에피소드는 한 flow에). 먼저 `estimate_only`로 비용을 확인한다. **재시도로 같은 호출을 반복하지 않는다**(두 번 과금된다).
+2. ElevenLabs 커넥터 `creative_generate_speech`로 장면마다 한 번씩 생성한다(model `eleven_v4`, 목소리 "Gun Woong - Deep & Trustworthy" `J3IV02ZzZmojOIQbmpu0`, `generations_count` 1, 한 에피소드는 한 flow에). 목소리를 바꿀 때는 같은 문장으로 후보 3~4개를 만들어 음성 인식 점수와 목소리 성격(신뢰감, 다큐 톤)으로 고르고 비교 파일을 사용자에게 준다. 먼저 `estimate_only`로 비용을 확인한다. **재시도로 같은 호출을 반복하지 않는다**(두 번 과금된다).
 3. `creative_get_flow_run_status`로 완료를 확인하고, 결과 URL을 `assets/audio/elevenlabs/scene_XX.mp3`로 내려받는다.
 4. `make_episode.sh`가 이 파일로 문장별 자막 시각을 자동으로 맞춘다.
 
