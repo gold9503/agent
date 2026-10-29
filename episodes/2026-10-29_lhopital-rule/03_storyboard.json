@@ -1,0 +1,384 @@
+{
+  "title": "로피탈의 정리: 0/0은 빠르기 대결이다",
+  "concept": "로피탈의 정리",
+  "subject": "수학",
+  "level": "high",
+  "curriculum": "대학 미적분학 · 부정형의 극한 (한국 고교 교육과정 밖. 선수 개념은 고교 미적분Ⅰ의 함수의 극한·미분계수·도함수. 학생들이 검산용 공식처럼 쓰지만 교과서에는 없다)",
+  "media": {
+    "study_desk_night": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 10,
+      "prompt": "Over-the-shoulder shot of a high school student's desk at night, a desk lamp lighting an open math notebook filled with blurred unreadable scribbles, a pencil tapping hesitantly, face never visible, shallow depth of field, slow push-in, cinematic, warm lamp light, 16:9, no text, no readable writing, no logos, no recognizable real person"
+    },
+    "paris_1690s": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 10,
+      "prompt": "Early morning over a reconstructed late 17th-century Paris riverside, stone bridges over the Seine, slate roofs and church towers in soft mist, horse carriages in the distance, slow aerial drift, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "noble_study": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 12,
+      "prompt": "Interior of a 17th-century French aristocrat's study, carved wooden desk, leather-bound books, brass compass and geometric drawing instruments, candlelight and window light, empty room, slow dolly forward, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "quill_letter": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 12,
+      "prompt": "Macro close-up of a hand in a lace cuff writing with a feather quill on aged paper by candlelight, illegible flowing strokes only, a wax seal and sealing stick beside the paper, slow motion, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no readable writing, no logos, no recognizable real person, no face"
+    },
+    "library_dawn": {
+      "source": "ai",
+      "kind": "video",
+      "duration": 12,
+      "prompt": "Dawn light streaming through tall windows into an old European library with wooden shelves of antique books, dust floating in light beams, a closed old book on a reading table, slow push-in, historical documentary reconstruction, cinematic, natural light, 16:9, no text, no logos, no recognizable real person"
+    },
+    "lhopital_portrait": {
+      "source": "commons",
+      "ref": "File:Guillaume de l'Hôpital.jpg",
+      "note": "로피탈 후작 초상 판화. 커먼즈 미러에서 파일명·퍼블릭 도메인 확인, 원본 페이지 미확인 → fetch_media가 라이선스 재확인"
+    },
+    "bernoulli_portrait": {
+      "source": "commons",
+      "ref": "File:Portret van Johann Bernoulli (I), RP-P-1908-3095.jpg",
+      "note": "요한 베르누이 초상 판화(레이크스 미술관, CC0). 커먼즈 미러에서 확인, 원본 페이지 미확인"
+    },
+    "analyse_title": {
+      "source": "commons",
+      "ref": "File:L'Hospital - Analyse des infiniment petits pour l'intelligence des lignes courbes, 1715 - 1425244.jpg",
+      "note": "파일명 확인 필요(위키백과 미러 썸네일 주소에서 추정). 1715년 판 속표지이므로 화면에 '1715년 판'으로 표기한다. 1696년 초판 속표지는 커먼즈에서 찾지 못함"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "section": "오프닝 질문",
+      "narration": [
+        {
+          "say": "분자도 영으로, 분모도 영으로 가는 분수가 있습니다.",
+          "sub": "분자도 0으로, 분모도 0으로 가는 분수가 있습니다."
+        },
+        {
+          "say": "이 분수는 결국 어디로 갈까요?"
+        },
+        {
+          "say": "많은 학생이 주문처럼 외웁니다. 위아래를 따로 미분하라.",
+          "sub": "많은 학생이 주문처럼 외웁니다. \"위아래를 따로 미분하라.\""
+        },
+        {
+          "say": "로피탈의 정리입니다."
+        },
+        {
+          "say": "그런데 이 정리의 주인은, 정말 로피탈일까요?"
+        }
+      ],
+      "visual": {
+        "type": "formula",
+        "key": "opening_zero_over_zero",
+        "description": "화면 중앙에 0/0이 써지고 물음표가 붙는다 → '위아래를 따로 미분하라'가 주문처럼 희미하게 겹쳐진다 → 마지막 문장에서 '로피탈의 정리' 글자 옆에 물음표, 영상 제목 카드로 전환",
+        "motion": "build_up",
+        "background": {
+          "media": "study_desk_night",
+          "dim": 0.55
+        }
+      },
+      "on_screen_text": "0/0 = ?"
+    },
+    {
+      "id": 2,
+      "section": "시대 속으로",
+      "narration": [
+        {
+          "say": "천육백구십육 년, 파리.",
+          "sub": "1696년, 파리."
+        },
+        {
+          "say": "로피탈 후작이 미분을 다룬 최초의 교과서, 무한소 해석을 펴냅니다.",
+          "sub": "로피탈 후작이 미분을 다룬 최초의 교과서, 『무한소 해석』을 펴냅니다."
+        },
+        {
+          "say": "그런데 이 책엔 숨은 스승이 있었습니다."
+        }
+      ],
+      "visual": {
+        "type": "image",
+        "key": "analyse_book",
+        "description": "구간 제목 '시대 속으로'. 파리 재현 영상 위에 연표 '1696'이 뜨고, 『무한소 해석』 속표지 사진이 액자처럼 떠오른다(사진 아래 작은 캡션: '1715년 판 속표지'). 두 번째 문장에서 로피탈 초상 판화가 옆에 나란히 뜬다. 'AI로 만든 재현 영상' 표시",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "paris_1690s",
+          "dim": 0.4
+        },
+        "photos": [
+          "analyse_title",
+          "lhopital_portrait"
+        ]
+      },
+      "on_screen_text": "1696 · 『무한소 해석』"
+    },
+    {
+      "id": 3,
+      "section": "시대 속으로",
+      "narration": [
+        {
+          "say": "스위스의 젊은 수학자, 요한 베르누이."
+        },
+        {
+          "say": "천육백구십사 년 삼월, 로피탈은 그에게 편지를 씁니다.",
+          "sub": "1694년 3월, 로피탈은 그에게 편지를 씁니다."
+        },
+        {
+          "say": "해마다 삼백 리브르를 줄 테니, 새 발견을 자신에게만 알려 달라고요.",
+          "sub": "해마다 300리브르를 줄 테니, 새 발견을 자신에게만 알려 달라고요."
+        }
+      ],
+      "visual": {
+        "type": "image",
+        "key": "bernoulli_letter",
+        "description": "베르누이 초상 판화가 천천히 확대되며 이름 카드 '요한 베르누이 (1667~1748)'. 이어서 깃펜으로 편지를 쓰는 AI 재현 영상으로 전환되고, 편지 요지 카드 '연 300리브르 ↔ 새 발견을 나에게만'이 뜬다. 편지 문장을 그대로 인용한 것처럼 보이지 않게 따옴표 없이 '요지'로 표기. 'AI로 만든 재현 영상' 표시",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "quill_letter",
+          "dim": 0.45
+        },
+        "photos": [
+          "bernoulli_portrait"
+        ]
+      },
+      "on_screen_text": "1694년 3월 · 연 300리브르"
+    },
+    {
+      "id": 4,
+      "section": "시대 속으로",
+      "narration": [
+        {
+          "say": "그해 칠월, 베르누이가 보낸 편지에 영 나누기 영 꼴을 푸는 방법이 담겨 있었습니다.",
+          "sub": "그해 7월, 베르누이가 보낸 편지에 0/0 꼴을 푸는 방법이 담겨 있었습니다."
+        },
+        {
+          "say": "이 방법이 두 해 뒤 로피탈의 책에 실리면서, 그의 이름으로 불리게 됐습니다."
+        },
+        {
+          "say": "로피탈도 머리말에서 베르누이의 도움을 밝혔죠."
+        }
+      ],
+      "visual": {
+        "type": "diagram",
+        "key": "timeline_letters",
+        "description": "연표가 왼쪽에서 오른쪽으로 그려진다: '1694.3 계약 제안' → '1694.7 베르누이 편지: 0/0 규칙' → '1696 『무한소 해석』 출간'. 마지막 문장에서 '머리말: 라이프니츠, 베르누이 형제에게 감사' 메모가 붙는다. 배경은 귀족 서재 AI 재현 영상",
+        "motion": "pan_left",
+        "background": {
+          "media": "noble_study",
+          "dim": 0.5
+        }
+      },
+      "on_screen_text": "1694.7 베르누이 → 1696 로피탈"
+    },
+    {
+      "id": 5,
+      "section": "개념의 탄생",
+      "narration": [
+        {
+          "say": "영 나누기 영 꼴은 왜 위아래를 미분하면 풀릴까요?",
+          "sub": "0/0 꼴은 왜 위아래를 미분하면 풀릴까요?"
+        },
+        {
+          "say": "그래프로 보면, 분자와 분모가 같은 점에서 엑스축을 지납니다.",
+          "sub": "그래프로 보면, 분자와 분모가 같은 점에서 x축을 지납니다."
+        },
+        {
+          "say": "그 점 근처를 확대하면, 곡선은 거의 직선입니다."
+        }
+      ],
+      "visual": {
+        "type": "animation",
+        "key": "two_curves_zoom",
+        "description": "구간 제목 '개념의 탄생'. 좌표평면에 y = f(x)(파랑), y = g(x)(주황) 두 곡선이 그려지고 둘 다 x = a에서 x축을 지난다(점 a 강조). 이어서 점 a 주변을 돋보기로 확대하면 두 곡선이 각각 직선(접선)처럼 펴진다",
+        "motion": "build_up"
+      },
+      "on_screen_text": "f(a) = 0, g(a) = 0"
+    },
+    {
+      "id": 6,
+      "section": "개념의 탄생",
+      "narration": [
+        {
+          "say": "직선의 높이는 기울기 곱하기 떨어진 거리."
+        },
+        {
+          "say": "두 높이를 나누면 거리는 약분되고, 기울기의 비만 남습니다."
+        },
+        {
+          "say": "영 나누기 영의 정체는, 두 함수가 영으로 다가가는 빠르기의 비였던 겁니다.",
+          "sub": "0/0의 정체는, 두 함수가 0으로 다가가는 빠르기의 비였던 겁니다."
+        },
+        {
+          "say": "그 빠르기가 바로 도함수죠."
+        }
+      ],
+      "visual": {
+        "type": "formula",
+        "key": "linear_cancel",
+        "description": "확대한 두 직선 옆에 수식이 한 줄씩 써진다: f(x) ≈ f′(a)(x − a), g(x) ≈ g′(a)(x − a) → 나누기 → (x − a)가 지워지는 약분 애니메이션 → f(x)/g(x) ≈ f′(a)/g′(a). 마지막에 f′, g′에 '빠르기 = 도함수' 라벨",
+        "motion": "build_up"
+      },
+      "on_screen_text": "f/g ≈ f′(a)/g′(a)"
+    },
+    {
+      "id": 7,
+      "section": "진짜 쉬운 설명",
+      "narration": [
+        {
+          "say": "두 선수가 결승선에 동시에 들어온다고 해 봅시다."
+        },
+        {
+          "say": "남은 거리로는 비교가 안 되죠. 둘 다 영이니까요.",
+          "sub": "남은 거리로는 비교가 안 되죠. 둘 다 0이니까요."
+        },
+        {
+          "say": "속도를 보면 됩니다. 세 배 빠른 선수는 직전까지 남은 거리도 세 배니까요."
+        }
+      ],
+      "visual": {
+        "type": "animation",
+        "key": "runners_finish",
+        "description": "구간 제목 '진짜 쉬운 설명'. 단순한 점 두 개(파랑: 분자, 주황: 분모)가 각자 트랙을 달려 같은 순간 결승선에 닿는다. 파랑은 3배 먼 곳에서 3배 빠르게 출발. 결승 직전 정지 화면에서 남은 거리 막대가 3 : 1로 표시되고 '속도의 비 = 3'",
+        "motion": "build_up"
+      },
+      "on_screen_text": "남은 거리의 비 → 속도의 비"
+    },
+    {
+      "id": 8,
+      "section": "진짜 쉬운 설명",
+      "narration": [
+        {
+          "say": "흔한 실수 하나."
+        },
+        {
+          "say": "영 나누기 영 꼴이 아닌데도 위아래를 미분하는 겁니다.",
+          "sub": "0/0 꼴이 아닌데도 위아래를 미분하는 겁니다."
+        },
+        {
+          "say": "엑스가 영으로 갈 때, 엑스 더하기 일, 나누기, 엑스 더하기 이는 이분의 일인데,",
+          "sub": "x → 0일 때, (x + 1)/(x + 2)는 1/2인데,"
+        },
+        {
+          "say": "위아래를 미분하면 엉뚱하게 일이 나옵니다.",
+          "sub": "위아래를 미분하면 엉뚱하게 1이 나옵니다."
+        }
+      ],
+      "visual": {
+        "type": "formula",
+        "key": "misuse_example",
+        "description": "'흔한 실수' 카드. lim(x→0) (x+1)/(x+2)에 0을 대입하면 1/2(0/0 아님 → 초록 체크). 옆에 잘못된 계산 1/1 = 1이 써지고 빨간 X. 아래 작은 글씨로 '몫의 미분 (f/g)′ 도 아니다: 분자, 분모를 따로 미분'",
+        "motion": "build_up"
+      },
+      "on_screen_text": "먼저 대입: 0/0인가?"
+    },
+    {
+      "id": 9,
+      "section": "공식 풀어보기",
+      "narration": [
+        {
+          "say": "정확히는 이렇습니다."
+        },
+        {
+          "say": "엑스가 에이로 갈 때 분자와 분모가 함께 영, 또는 함께 무한대로 가고,",
+          "sub": "x → a일 때 분자와 분모가 함께 0, 또는 함께 ∞로 가고,"
+        },
+        {
+          "say": "에이 근처에서 둘 다 미분 가능하고 분모의 도함수가 영이 아니며,",
+          "sub": "a 근처에서 둘 다 미분 가능하고 g′(x) ≠ 0이며,"
+        },
+        {
+          "say": "도함수끼리 나눈 극한이 존재하면, 원래 극한도 그 값과 같습니다.",
+          "sub": "f′/g′의 극한이 존재하면, 원래 극한도 그 값과 같습니다."
+        }
+      ],
+      "visual": {
+        "type": "formula",
+        "key": "theorem_statement",
+        "description": "구간 제목 '공식 풀어보기'. 조건 체크리스트가 한 줄씩 생긴다: ① 0/0 또는 ∞/∞ ② a 근처에서 f, g 미분 가능, g′(x) ≠ 0 ③ lim f′/g′ 존재. 세 칸에 체크가 다 들어가면 결론 lim(x→a) f(x)/g(x) = lim(x→a) f′(x)/g′(x)가 크게 써진다. f, g, a, ′ 기호에 짧은 라벨(분자, 분모, 다가가는 값, 도함수)",
+        "motion": "build_up"
+      },
+      "on_screen_text": "lim f/g = lim f′/g′"
+    },
+    {
+      "id": 10,
+      "section": "공식 풀어보기",
+      "narration": [
+        {
+          "say": "예제 하나. 엑스가 일로 갈 때, 엑스 세제곱 빼기 일, 나누기 엑스 빼기 일.",
+          "sub": "예제 하나. x → 1일 때, (x³ − 1)/(x − 1)"
+        },
+        {
+          "say": "일을 넣어 보면 영 나누기 영, 조건이 맞습니다.",
+          "sub": "1을 넣어 보면 0/0, 조건이 맞습니다."
+        }
+      ],
+      "visual": {
+        "type": "formula",
+        "key": "example_setup",
+        "description": "lim(x→1) (x³ − 1)/(x − 1)이 써지고, x에 1을 대입하는 장면 → (1 − 1)/(1 − 1) = 0/0. 앞 장면의 체크리스트 첫 칸에 체크",
+        "motion": "build_up"
+      },
+      "on_screen_text": "lim(x→1) (x³ − 1)/(x − 1)"
+    },
+    {
+      "id": 11,
+      "section": "공식 풀어보기",
+      "narration": [
+        {
+          "say": "위아래를 미분하면 삼 엑스 제곱 나누기 일. 일을 넣으면 삼입니다.",
+          "sub": "위아래를 미분하면 3x²/1. 1을 넣으면 3입니다."
+        },
+        {
+          "say": "분자가 분모보다 세 배 빠르게 영에 다가간다는 뜻입니다.",
+          "sub": "분자가 분모보다 세 배 빠르게 0에 다가간다는 뜻입니다."
+        }
+      ],
+      "visual": {
+        "type": "formula",
+        "key": "example_solve",
+        "description": "분자 x³ − 1 → 3x², 분모 x − 1 → 1로 각각 따로 미분(화살표 두 개) → 3·1²/1 = 3. 오른쪽 아래에 작은 검산 박스: (x − 1)(x² + x + 1)/(x − 1) → 1 + 1 + 1 = 3 ✔. 마지막 문장에서 장면 7의 두 주자가 작게 다시 나와 3 : 1 속도로 결승선에 닿는다",
+        "motion": "build_up"
+      },
+      "on_screen_text": "= 3"
+    },
+    {
+      "id": 12,
+      "section": "오늘의 한 줄",
+      "narration": [
+        {
+          "say": "오늘의 한 줄."
+        },
+        {
+          "say": "영 나누기 영은 빠르기 대결이고, 로피탈의 정리는 그 승부를 기울기로 가립니다.",
+          "sub": "0/0은 빠르기 대결이고, 로피탈의 정리는 그 승부를 기울기로 가립니다."
+        },
+        {
+          "say": "다만 쓰기 전에, 꼴부터 확인하세요."
+        },
+        {
+          "say": "다음 시간에는 테일러 급수 이야기를 해 보겠습니다."
+        },
+        {
+          "say": "최고의 공부였습니다."
+        }
+      ],
+      "visual": {
+        "type": "title_card",
+        "key": "one_line",
+        "description": "새벽 도서관 AI 재현 영상 위에 오늘의 한 줄 카드 '0/0 = 빠르기 대결, 승부는 기울기로'. 이어서 '먼저 확인: 0/0? ∞/∞?' 작은 경고 카드, 다음 편 예고 '테일러 급수'와 채널 로고. 'AI로 만든 재현 영상' 표시",
+        "motion": "slow_zoom_in",
+        "background": {
+          "media": "library_dawn",
+          "dim": 0.45
+        }
+      },
+      "on_screen_text": "0/0 = 빠르기 대결"
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import json
 import sys
 from pathlib import Path
 
-CHARS_PER_MIN = 320  # 한국어 나레이션 1분당 글자 수 (스타일 가이드 기준)
+CHARS_PER_MIN = 400  # ElevenLabs 한국어 나레이션 1분당 글자 수 (약 6.7자/초, 스타일 가이드 기준)
 
 ep = Path(sys.argv[1])
 sb = json.loads((ep / "03_storyboard.json").read_text(encoding="utf-8"))

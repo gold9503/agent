@@ -143,6 +143,12 @@ class ChoigoScene(MovingCameraScene):
             grp.add(cap)
         return grp
 
+    def photo_or(self, mid, fallback, height):
+        """사진이 있으면 사진을, 아직 없으면 직접 그린 대체 그림을 같은 크기로 쓴다."""
+        if sorted((self.ep / "assets/media").glob(f"{mid}.*")):
+            return self.photo(mid, height=height)
+        return fallback.set_height(height)
+
     # ── 자주 쓰는 연출 ──────────────────────────────────
     def show_chapter(self, number, title, hold=1.2):
         card = chapter_card(number, title)
