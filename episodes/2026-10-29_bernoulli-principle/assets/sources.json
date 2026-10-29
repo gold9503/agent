@@ -54,6 +54,7 @@
       "plan": "Starter",
       "generated_at": "2026-10-29",
       "physics_check": "pass: 빨대 바람에 두 종이 아래쪽이 안쪽으로 모여 거의 닿음 (물리 방향 맞음)",
+      "watermark": false,
       "author": "최고의 공부 (AI 도구 사용)",
       "license": "생성 서비스 약관 (법무팀 확인)",
       "ai": true
@@ -70,6 +71,7 @@
       "plan": "Starter",
       "generated_at": "2026-10-29",
       "physics_check": "pass: 붉은 사암 쌍탑 대성당, 강, 목조선. 현대 시설 없음. 재현이므로 실제 경관과 다를 수 있음",
+      "watermark": false,
       "author": "최고의 공부 (AI 도구 사용)",
       "license": "생성 서비스 약관 (법무팀 확인)",
       "ai": true
@@ -86,6 +88,7 @@
       "plan": "Starter",
       "generated_at": "2026-10-29",
       "physics_check": "pass: 손과 소매만 보임, 얼굴 없음",
+      "watermark": false,
       "author": "최고의 공부 (AI 도구 사용)",
       "license": "생성 서비스 약관 (법무팀 확인)",
       "ai": true
@@ -102,6 +105,7 @@
       "plan": "Starter",
       "generated_at": "2026-10-29",
       "physics_check": "caution: 펜촉이 근대식 금속 펜촉처럼 보이고 종이에 모눈이 있음 → 시대 고증 약점, 법무 판단",
+      "watermark": false,
       "author": "최고의 공부 (AI 도구 사용)",
       "license": "생성 서비스 약관 (법무팀 확인)",
       "ai": true
@@ -118,6 +122,7 @@
       "plan": "Starter",
       "generated_at": "2026-10-29",
       "physics_check": "caution: 유리관 물기둥이 통 수면보다 낮음(맞음). 다만 유리관이 관을 관통해 아래로 나와 있음 → 어둡게 깔고 도식으로 설명",
+      "watermark": false,
       "author": "최고의 공부 (AI 도구 사용)",
       "license": "생성 서비스 약관 (법무팀 확인)",
       "ai": true
@@ -134,6 +139,7 @@
       "plan": "Starter",
       "generated_at": "2026-10-29",
       "physics_check": "pass: 바위 사이 좁은 곳에서 물살이 빨라짐",
+      "watermark": false,
       "author": "최고의 공부 (AI 도구 사용)",
       "license": "생성 서비스 약관 (법무팀 확인)",
       "ai": true
@@ -150,6 +156,7 @@
       "plan": "Starter",
       "generated_at": "2026-10-29",
       "physics_check": "pass: 표식 없는 날개, 로고·글자 없음",
+      "watermark": false,
       "author": "최고의 공부 (AI 도구 사용)",
       "license": "생성 서비스 약관 (법무팀 확인)",
       "ai": true
@@ -166,6 +173,7 @@
       "plan": "Starter",
       "generated_at": "2026-10-29",
       "physics_check": "caution: 0~3.9초만 사용(이후 다른 컷, 기체 형태 어색). 동체에 뜻 없는 작은 글자 모양 있음 → 법무 판단",
+      "watermark": false,
       "author": "최고의 공부 (AI 도구 사용)",
       "license": "생성 서비스 약관 (법무팀 확인)",
       "ai": true

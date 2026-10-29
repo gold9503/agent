@@ -18,7 +18,7 @@ GOLD, INK, BG_COLOR = "#E8B44C", "#EDEAE3", "#15171C"
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "7.0", "-i", str(EP / "assets/media/paper_sheets_blow.mp4"),
                 "-frames:v", "1", str(BG)], check=True)
 
-photo = Image.open(BG).convert("RGB").crop((300, 0, 1620, 1080)).resize((587, 480 + 240))
+photo = Image.open(BG).convert("RGB").crop((520, 0, 1400, 1080)).resize((587, 720))
 photo = ImageEnhance.Brightness(photo).enhance(0.85)
 im = Image.new("RGB", (1280, 720), BG_COLOR)
 im.paste(photo, (0, 0))
@@ -28,8 +28,8 @@ for x0, x1 in ((90, 230), (497, 357)):
     d.line((x0, 470, x1, 470), fill=GOLD, width=14)
     tip = 1 if x1 > x0 else -1
     d.polygon([(x1 + tip * 34, 470), (x1, 448), (x1, 492)], fill=GOLD)
-d.rounded_rectangle((14, 14, 252, 58), radius=8, fill=(0, 0, 0))
-d.text((26, 18), "AI로 만든 영상", font=ImageFont.truetype(SANS, 28, index=KR), fill=INK)
+d.rounded_rectangle((14, 14, 420, 58), radius=8, fill=(0, 0, 0))
+d.text((26, 18), "AI 이미지 · 실제 실험 사진 아님", font=ImageFont.truetype(SANS, 26, index=KR), fill=INK)
 
 d.text((640, 120), "왜 붙을까?", font=ImageFont.truetype(SANS, 112, index=KR), fill=GOLD)
 d.text((644, 285), "숨을 불었는데 종이가 다가온다", font=ImageFont.truetype(SANS, 36, index=KR), fill=INK)
