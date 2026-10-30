@@ -196,6 +196,8 @@ def main():
 
     ep = Path(args.episode)
     sb = json.loads((ep / "03_storyboard.json").read_text(encoding="utf-8"))
+    if sb.get("format") == "vertical":   # 세로 숏츠는 장면 사이 쉼을 줄여 호흡을 빠르게 (60초 이내)
+        globals().update(SCENE_LEAD=0.1, SCENE_TAIL=0.35)
     out = ep / "assets" / "audio"
     cache = out / "cache"
     cache.mkdir(parents=True, exist_ok=True)

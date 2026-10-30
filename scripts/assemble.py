@@ -193,7 +193,7 @@ def main():
         ass = work / "vertical.ass"
         cards = [(c["start"], c["start"] + c.get("dur", 4.0), c["text"]) for c in sh.get("cards", [])]
         write_ass(ass, LAYOUTS["native"], cues, sh.get("headline", [sb["title"], ""]),
-                  f"최고의 공부 · {sb.get('concept', '')}", sh.get("end", "최고의 공부"), offset, cards)
+                  f"최고의 공부 · {sb.get('concept', '')}", sh.get("end") or "", offset, cards)
         filt = filt.replace(f"subtitles={srt}:force_style='{SUB_STYLE}'", f"ass={ass}")
     run(["ffmpeg", "-y", "-v", "error", "-i", str(work / "video.mp4"), "-i", str(work / "narration.wav"),
          "-i", str(work / "bgm.wav"), "-filter_complex", filt, "-map", "[v]", "-map", "[a]",

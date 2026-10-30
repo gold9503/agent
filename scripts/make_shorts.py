@@ -89,12 +89,14 @@ def write_ass(path, L, cues, headline, brand, end_text, total, cards=()):
         head = headline[0] + r"\N" + rf"{{\c{GOLD}}}" + headline[1]
         lines += [ev(a, b, "Head", L["head_y"], head) for a, b in spans if b > a]
         lines.append(ev(0, total, "Brand", L["brand_y"], brand))
-        lines.append(ev(total - END_CARD, total, "End", L["end_y"], end_text))
+        if end_text:
+            lines.append(ev(total - END_CARD, total, "End", L["end_y"], end_text))
     else:                 # 정사각형: 제목 한 줄, 아래 줄은 브랜드 → 마지막에 안내 문구
         head = headline[0] + " " + rf"{{\c{GOLD}}}" + headline[1]
         lines += [ev(a, b, "Head", L["head_y"], head) for a, b in spans if b > a]
-        lines.append(ev(0, total - END_CARD, "Brand", L["brand_y"], brand))
-        lines.append(ev(total - END_CARD, total, "End", L["end_y"], end_text))
+        lines.append(ev(0, total - (END_CARD if end_text else 0), "Brand", L["brand_y"], brand))
+        if end_text:
+            lines.append(ev(total - END_CARD, total, "End", L["end_y"], end_text))
     for a, b, text in cues:
         lines.append(ev(a, b, "Sub", L["sub_y"], text.replace("\n", r"\N")))
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
