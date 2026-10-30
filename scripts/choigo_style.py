@@ -2,7 +2,7 @@
 
 모든 에피소드의 visuals.py는 이 모듈의 ChoigoScene을 상속한다.
 - 장면 길이와 문장 타이밍은 assets/audio/timings.json에서 읽어 나레이션과 맞춘다.
-- 화면 아래쪽(y < -2.5)은 자막 자리이므로 비워둔다.
+- 화면 아래쪽(y < -2.5)은 자막 자리이므로 비워둔다. 세로 숏츠는 SAFE_TOP/SAFE_BOTTOM/SAFE_RIGHT 안에만 그린다.
 - 장면은 투명 배경으로 렌더링된다. 배경(실사 영상/사진 또는 기본 배경색)은 assemble.py가 아래에 깐다.
   장면 구성표에서 visual.background로 지정한 소재가 배경이 되고, 출처 표시(AI 재현 표시 포함)는 자동으로 붙는다.
 """
@@ -26,10 +26,19 @@ SERIF = "Noto Serif CJK KR"
 
 SAFE_BOTTOM = -2.5    # 이 아래는 자막 영역
 
+# 세로 숏츠(03_storyboard.json "format": "vertical"): 1080×1920, 화면 좌표 가로 ±4.5 · 세로 ±8 (1단위 = 120px)
+VERTICAL = os.environ.get("CHOIGO_FORMAT") == "vertical"
 config.background_color = BG
 config.frame_rate = 30
-config.pixel_width = 1920
-config.pixel_height = 1080
+if VERTICAL:
+    config.pixel_width, config.pixel_height = 1080, 1920
+    config.frame_width, config.frame_height = 9.0, 16.0
+    SAFE_TOP = 4.3        # 이 위는 헤드라인과 AI 표시 자리 (assemble이 입힌다)
+    SAFE_BOTTOM = -3.1    # 이 아래는 자막과 플랫폼 버튼 자리
+    SAFE_RIGHT = 3.6      # 오른쪽 끝은 좋아요·댓글 버튼 자리
+else:
+    config.pixel_width = 1920
+    config.pixel_height = 1080
 
 TexTemplateLibrary.default.add_to_preamble(r"\usepackage{amsmath}")
 
@@ -100,7 +109,7 @@ class ChoigoScene(MovingCameraScene):
             frame.add_updater(lambda m, dt: m.scale(1 - self.ZOOM_PER_SEC * dt))
             self.add(frame)
         bg = self.storyboard_scene["visual"].get("background")
-        if bg:
+        if bg and not VERTICAL:   # 세로 숏츠는 assemble이 화면 전체에 AI 표시를 고정한다
             self.background_label(bg["media"])
         self.build()
         self.until(self.scene_len)

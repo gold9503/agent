@@ -34,6 +34,10 @@ LAYOUTS = {
     "vertical": dict(w=1080, h=1920, video_y=560, max_line=16, sub_size=58, sub_y=1245,
                      head_size=80, head_y=200, brand_size=40, brand_y=115, end_y=1510, end_size=42,
                      ai_y=420, ai_text=r"실사 화면은 AI로 만든 영상입니다\N실제 실험·역사 촬영 아님"),
+    # 세로 숏츠 전용 에피소드(assemble.py): 화면 전체가 영상, Manim 그림은 y 450~1330px 안
+    "native": dict(w=1080, h=1920, video_y=0, max_line=16, sub_size=60, sub_y=1375,
+                   head_size=76, head_y=150, brand_size=34, brand_y=70, end_y=1540, end_size=44,
+                   ai_y=360, ai_text="AI로 만든 영상 · 실제 촬영 아님"),
     "square": dict(w=1080, h=1080, video_y=170, max_line=22, sub_size=44, sub_y=810,
                    head_size=54, head_y=48, brand_size=28, brand_y=1020, end_y=1020, end_size=30,
                    ai_y=935, ai_text="AI로 만든 영상 · 실제 실험·역사 촬영 아님"),

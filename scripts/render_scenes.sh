@@ -16,7 +16,13 @@ else
   SCENES=$(grep -oE '^class (S[0-9]{2})\(' "$EP/visuals.py" | sed -E 's/class (S[0-9]+)\(/\1/')
 fi
 
+RES="1920,1080"
+if grep -q '"format": *"vertical"' "$EP/03_storyboard.json"; then
+  export CHOIGO_FORMAT=vertical
+  RES="1080,1920"
+fi
+
 mkdir -p "$EP/assets/render/logs"
 echo "$SCENES" | xargs -P "$JOBS" -I{} sh -c \
-  "'$PY' -m manim render -t -q h --fps 30 -r 1920,1080 --disable_caching --media_dir '$EP/assets/render/{}' \
+  "'$PY' -m manim render -t -q h --fps 30 -r $RES --disable_caching --media_dir '$EP/assets/render/{}' \
    '$EP/visuals.py' {} > '$EP/assets/render/logs/{}.log' 2>&1 && echo 'ok {}' || echo 'FAIL {}'"

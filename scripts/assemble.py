@@ -69,7 +69,7 @@ def cues_for(sentence, offset, max_line=SUB_MAX_LINE):
     return cues
 
 
-def composite_scene(ep, scene, overlay, dest):
+def composite_scene(ep, scene, overlay, dest, size=(1920, 1080)):
     """배경 위에 투명 장면 레이어를 겹쳐 장면 영상 하나를 만든다."""
     dur = probe_duration(overlay)
     bg = scene["visual"].get("background")
@@ -83,7 +83,8 @@ def composite_scene(ep, scene, overlay, dest):
     if bg:
         src = files[0]
         dim = bg.get("dim", 0.35)
-        fit = "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30"
+        W, H = size
+        fit = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps=30"
         look = f"eq=saturation=0.9,drawbox=x=0:y=0:w=iw:h=ih:color=black@{dim}:t=fill"
         if src.suffix.lower() in VIDEO_EXT:
             # start/end: 쓸 구간만 잘라 쓴다. max_slow: 장면별 최대 감속 배율.
@@ -109,10 +110,10 @@ def composite_scene(ep, scene, overlay, dest):
         else:   # 사진: 느린 줌(Ken Burns)
             frames = int(dur * 30) + 1
             base_in = ["-loop", "1", "-i", str(src)]
-            base = (f"[0:v]scale=2400:-2,zoompan=z='min(zoom+0.0005,1.12)':d={frames}:s=1920x1080:fps=30,"
+            base = (f"[0:v]scale={int(W * 1.25)}:-2,zoompan=z='min(zoom+0.0005,1.12)':d={frames}:s={W}x{H}:fps=30,"
                     f"{look}[base]")
     else:
-        base_in = ["-f", "lavfi", "-i", f"color=c={BG_COLOR}:s=1920x1080:r=30"]
+        base_in = ["-f", "lavfi", "-i", f"color=c={BG_COLOR}:s={size[0]}x{size[1]}:r=30"]
         base = "[0:v]null[base]"
     run(["ffmpeg", "-y", "-v", "error", *base_in, "-i", str(overlay), "-filter_complex",
          f"{base};[base][1:v]overlay=0:0:format=auto,format=yuv420p[v]", "-map", "[v]", "-t", f"{dur:.3f}",
@@ -139,7 +140,10 @@ def main():
     work.mkdir(parents=True, exist_ok=True)
 
     timings = json.loads((ep / "assets/audio/timings.json").read_text(encoding="utf-8"))
-    scenes = {s["id"]: s for s in json.loads((ep / "03_storyboard.json").read_text(encoding="utf-8"))["scenes"]}
+    sb = json.loads((ep / "03_storyboard.json").read_text(encoding="utf-8"))
+    scenes = {s["id"]: s for s in sb["scenes"]}
+    vertical = sb.get("format") == "vertical"   # 세로 숏츠 전용 에피소드
+    size = (1080, 1920) if vertical else (1920, 1080)
     (work / "scenes").mkdir(exist_ok=True)
 
     # 1) 장면 영상 길이에 맞춰 나레이션을 이어 붙이고 자막 시각을 계산
@@ -147,18 +151,19 @@ def main():
     concat_list = []
     for sc in timings:
         name = f"S{sc['id']:02d}"
-        layer = ep / f"assets/render/{name}/videos/visuals/1080p30/{name}.mov"
+        layer = next(iter(sorted((ep / f"assets/render/{name}/videos/visuals").glob(f"*/{name}.mov"))),
+                     ep / f"assets/render/{name}/videos/visuals/1080p30/{name}.mov")
         wav = ep / f"assets/audio/scene_{sc['id']:02d}.wav"
         if not layer.exists() or layer.stat().st_mtime < wav.stat().st_mtime:
             sys.exit(f"{name}: 장면 영상이 없거나 나레이션보다 오래되었습니다. render_scenes.sh를 다시 실행하세요.")
         vid = work / "scenes" / f"{name}.mp4"
-        vdur = composite_scene(ep, scenes[sc["id"]], layer, vid)
+        vdur = composite_scene(ep, scenes[sc["id"]], layer, vid, size)
         audio, sr = sf.read(wav, dtype="float32")
         n = int(round(vdur * sr))
         audio = np.pad(audio, (0, max(0, n - len(audio))))[:n]
         narration.append(audio)
         for s in sc["sentences"]:
-            cues += cues_for(s, offset)
+            cues += cues_for(s, offset, max_line=16 if vertical else SUB_MAX_LINE)
         concat_list.append(f"file '{vid}'")
         offset += vdur
     sf.write(work / "narration.wav", np.concatenate(narration), sr)
@@ -182,6 +187,14 @@ def main():
             f"[1:a]aformat=channel_layouts=stereo[nar];"
             f"[nar][bgm]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11[a];"
             f"[0:v]subtitles={srt}:force_style='{SUB_STYLE}'[v]")
+    if vertical:   # 세로: 헤드라인, AI 표시, 큰 자막, 끝 문구를 숏폼과 같은 배치로 입힌다
+        from make_shorts import LAYOUTS, write_ass
+        sh = sb.get("shorts", {})
+        ass = work / "vertical.ass"
+        cards = [(c["start"], c["start"] + c.get("dur", 4.0), c["text"]) for c in sh.get("cards", [])]
+        write_ass(ass, LAYOUTS["native"], cues, sh.get("headline", [sb["title"], ""]),
+                  f"최고의 공부 · {sb.get('concept', '')}", sh.get("end", "최고의 공부"), offset, cards)
+        filt = filt.replace(f"subtitles={srt}:force_style='{SUB_STYLE}'", f"ass={ass}")
     run(["ffmpeg", "-y", "-v", "error", "-i", str(work / "video.mp4"), "-i", str(work / "narration.wav"),
          "-i", str(work / "bgm.wav"), "-filter_complex", filt, "-map", "[v]", "-map", "[a]",
          "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",

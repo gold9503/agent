@@ -19,6 +19,6 @@ echo "③ 발음 점검";            "$PY" "$DIR/check_narration.py" "$EP" 2>/de
 echo "④ 실사 소재 수집";       python3 "$DIR/fetch_media.py" "$EP" ${CHOIGO_ALLOW_MISSING_MEDIA:+--allow-missing}
 echo "⑤ 장면 렌더링";          "$DIR/render_scenes.sh" "$EP" | { ! grep FAIL; }
 echo "⑥ 합성 (배경, 자막, 음악)"; "$PY" "$DIR/assemble.py" "$EP"
-if grep -q '"shorts"' "$EP/03_storyboard.json"; then
+if grep -q '"shorts"' "$EP/03_storyboard.json" && ! grep -q '"format": *"vertical"' "$EP/03_storyboard.json"; then
 echo "⑦ 숏폼 (세로 9:16, 정사각형 1:1)"; (cd "$DIR" && "$PY" make_shorts.py "$EP")
 fi
