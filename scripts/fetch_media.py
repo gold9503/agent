@@ -28,7 +28,7 @@ STATIC_SOURCES = [
      "license": "자체 저작물", "ai": False},
     {"id": "bgm", "type": "music", "source": "자체 합성 (scripts/bgm.py)", "author": "최고의 공부",
      "license": "자체 저작물", "ai": False},
-    {"id": "fonts", "type": "font", "source": "Noto Sans/Serif CJK KR, Computer Modern", "author": "Google, Adobe / D. Knuth",
+    {"id": "fonts", "type": "font", "source": "Noto Sans/Serif CJK KR (자막·화면 글자·로고 '최고의 공부'는 Noto Serif CJK KR), Computer Modern", "author": "Google, Adobe / D. Knuth",
      "license": "SIL OFL 1.1 / Knuth License", "ai": False},
 ]
 
